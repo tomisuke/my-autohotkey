@@ -1,7 +1,7 @@
 #Requires AutoHotkey v2.0
 !^r:: Reload
 !^e:: Edit
-Run "C:\Users\Tomisuke\Online\GitHub\MyAutohotkey\TomisukeLaptop.ahk"
+Run "C:\Users\Tomisuke\Online\Home\MyAutohotkey\TomisukeLaptop.ahk"
 RUn "C:\Users\Tomisuke\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Flow Launcher\Flow Launcher.lnk"
 Run "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\TickTick\TickTick.lnk"
 WinWait("ahk_exe TickTick.exe")
