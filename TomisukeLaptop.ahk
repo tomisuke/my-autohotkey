@@ -1,4 +1,5 @@
 #Requires AutoHotkey v2.0
+#include VSCode.ahk
 ;sc07b:無変換   sc079:変換
 Enter & q:: {
     Run "C:\Users\Tomisuke\Online\Home\MyAutohotkey\TomisukeToQwerty.ahk"
