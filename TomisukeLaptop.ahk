@@ -12,7 +12,7 @@ Enter & q:: {
 }
 #HotIf sec = 0
 */
-qwerty := false
+qwerty := false 
 !^r:: Reload
 !^e:: Edit
 ;ピリオドレイヤー
@@ -105,7 +105,7 @@ Space & o:: WinActivate "ahk_exe Notepad.exe"
 Space & o:: Run "C:\Windows\notepad.exe"
 ;LINE
 #HotIf WinActive("ahk_exe LINE.exe")
-Space & e:: WinMinimize("ahk_exe LINE.exe")
+Space & e:: WinHide("ahk_exe LINE.exe")
 #HotIf WinExist("ahk_exe LINE.exe")
 Space & e:: WinActivate "ahk_exe LINE.exe"
 #HotIf
