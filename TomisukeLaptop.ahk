@@ -6,7 +6,7 @@ Enter & q:: {
     ExitApp
 }
 
-qwerty := false 
+qwerty := false
 !^r:: Reload
 !^e:: Edit
 ;ピリオドレイヤー
@@ -34,8 +34,8 @@ Enter & g:: Send "{Blind}{Home}"
 Enter & f:: Send "{Blind}{End}"
 
 #HotIf WinActive("ahk_exe ONENOTE.EXE")
-Enter & t:: SendPlay "{Blind}{Down}"
-Enter & s:: SendPlay "{Blind}{Up}"
+Enter & t:: DllCall("keybd_event", "UInt", 0x28, "UInt", 0, "UInt", 1, "UInt", 0) ; Down
+Enter & s:: DllCall("keybd_event", "UInt", 0x26, "UInt", 0, "UInt", 1, "UInt", 0) ; Up
 #HotIf
 
 Enter & h:: Send "+{sc079}"
