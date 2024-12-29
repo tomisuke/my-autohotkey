@@ -1,17 +1,11 @@
 #Requires AutoHotkey v2.0
 ;sc07b:無変換   sc079:変換
-/*sec := 0
 Enter & q:: {
-    global sec
-    if (sec = 0) {
-        sec := 1
-    } else {
-        sec := 0
-    }
-    MsgBox sec
+    Run "C:\Users\Tomisuke\Online\Home\MyAutohotkey\TomisukeToQwerty.ahk"
+    Msgbox "ゲストモード`nGuestMode", "LayoutChanger", "T2"
+    ExitApp
 }
-#HotIf sec = 0
-*/
+
 qwerty := false 
 !^r:: Reload
 !^e:: Edit

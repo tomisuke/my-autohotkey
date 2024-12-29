@@ -1,6 +1,6 @@
 #Requires AutoHotkey v2.0
 Enter & q:: {
-    Run "C:\Users\Tomisuke\Online\GitHub\MyAutohotkey\TomisukeLaptop.ahk"
+    Run "C:\Users\Tomisuke\Online\Home\MyAutohotkey\TomisukeLaptop.ahk"
     Msgbox "デフォルトモード`nDefaultMode", "LayoutChanger", "T2"
     ExitApp
 }
@@ -34,7 +34,6 @@ s::l
 k::;
 f:::
 
-
 x::z
 c::x
 v::c
@@ -46,11 +45,12 @@ m::,
 b::.
 z::/
 
-RShift::Send "{Space}"
+LShift:: Send "{Space}"
+
 F14::Enter
 F15::Esc
-Space:: Send "{vk1a}"    ;無変換toIMEOff
-Enter:: Send "{vk16}"    ;変換toIMEOn
+;Space:: Send "{vk1A}"    ;無変換toIMEOff
+;Enter:: Send "{vk16}"    ;変換toIMEOn
 
 !^r:: Reload
 !^e:: Edit
