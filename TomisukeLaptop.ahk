@@ -190,6 +190,7 @@ Space & s::F10
 Space & k::F11
 Space & f::F12
 ;輝度調整
+
 Space & 1::!^F1
 Space & ,::!^F2
 ;音量調整
@@ -202,8 +203,10 @@ Space & ]::!^F4
 Space & [::!^F5
 
 ;その他
+!F13::
 sc029:: Send "{Esc}"
 ^+sc029:: Send "^+{Esc}"
+Enter & j::!^+F13
 
 #HotIf WinActive("ahk_exe Discord.exe")
 !F4:: WinClose("ahk_exe Discord.exe")
