@@ -22,6 +22,10 @@ qwerty := false
 . & k::)
 . & h::&
 . & m::%
+. & g::"
+. & j::'
+. & f::#
+. & Delete::$
 . & b:: Send "{{}"
 . & z:: Send "{}}"
 
