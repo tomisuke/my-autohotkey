@@ -5,6 +5,10 @@
 Run "C:\Users\Tomisuke\Online\Home\MyAutohotkey\TomisukeLaptop.ahk"
 ;flowLauncher
 RUn "C:\Users\Tomisuke\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Flow Launcher\Flow Launcher.lnk"
+;earTrumpet
+Run "C:\Program Files\WindowsApps\40459File-New-Project.EarTrumpet_2.3.0.0_x86__1sdd7yawvg6ne\EarTrumpet\EarTrumpet.exe"
+; twinkleTray
+Run "explorer.exe shell:AppsFolder\TwinkleTray_8wekyb3d8bbwe!TwinkleTray"
 ;TickTick
 Run "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\TickTick\TickTick.lnk"
 WinWait("ahk_exe TickTick.exe")
