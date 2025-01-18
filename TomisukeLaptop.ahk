@@ -37,6 +37,7 @@ Enter & s:: Send "{Blind}{Up}"
 Enter & k:: Send "{Blind}{Right}"
 Enter & g:: Send "{Blind}{Home}"
 Enter & f:: Send "{Blind}{End}"
+Enter & d:: Send "!+^{F1}"
 
 #HotIf WinActive("ahk_exe ONENOTE.EXE")
 Enter & t:: DllCall("keybd_event", "UInt", 0x28, "UInt", 0, "UInt", 1, "UInt", 0) ; Down
@@ -44,11 +45,6 @@ Enter & s:: DllCall("keybd_event", "UInt", 0x26, "UInt", 0, "UInt", 1, "UInt", 0
 #HotIf
 
 Enter & h:: Send "+{sc079}"
-; Enter & q:: {
-;     Run "C:\Users\Tomisuke\Online\GitHub\MyAutohotkey\TomisukeToQwerty.ahk"
-;     MsgBox "ゲストモード`nGuestMode", "LayoutChanger", "T2"
-;     ExitApp
-; }
 
 ;コンマレイヤー
 , & n::1
@@ -181,6 +177,16 @@ Space & Delete:: Run "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\OneNo
 #e:: WinActivate "ahk_class CabinetWClass"
 #HotIf
 #e:: Run "C:\Windows\explorer.exe"
+;ChatGPT
+    Space & `;:: {
+    if WinActive("ahk_exe ChatGPT.exe") {
+        WinMinimize("ahk_exe ChatGPT.exe")
+    } else if WinExist("ahk_exe ChatGPT.exe") {
+        WinActivate("ahk_exe ChatGPT.exe")
+    } else {
+        Run "C:\Program Files\WindowsApps\OpenAI.ChatGPT-Desktop_1.2025.7.0_x64__2p2nqsd0c76g0\app\ChatGPT.exe"
+    }
+}
 Space & j::F1
 Space & h::F2
 Space & m::F3
@@ -200,7 +206,6 @@ Space & ,::!^F2
 ;音量調整
 Space & .::Volume_Down
 Space & -::Volume_Up
-Space & `;::!^F3
 Space & 4::Volume_Mute
 ;音声入出力切り換え
 Space & ]::!^F4
