@@ -1,72 +1,3 @@
-#Requires AutoHotkey v2.0
-#include VSCode.ahk
-;sc07b:無変換   sc079:変換
-Enter & q:: {
-    Run "C:\Users\Tomisuke\Online\Home\MyAutohotkey\TomisukeToQwerty.ahk"
-    Msgbox "ゲストモード`nGuestMode", "LayoutChanger", "T2"
-    ExitApp
-}
-
-qwerty := false
-!^r:: Reload
-!^e:: Edit
-;ピリオドレイヤー
-;記号
-. & r::_
-. & d::sc028
-. & y::[
-. & p::]
-. & n::!
-. & t::?
-. & s::(
-. & k::)
-. & h::&
-. & m::%
-. & g::"
-. & j::'
-. & f::#
-. & Delete::$
-. & b:: Send "{{}"
-. & z:: Send "{}}"
-
-;enterレイヤー
-;矢印
-Enter & n:: Send "{Blind}{Left}"
-Enter & t:: Send "{Blind}{Down}"
-Enter & s:: Send "{Blind}{Up}"
-Enter & k:: Send "{Blind}{Right}"
-Enter & g:: Send "{Blind}{Home}"
-Enter & f:: Send "{Blind}{End}"
-Enter & d:: Send "!+^{F1}"
-
-#HotIf WinActive("ahk_exe ONENOTE.EXE")
-Enter & t:: DllCall("keybd_event", "UInt", 0x28, "UInt", 0, "UInt", 1, "UInt", 0) ; Down
-Enter & s:: DllCall("keybd_event", "UInt", 0x26, "UInt", 0, "UInt", 1, "UInt", 0) ; Up
-#HotIf
-
-Enter & h:: Send "+{sc079}"
-
-;コンマレイヤー
-, & n::1
-, & t::2
-, & s::3
-, & k::0
-, & h::4
-, & m::5
-, & b::6
-, & z::.
-, & r::7
-, & d::8
-, & y::9
-, & p::*
-, & g:: Send "{BS}"
-, & j::+
-, & f::-
-, & Delete::*
-, & l::/
-
-!c::^+R
-
 ;スペースレイヤー
 ;Winactive
 ;vivaldi
@@ -89,8 +20,6 @@ Space & a:: {
         Run "C:\Users\Tomisuke\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Vivaldi.lnk"
     }
 }
-
-
 ;メモ帳
 #HotIf WinActive("ahk_exe Notepad.exe")
 Space & o:: WinMinimize("ahk_exe Notepad.exe")
@@ -178,7 +107,7 @@ Space & Delete:: Run "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\OneNo
 #HotIf
 #e:: Run "C:\Windows\explorer.exe"
 ;ChatGPT
-    Space & `;:: {
+Space & `;:: {
     if WinActive("ahk_exe ChatGPT.exe") {
         WinMinimize("ahk_exe ChatGPT.exe")
     } else if WinExist("ahk_exe ChatGPT.exe") {
@@ -187,70 +116,3 @@ Space & Delete:: Run "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\OneNo
         Run "C:\Program Files\WindowsApps\OpenAI.ChatGPT-Desktop_1.2025.16.0_x64__2p2nqsd0c76g0\app\ChatGPT.exe"
     }
 }
-Space & j::F1
-Space & h::F2
-Space & m::F3
-Space & b::F4
-Space & z::F5
-Space & \::F6
-Space & g::F7
-Space & n::F8
-Space & t::F9
-Space & s::F10
-Space & k::F11
-Space & f::F12
-;輝度調整
-Space & 1::!^F1
-Space & ,::!^F2
-;音量調整
-Space & .::Volume_Down
-Space & -::Volume_Up
-Space & 4::Volume_Mute
-;音声入出力切り換え
-Space & ]::!^F4
-Space & [::!^F5
-
-;その他
-!F13::
-sc029:: Send "{Esc}"
-^+sc029:: Send "^+{Esc}"
-Enter & j::!^+F13
-
-#HotIf WinActive("ahk_exe Discord.exe")
-!F4:: WinClose("ahk_exe Discord.exe")
-#HotIf
-
-;IME制御
-#HotIf WinExist("Flow.Launcher")
-F13:: IME_SET(1)
-#HotIf
-F13:: Send "{vk16}" ;かな/ローマ字キーtoIMEOn
-#HotIf WinExist("Flow.Launcher")
-F14:: IME_SET(0)
-#HotIf
-F14:: Send "{vk1A}" ;EnterToIMEOff
-IME_SET(SetSts, WinTitle := "A") {
-    hwnd := WinGetID(WinTitle)
-    if (WinActive(WinTitle)) {
-        ptrSize := A_PtrSize ? A_PtrSize : 4
-        cbSize := 4 + 4 + (ptrSize * 6) + 16
-        stGTI := Buffer(cbSize, 0)
-        NumPut("UInt", cbSize, stGTI, 0)
-        if (DllCall("GetGUIThreadInfo", "Uint", 0, "Ptr", stGTI)) {
-            hwnd := NumGet(stGTI, 8 + ptrSize, "UInt")
-        }
-    }
-
-    return DllCall("SendMessage"
-        , "Ptr", DllCall("imm32\ImmGetDefaultIMEWnd", "Ptr", hwnd)
-        , "UInt", 0x0283  ; Message : WM_IME_CONTROL
-        , "Ptr", 0x006    ; wParam  : IMC_SETOPENSTATUS
-        , "Ptr", SetSts)  ; lParam  : 0 or 1
-}
-
-;補助
-Space::Space
-,::,
-.::.
-enter::Enter
-;#HotIf

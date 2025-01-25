@@ -7,28 +7,7 @@
 !F4:: WinClose("ahk_exe Discord.exe")
 #HotIf
 
-;スペースレイヤー
-;Winactive
-;Vivaldi
-#HotIf WinActive("ahk_exe vivaldi.exe")
-^!F13:: WinMinimize "ahk_exe vivaldi.exe"
-#HotIf WinExist("ahk_exe vivaldi.exe")
-^!F13:: WinActivate "ahk_exe vivaldi.exe"
-#HotIf
-^!F13:: Run "C:\Users\Tomisuke\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Vivaldi.lnk"
-;Notepad
-#HotIf WinActive("ahk_exe Notepad.exe")
-!^F14:: WinMinimize "ahk_exe Notepad.exe"
-#HotIf WinExist("ahk_exe Notepad.exe")
-!^F14:: WinActivate "ahk_exe Notepad.exe"
-#HotIf
-!^F14:: Run "C:\Windows\notepad.exe"
-#HotIf WinActive("ahk_exe LINE.exe")
-!^F15:: WinMinimize "ahk_exe LINE.exe"
-#HotIf WinExist("ahk_exe LINE.exe")
-!^F15:: WinActivate "ahk_exe LINE.exe"
-#HotIf
-!^F15:: Run "C:\Users\Tomisuke\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\LINE\LINE.lnk"
+
 ;Discord
 #HotIf WinActive("ahk_exe Discord.exe")
 !^F16:: WinMinimize "ahk_exe Discord.exe"
@@ -80,6 +59,8 @@
 !^F22:: Run "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\OneNote.lnk"
 
 #e::#1
+;frow launcher
+Enter & j::!^+F13
 
 ;IME制御 
 IME_SET(SetSts, WinTitle := "A") {
