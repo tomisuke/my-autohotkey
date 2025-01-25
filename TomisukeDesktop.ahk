@@ -24,10 +24,9 @@
 !^F21:: runProgram(9)
 !^F22:: runProgram(10)
 #e::#1
-;frow launcher
-Enter & j::!^+F13
 
 #HotIf WinExist("Flow.Launcher")
 vk1A:: IME_SET(0)
 vk16:: IME_SET(1)
 #HotIf
+Space::Space
