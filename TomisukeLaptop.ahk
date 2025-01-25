@@ -1,20 +1,17 @@
 #Requires AutoHotkey v2.0
-#include VSCode.ahk
 ;sc07b:無変換   sc079:変換
 ;-----------------
 #Include %A_ScriptDir%/common/
 #Include runProgram.ahk
 #Include IME.ahk
+#include VSCode.ahk
 ;-----------------
 Enter & q:: {
     Run "C:\Users\Tomisuke\Online\Home\MyAutohotkey\TomisukeToQwerty.ahk"
     Msgbox "ゲストモード`nGuestMode", "LayoutChanger", "T2"
     ExitApp
 }
-
 qwerty := false
-!^r:: Reload
-!^e:: Edit
 ;ピリオドレイヤー
 ;記号
 . & r::_
@@ -110,6 +107,15 @@ Space & [::!^F5
 sc029:: Send "{Esc}"
 ^+sc029:: Send "^+{Esc}"
 Enter & j::!^+F13 ;flowLauncher
+;ime制御
+#HotIf WinExist("Flow.Launcher")
+F13:: IME_SET(1)
+#HotIf
+F13:: Send "{vk16}" ;かな/ローマ字キーtoIMEOn
+#HotIf WinExist("Flow.Launcher")
+F14:: IME_SET(0)
+#HotIf
+F14:: Send "{vk1A}" ;EnterToIMEOff
 
 ;補助
 Space::Space

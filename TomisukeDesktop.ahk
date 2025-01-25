@@ -7,11 +7,6 @@
 #Include runProgram.ahk
 #Include IME.ahk
 ;-----------------
-
-#HotIf WinActive("ahk_exe Discord.exe")
-!F4:: WinClose("ahk_exe Discord.exe")
-#HotIf
-
 ;スペースレイヤー
 ^!F13:: runProgram(1)
 !^F14:: runProgram(2)
