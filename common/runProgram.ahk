@@ -54,6 +54,7 @@ runVivaldi() {
     } else {
         Run "C:\Users\Tomisuke\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Vivaldi.lnk"
     }
+    MsgBox("test")
 }
 runMemo() { ;メモ帳
     if WinActive("ahk_exe Notepad.exe") {
