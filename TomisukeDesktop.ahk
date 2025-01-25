@@ -80,6 +80,8 @@
 !^F22:: Run "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\OneNote.lnk"
 
 #e::#1
+;frow launcher
+Enter & j::!^+F13
 
 ;IME制御 
 IME_SET(SetSts, WinTitle := "A") {
