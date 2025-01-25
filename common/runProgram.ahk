@@ -105,7 +105,7 @@ runTickTIck() {
     } else if WinExist("ahk_exe TickTick.exe") {
         WinActivate "ahk_exe TickTick.exe"
     } else {
-        Run "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\TickTick\TickTick.lnk"
+        Run "C:\Program Files (x86)\TickTick\TickTick.exe"
     }
 }
 runVSCode() {
