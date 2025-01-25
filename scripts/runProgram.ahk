@@ -1,7 +1,30 @@
-;スペースレイヤー
-;Winactive
-;vivaldi
-runVivaldi(){
+runProgram(x) {
+    switch (x) {
+        case 1:
+            runVivaldi()
+        case 2:
+            runMemo()
+        case 3:
+            runLINE()
+        case 4:
+            runDiscord()
+        case 5:
+            runNotionCalendar()
+        case 6:
+            runZoom()
+        case 7:
+            runTickTIck()
+        case 8:
+            runVSCode()
+        case 9:
+            runThunderbird()
+        case 10:
+            runOnenote()
+        case 11:
+            runExplorer()
+    }
+}
+runVivaldi() {
     if WinActive("ahk_exe vivaldi.exe") {
         activeID := WinGetID("A")
         WinMinimize(activeID)
@@ -12,50 +35,57 @@ runVivaldi(){
                 break
             }
         }
-    }
-    else if WinExist("ahk_exe vivaldi.exe") {
+    } else if WinExist("ahk_exe vivaldi.exe") {
         WinActivate "ahk_exe vivaldi.exe"
-    }
-    else {
+    } else {
         Run "C:\Users\Tomisuke\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Vivaldi.lnk"
     }
 }
-;メモ帳
-#HotIf WinActive("ahk_exe Notepad.exe")
-Space & o:: WinMinimize("ahk_exe Notepad.exe")
-#HotIf WinExist("ahk_exe Notepad.exe")
-Space & o:: WinActivate "ahk_exe Notepad.exe"
-#HotIf
-Space & o:: Run "C:\Windows\notepad.exe"
-;LINE
-#HotIf WinActive("ahk_exe LINE.exe")
-Space & e:: WinHide("ahk_exe LINE.exe")
-#HotIf WinExist("ahk_exe LINE.exe")
-Space & e:: WinActivate "ahk_exe LINE.exe"
-#HotIf
-Space & e:: Run "C:\Users\Tomisuke\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\LINE\LINE.lnk"
-;discord
-#HotIf WinActive("ahk_exe Discord.exe")
-Space & i:: WinMinimize("ahk_exe Discord.exe")
-#HotIf WinExist("ahk_exe Discord.exe")
-Space & i:: WinActivate "ahk_exe Discord.exe"
-#HotIf
-Space & i:: Run "C:\Users\Tomisuke\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Discord Inc\Discord.lnk"
-;notionカレンダー
-#HotIf WinActive("ahk_exe Notion Calendar.exe")
-Space & u:: WinMinimize("ahk_exe Notion Calendar.exe")
-#HotIf WinExist("ahk_exe Notion Calendar.exe")
-Space & u:: WinActivate "ahk_exe Notion Calendar.exe"
-#HotIf
-Space & u:: Run "C:\Users\Tomisuke\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Notion Calendar.lnk"
-;Zoom
-#HotIf WinActive("ahk_class ConfMultiTabContentWndClass")
-Space & x:: WinMinimize("ahk_class ConfMultiTabContentWndClass")
-#HotIf WinExist("ahk_class ConfMultiTabContentWndClass")
-Space & x:: WinActivate "ahk_class ConfMultiTabContentWndClass"
-#HotIf
-;ticktick
-Space & c:: {
+runMemo() { ;メモ帳
+    if WinActive("ahk_exe Notepad.exe") {
+        WinMinimize("ahk_exe Notepad.exe")
+    } else if WinExist("ahk_exe Notepad.exe") {
+        WinActivate "ahk_exe Notepad.exe"
+    } else {
+        Run "C:\Windows\notepad.exe"
+    }
+}
+runLINE() {
+    If WinActive("ahk_exe LINE.exe") {
+        WinHide("ahk_exe LINE.exe")
+    } else if WinExist("ahk_exe LINE.exe") {
+        WinActivate "ahk_exe LINE.exe"
+    } else {
+        Run "C:\Users\Tomisuke\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\LINE\LINE.lnk"
+    }
+}
+runDiscord() {
+    If WinActive("ahk_exe Discord.exe") {
+        WinMinimize("ahk_exe Discord.exe")
+    } else if WinExist("ahk_exe Discord.exe") {
+        WinActivate "ahk_exe Discord.exe"
+    } else {
+        Run "C:\Users\Tomisuke\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Discord Inc\Discord.lnk"
+    }
+}
+runNotionCalendar() {
+    ;notionカレンダー
+    If WinActive("ahk_exe Notion Calendar.exe") {
+        WinMinimize("ahk_exe Notion Calendar.exe")
+    } else if WinExist("ahk_exe Notion Calendar.exe") {
+        WinActivate "ahk_exe Notion Calendar.exe"
+    } else {
+        Run "C:\Users\Tomisuke\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Notion Calendar.lnk"
+    }
+}
+runZoom() {
+    If WinActive("ahk_class ConfMultiTabContentWndClass") {
+        WinMinimize("ahk_class ConfMultiTabContentWndClass")
+    } else if WinExist("ahk_class ConfMultiTabContentWndClass") {
+        WinActivate "ahk_class ConfMultiTabContentWndClass"
+    }
+}
+runTickTIck() {
     if WinActive("ahk_exe TickTick.exe") {
         WinMinimize "ahk_exe TickTick.exe"
     } else if WinExist("ahk_exe TickTick.exe") {
@@ -64,8 +94,7 @@ Space & c:: {
         Run "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\TickTick\TickTick.lnk"
     }
 }
-;VSCode
-Space & v:: {
+runVSCode() {
     if WinActive("ahk_exe Code.exe") {  ;vscode active
         WinMinimize "ahk_exe Code.exe"
         if WinExist("ahk_exe idea64.exe") {
@@ -84,30 +113,34 @@ Space & v:: {
         Run "C:\Users\Tomisuke\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Visual Studio Code\Visual Studio Code.lnk"
     }
 }
-;thunderbird
-#HotIf WinActive("ahk_exe thunderbird.exe")
-Space & w:: WinMinimize "ahk_exe thunderbird.exe"
-#HotIf WinExist("ahk_exe thunderbird.exe")
-Space & w:: WinActivate "ahk_exe thunderbird.exe"
-#HotIf
-Space & w:: Run "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Thunderbird.lnk"
-#HotIf WinExist("ahk_exe ONENOTE.EXE")
-;Onenote
-#HotIf WinActive("ahk_exe ONENOTE.EXE")
-Space & Delete:: WinMinimize "ahk_exe ONENOTE.EXE"
-#HotIf WinExist("ahk_exe ONENOTE.EXE")
-Space & Delete:: WinActivate "ahk_exe ONENOTE.EXE"
-#HotIf
-Space & Delete:: Run "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\OneNote.lnk"
-;explorer
-#HotIf WinActive("ahk_class CabinetWClass")
-#e:: WinMinimize "ahk_class CabinetWClass"
-#HotIf WinExist("ahk_class CabinetWClass")
-#e:: WinActivate "ahk_class CabinetWClass"
-#HotIf
-#e:: Run "C:\Windows\explorer.exe"
-;ChatGPT
-Space & `;:: {
+runThunderbird() {
+    If WinActive("ahk_exe thunderbird.exe") {
+        WinMinimize "ahk_exe thunderbird.exe"
+    } else if WinExist("ahk_exe thunderbird.exe") {
+        WinActivate "ahk_exe thunderbird.exe"
+    } else {
+        Run "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Thunderbird.lnk"
+    }
+}
+runOnenote() {
+    If WinActive("ahk_exe ONENOTE.EXE") {
+        WinMinimize "ahk_exe ONENOTE.EXE"
+    } else If WinExist("ahk_exe ONENOTE.EXE") {
+        WinActivate "ahk_exe ONENOTE.EXE"
+    } else {
+        Run "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\OneNote.lnk"
+    }
+}
+runExplorer() {
+    If WinActive("ahk_class CabinetWClass") {
+        WinMinimize "ahk_class CabinetWClass"
+    } else if WinExist("ahk_class CabinetWClass") {
+        WinActivate "ahk_class CabinetWClass"
+    } else {
+        Run "C:\Windows\explorer.exe"
+    }
+}
+runChatGPT() {
     if WinActive("ahk_exe ChatGPT.exe") {
         WinMinimize("ahk_exe ChatGPT.exe")
     } else if WinExist("ahk_exe ChatGPT.exe") {
