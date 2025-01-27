@@ -5,6 +5,7 @@
 #Include runProgram.ahk
 #Include IME.ahk
 #include VSCode.ahk
+#include common.ahk
 ;-----------------
 Enter & q:: {
     Run "C:\Users\Tomisuke\Online\Home\MyAutohotkey\TomisukeToQwerty.ahk"
@@ -80,6 +81,8 @@ Space & c:: runProgram(7)
 Space & v:: runProgram(8)
 Space & w:: runProgram(9)
 Space & Delete:: runProgram(10)
+Space & `;:: runProgram(11)
+#e:: runProgram(12)
 ;FN
 Space & j::F1
 Space & h::F2

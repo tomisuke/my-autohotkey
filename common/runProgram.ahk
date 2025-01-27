@@ -31,8 +31,10 @@ runProgram(x) {
             runOnenote()
             return
         case 11:
+            runChatGPT()
+        case 12:
             runExplorer()
-            return
+
         default:
             MsgBox("Unknown case: " . x)
             return
