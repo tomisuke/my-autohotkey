@@ -18,6 +18,7 @@
 !^F20:: runProgram(8)
 !^F21:: runProgram(9)
 !^F22:: runProgram(10)
+!^F23:: runProgram(11)
 #e::#1
 
 #HotIf WinExist("Flow.Launcher")
