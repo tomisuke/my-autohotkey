@@ -7,6 +7,18 @@
 #include VSCode.ahk
 #include common.ahk
 ;-----------------
+; Enter:: SinglePress("Enter", "d")
+; SinglePress(lastkey, sendkey) {
+;     KeyWait "All"
+;     MsgBox "b"
+;     If (A_PriorKey = lastkey)
+;     {
+;         Send "{Enter}"
+;     }else if(A_PriorKey = sendKey){
+;         Send "{Enter}"
+;     }
+; }
+
 Enter & q:: {
     Run "C:\Users\Tomisuke\Online\Home\MyAutohotkey\TomisukeToQwerty.ahk"
     Msgbox "ゲストモード`nGuestMode", "LayoutChanger", "T2"
@@ -40,7 +52,24 @@ Enter & s:: Send "{Blind}{Up}"
 Enter & k:: Send "{Blind}{Right}"
 Enter & g:: Send "{Blind}{Home}"
 Enter & f:: Send "{Blind}{End}"
-Enter & d:: Send "!+^{F1}"
+; Enter & d:: {
+;     Send "!+^{F1}"
+;     KeyWait "{All}"
+;     Send "{Enter}"
+; }
+Enter:: {
+    frag := KeyWaitAny()
+    if(frag = "d")
+}
+KeyWaitAny()
+{
+    ih := InputHook()
+        ih.VisibleNonText := false
+    ih.KeyOpt("{All}", "E")  ; End
+    ih.Start()
+    ih.Wait()
+    return ih.EndKey  ; Return the key name
+}
 #HotIf WinActive("ahk_exe ONENOTE.EXE")
 Enter & t:: DllCall("keybd_event", "UInt", 0x28, "UInt", 0, "UInt", 1, "UInt", 0) ; Down
 Enter & s:: DllCall("keybd_event", "UInt", 0x26, "UInt", 0, "UInt", 1, "UInt", 0) ; Up
@@ -124,4 +153,4 @@ F14:: Send "{vk1A}" ;EnterToIMEOff
 Space::Space
 ,::,
 .::.
-enter::Enter
+Enter::Enter
