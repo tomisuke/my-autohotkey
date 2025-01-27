@@ -1,12 +1,4 @@
 ;IME制御
-#HotIf WinExist("Flow.Launcher")
-F13:: IME_SET(1)
-#HotIf
-F13:: Send "{vk16}" ;かな/ローマ字キーtoIMEOn
-#HotIf WinExist("Flow.Launcher")
-F14:: IME_SET(0)
-#HotIf
-F14:: Send "{vk1A}" ;EnterToIMEOff
 IME_SET(SetSts, WinTitle := "A") {
     hwnd := WinGetID(WinTitle)
     if (WinActive(WinTitle)) {

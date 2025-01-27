@@ -31,8 +31,10 @@ runProgram(x) {
             runOnenote()
             return
         case 11:
+            runChatGPT()
+        case 12:
             runExplorer()
-            return
+
         default:
             MsgBox("Unknown case: " . x)
             return
@@ -54,7 +56,6 @@ runVivaldi() {
     } else {
         Run "C:\Users\Tomisuke\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Vivaldi.lnk"
     }
-    MsgBox("test")
 }
 runMemo() { ;メモ帳
     if WinActive("ahk_exe Notepad.exe") {
@@ -106,7 +107,7 @@ runTickTIck() {
     } else if WinExist("ahk_exe TickTick.exe") {
         WinActivate "ahk_exe TickTick.exe"
     } else {
-        Run "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\TickTick\TickTick.lnk"
+        Run "C:\Program Files (x86)\TickTick\TickTick.exe"
     }
 }
 runVSCode() {
