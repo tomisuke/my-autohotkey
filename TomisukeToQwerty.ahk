@@ -44,6 +44,7 @@ h::m
 m::,
 b::.
 z::/
+`;::-
 
 LShift:: Send "{Space}"
 
