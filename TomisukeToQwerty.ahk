@@ -46,7 +46,6 @@ b::.
 z::/
 
 LShift:: Send "{Space}"
-RShift::RShift
 
 F14::Enter
 F15::Esc
