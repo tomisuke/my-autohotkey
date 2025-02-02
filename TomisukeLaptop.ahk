@@ -8,7 +8,7 @@
 #include common.ahk
 ;-----------------
 Enter & q:: {
-    Run ".\TomisukeToQwerty.ahk"
+    Run "C:\Users\Tomisuke\Online\Home\MyAutohotkey\TomisukeToQwerty.ahk"
     Msgbox "ゲストモード`nGuestMode", "LayoutChanger", "T2"
     ExitApp
 }

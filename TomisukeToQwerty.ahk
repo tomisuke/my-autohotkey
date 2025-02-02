@@ -1,6 +1,6 @@
 #Requires AutoHotkey v2.0
 Enter & q:: {
-    Run ".\TomisukeLaptop.ahk"
+    Run "C:\Users\Tomisuke\Online\Home\MyAutohotkey\TomisukeLaptop.ahk"
     Msgbox "デフォルトモード`nDefaultMode", "LayoutChanger", "T2"
     ExitApp
 }
@@ -45,7 +45,8 @@ m::,
 b::.
 z::/
 
-RShift:: Send "{Space}"
+LShift:: Send "{Space}"
+RShift::RShift
 
 F14::Enter
 F15::Esc
