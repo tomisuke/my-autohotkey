@@ -6,9 +6,9 @@ Enter & q:: {
 }
 
 /::1
-:::-
+^::-
 \::^
-^::\
+:::\
 @::BS
 
 1::q
@@ -46,6 +46,7 @@ b::.
 z::/
 
 LShift:: Send "{Space}"
+RShift::RShift
 
 F14::Enter
 F15::Esc
