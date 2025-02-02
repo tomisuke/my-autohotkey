@@ -47,7 +47,6 @@ Enter & s:: DllCall("keybd_event", "UInt", 0x26, "UInt", 0, "UInt", 1, "UInt", 0
 #HotIf
 
 Enter & h:: Send "+{sc079}"
-Enter & y:: Send "{Blind}{Up}"
 
 ;コンマレイヤー
 , & n::1
