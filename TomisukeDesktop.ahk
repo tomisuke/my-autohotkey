@@ -20,6 +20,17 @@
 !^F22:: runProgram(10)
 !^F23:: runProgram(11)
 #e::#1
+;モニター切り換え
+!^+F13::{
+    Send "#{p}"
+    Sleep 50
+    Send "{Tab}"
+    Sleep 50
+    loop(2){
+        Send "{Down}"   
+        Sleep 50
+    }
+}
 
 #HotIf WinExist("Flow.Launcher")
 vk1A:: IME_SET(0)
