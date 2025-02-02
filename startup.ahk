@@ -2,7 +2,7 @@
 !^r:: Reload
 !^e:: Edit
 ;tomisukeLaptop
-Run "C:\Users\Tomisuke\Online\Home\MyAutohotkey\TomisukeLaptop.ahk"
+Run ".\TomisukeLaptop.ahk"
 ;flowLauncher
 Run "C:\Users\Tomisuke\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Flow Launcher\Flow Launcher.lnk"
 ; twinkleTray
@@ -29,7 +29,7 @@ WinWait("ahk_exe PhoneExperienceHost.exe")
 WinHide("ahk_exe PhoneExperienceHost.exe")
 ;powerToys
 Run "C:\Users\Tomisuke\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\PowerToys (Preview)\PowerToys (Preview).lnk"
-Run "C:\Program Files\Google\Drive File Stream\101.0.3.0\GoogleDriveFS.exe"
+Run "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Google Drive.lnk"
 ;everything
 Run "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Everything.lnk"
 WinWait("ahk_exe Everything.exe")
