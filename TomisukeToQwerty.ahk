@@ -1,7 +1,7 @@
 #Requires AutoHotkey v2.0
 Enter & q:: {
     Run ".\TomisukeLaptop.ahk"
-    Msgbox "デフォルトモード`nDefaultMode", "LayoutChanger", "T1"
+    Msgbox "デフォルトモード`nDefaultMode", "LayoutChanger", "T0.5"
     ExitApp
 }
 
