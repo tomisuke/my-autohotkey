@@ -7,7 +7,7 @@
 #include VSCode.ahk
 #include common.ahk
 ;-----------------
-Enter & q:: {
+Pause:: {
     Run ".\TomisukeToQwerty.ahk"
     Msgbox "ゲストモード`nGuestMode", "LayoutChanger", "T0.5"
     ExitApp

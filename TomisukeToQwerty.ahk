@@ -1,5 +1,9 @@
 #Requires AutoHotkey v2.0
-Enter & q:: {
+;-----------------
+#Include %A_ScriptDir%/common/
+#include common.ahk
+;-----------------
+Pause:: {
     Run ".\TomisukeLaptop.ahk"
     Msgbox "デフォルトモード`nDefaultMode", "LayoutChanger", "T0.5"
     ExitApp
@@ -51,6 +55,3 @@ F14::Enter
 F15::Esc
 ;Space:: Send "{vk1A}"    ;無変換toIMEOff
 ;Enter:: Send "{vk16}"    ;変換toIMEOn
-
-!^r:: Reload
-!^e:: Edit
