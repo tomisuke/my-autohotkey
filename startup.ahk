@@ -5,6 +5,8 @@
 Run ".\TomisukeLaptop.ahk"
 ;flowLauncher
 Run "C:\Users\Tomisuke\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Flow Launcher\Flow Launcher.lnk"
+;earTrumpet
+Run "explorer.exe shell:AppsFolder\40459File-New-Project.EarTrumpet_1sdd7yawvg6ne!EarTrumpet"
 ; twinkleTray
 Run "explorer.exe shell:AppsFolder\TwinkleTray_8wekyb3d8bbwe!TwinkleTray"
 ;TickTick
@@ -29,27 +31,22 @@ WinWait("ahk_exe PhoneExperienceHost.exe")
 WinHide("ahk_exe PhoneExperienceHost.exe")
 ;powerToys
 Run "C:\Users\Tomisuke\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\PowerToys (Preview)\PowerToys (Preview).lnk"
-Run "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Google Drive.lnk"
 ;everything
 Run "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Everything.lnk"
 WinWait("ahk_exe Everything.exe")
 WinHide("ahk_exe Everything.exe")
-;onenote
-Run "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\OneNote.lnk"
-WinWait("ahk_exe ONENOTE.EXE")
-WinHide("ahk_exe ONENOTE.EXE")
-WinWait("ahk_exe ONENOTE.EXE")
-WinHide("ahk_exe ONENOTE.EXE")
 ;NotionCalendar
 Run "C:\Users\Tomisuke\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Notion Calendar.lnk"
 WinWait("ahk_exe Notion Calendar.exe")
 WinHide("ahk_exe Notion Calendar.exe")
+;RIZE
+Run "C:\Users\Tomisuke\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\GitHub, Inc\Rize.lnk"
+WinWait("ahk_exe Rize.exe")
+WinHide("ahk_exe Rize.exe")
 ;DeepL
 Run "C:\Users\Tomisuke\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\DeepL.lnk"
 WinWait("ahk_exe DeepL.exe")
 WinHide("ahk_exe DeepL.exe")
 ;LINE
 Run "C:\Users\Tomisuke\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\LINE\LINE.lnk"
-WinWait("ahk_exe LINE.exe")
-Send "{Esc}"
 ExitApp
