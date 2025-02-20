@@ -17,8 +17,8 @@ HandleModifierKeys(singleKey, modifiedKey) {
         modifiers .= "#"
 
     ; 修飾キーと指定されたキーを送信
-    if (modifiers = "") {
-        Send(singleKey)
+    if (modifiers = "" OR modifiers = "+") {
+        Send(modifiers singleKey)
     } else {
         Send(modifiers modifiedKey)
     }
