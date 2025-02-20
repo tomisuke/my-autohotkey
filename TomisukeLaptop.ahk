@@ -4,7 +4,7 @@
 #Include %A_ScriptDir%/common/
 #Include runProgram.ahk
 #Include IME.ahk
-#include VSCode.ahk
+#include appOriginal.ahk
 #include common.ahk
 ;-----------------
 Pause:: {
