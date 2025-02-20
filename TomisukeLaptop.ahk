@@ -107,6 +107,12 @@ Space & 4::Volume_Mute
 ;音声入出力切り換え
 Space & ]::!^F4
 Space & [::!^F5
+;コピペショートカット
+*x::HandleModifierKeys("x", "z")
+*c::HandleModifierKeys("c", "x")
+*v::HandleModifierKeys("v", "c")
+*w::HandleModifierKeys("w", "v")
+*z::HandleModifierKeys("z", "w")
 ;その他
 sc029:: Send "{Esc}"
 ^+sc029:: Send "^+{Esc}"
