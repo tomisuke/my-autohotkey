@@ -46,7 +46,9 @@ Enter & t:: DllCall("keybd_event", "UInt", 0x28, "UInt", 0, "UInt", 1, "UInt", 0
 Enter & s:: DllCall("keybd_event", "UInt", 0x26, "UInt", 0, "UInt", 1, "UInt", 0) ; Up
 #HotIf
 
-Enter & h:: Send "+{sc079}"
+Enter & j::!^+F13 ;flowLauncher
+Enter & h:: Send "+{sc079}" ;IMEon off修正
+Enter & m:: Send "{AppsKey}"
 Enter & y:: Send "{Blind}{up}"
 
 ;コンマレイヤー
@@ -116,7 +118,6 @@ Space & [::!^F5
 ;その他
 sc029:: Send "{Esc}"
 ^+sc029:: Send "^+{Esc}"
-Enter & j::!^+F13 ;flowLauncher
 ;ime制御
 #HotIf WinExist("Flow.Launcher")
 F13:: IME_SET(1)
@@ -126,7 +127,6 @@ F13:: Send "{vk16}" ;かな/ローマ字キーtoIMEOn
 F14:: IME_SET(0)
 #HotIf
 F14:: Send "{vk1A}" ;EnterToIMEOff
-
 ;補助
 Space::Space
 ,::,
