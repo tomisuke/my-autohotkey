@@ -29,6 +29,8 @@ WinWait("ahk_exe PhoneExperienceHost.exe")
 WinHide("ahk_exe PhoneExperienceHost.exe")
 WinWait("ahk_exe PhoneExperienceHost.exe")
 WinHide("ahk_exe PhoneExperienceHost.exe")
+;GoogleDrive
+Run "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Google Drive.lnk"
 ;powerToys
 Run "C:\Users\Tomisuke\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\PowerToys (Preview)\PowerToys (Preview).lnk"
 ;everything
