@@ -46,7 +46,7 @@ Run "C:\Users\Tomisuke\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Git
 WinWait("ahk_exe Rize.exe")
 WinHide("ahk_exe Rize.exe")
 ;DeepL
-Run "C:\Users\Tomisuke\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\DeepL.lnk"
+Run "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\DeepL.lnk"
 WinWait("ahk_exe DeepL.exe")
 WinHide("ahk_exe DeepL.exe")
 ;LINE
