@@ -5,6 +5,8 @@
 Run ".\TomisukeLaptop.ahk"
 ;flowLauncher
 Run "C:\Users\Tomisuke\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Flow Launcher\Flow Launcher.lnk"
+;alttabTerminator
+Run "C:\Program Files\Alt-Tab Terminator\AltTabTer.exe"
 ;earTrumpet
 Run "explorer.exe shell:AppsFolder\40459File-New-Project.EarTrumpet_1sdd7yawvg6ne!EarTrumpet"
 ; twinkleTray
