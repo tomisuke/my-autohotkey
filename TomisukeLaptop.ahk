@@ -114,6 +114,10 @@ Space & [::!^F5
 *v::HandleModifierKeys("v", "c")
 *w::HandleModifierKeys("w", "v")
 *z::HandleModifierKeys("z", "w")
+;clibor
+Enter & B::!^+#0
+Enter & z::!^+#1
+Enter & sc073b::!^+#2
 ;その他
 sc029:: Send "{Esc}"
 ^+sc029:: Send "^+{Esc}"
