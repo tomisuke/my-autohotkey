@@ -5,6 +5,8 @@
 Run ".\TomisukeLaptop.ahk"
 ;flowLauncher
 Run "C:\Users\Tomisuke\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Flow Launcher\Flow Launcher.lnk"
+;clibor
+Run "C:\Program Files\clibor\Clibor.exe"
 ;alttabTerminator
 Run "C:\Program Files\Alt-Tab Terminator\AltTabTer.exe"
 ;earTrumpet
