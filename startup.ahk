@@ -45,10 +45,6 @@ WinHide("ahk_exe Everything.exe")
 Run "C:\Users\Tomisuke\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Notion Calendar.lnk"
 WinWait("ahk_exe Notion Calendar.exe")
 WinHide("ahk_exe Notion Calendar.exe")
-;RIZE
-Run "C:\Users\Tomisuke\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\GitHub, Inc\Rize.lnk"
-WinWait("ahk_exe Rize.exe")
-WinHide("ahk_exe Rize.exe")
 ;DeepL
 Run "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\DeepL.lnk"
 WinWait("ahk_exe DeepL.exe")
