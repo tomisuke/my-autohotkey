@@ -6,6 +6,7 @@
 #Include IME.ahk
 #include appOriginal.ahk
 #include common.ahk
+#Include Discord.ahk
 ;-----------------
 Pause:: {
     Run ".\TomisukeToQwerty.ahk"
@@ -40,14 +41,23 @@ Enter & s:: Send "{Blind}{Up}"
 Enter & k:: Send "{Blind}{Right}"
 Enter & g:: Send "{Blind}{Home}"
 Enter & f:: Send "{Blind}{End}"
-Enter & d:: Send "{RButton}{WheelDown}"
+
+#HotIf WinActive("ahk_exe FluentSearch.exe")
+Enter & n::Left
+Enter & t::Down
+Enter & s::Up
+Enter & k::Right
+Enter & g::Home
+Enter & f::End
+#HotIf
+
 #HotIf WinActive("ahk_exe ONENOTE.EXE")
 Enter & t:: DllCall("keybd_event", "UInt", 0x28, "UInt", 0, "UInt", 1, "UInt", 0) ; Down
 Enter & s:: DllCall("keybd_event", "UInt", 0x26, "UInt", 0, "UInt", 1, "UInt", 0) ; Up
 #HotIf
 
-Enter & h:: Send "+{sc079}"
-Enter & m:: Send "{AppsKey}"
+Enter & h:: Send "!+^{F1}"
+Enter & m:: Send "+{sc079}"
 Enter & y:: Send "{Blind}{up}"
 
 ;コンマレイヤー
@@ -109,11 +119,21 @@ Space & 4::Volume_Mute
 Space & ]::!^F4
 Space & [::!^F5
 ;コピペショートカット
-*x::HandleModifierKeys("x", "z")
-*c::HandleModifierKeys("c", "x")
-*v::HandleModifierKeys("v", "c")
-*w::HandleModifierKeys("w", "v")
-*z::HandleModifierKeys("z", "w")
+*x:: {
+    HandleModifierKeys("x", "z")
+}
+*c:: {
+    HandleModifierKeys("c", "x")
+}
+*v:: {
+    HandleModifierKeys("v", "c")
+}
+*w:: {
+    HandleModifierKeys("w", "v")
+}
+*z:: {
+HandleModifierKeys("z", "w")
+}
 ;clibor
 Enter & B::!^+#0
 Enter & z::!^+#1
@@ -123,11 +143,11 @@ sc029:: Send "{Esc}"
 ^+sc029:: Send "^+{Esc}"
 Enter & j::!^+F13 ;flowLauncher
 ;ime制御
-#HotIf WinExist("Flow.Launcher")
+#HotIf WinExist("Flow.Launcher") OR WinActive("ahk_exe YukkuriMovieMaker.exe")
 F13:: IME_SET(1)
 #HotIf
 F13:: Send "{vk16}" ;かな/ローマ字キーtoIMEOn
-#HotIf WinExist("Flow.Launcher")
+#HotIf WinExist("Flow.Launcher") OR WinActive("ahk_exe YukkuriMovieMaker.exe")
 F14:: IME_SET(0)
 #HotIf
 F14:: Send "{vk1A}" ;EnterToIMEOff

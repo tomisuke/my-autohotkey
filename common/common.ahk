@@ -3,9 +3,10 @@
 #HotIf
 !^r:: Reload
 !^e:: Edit
+
 ;単体動作と修飾キーを組み合わせた動作を条件分岐する関数
 HandleModifierKeys(singleKey, modifiedKey) {
-    ; 修飾キーの状態を取得
+        ; 修飾キーの状態を取得
     modifiers := ""
     if GetKeyState("Ctrl", "P")
         modifiers .= "^"
