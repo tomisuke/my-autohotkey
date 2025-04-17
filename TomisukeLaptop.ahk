@@ -8,6 +8,8 @@
 #include common.ahk
 #Include Discord.ahk
 ;-----------------
+:*R:ol::\overline{}
+
 Pause:: {
     Run ".\TomisukeToQwerty.ahk"
     Msgbox "ゲストモード`nGuestMode", "LayoutChanger", "T0.5"
@@ -132,7 +134,7 @@ Space & [::!^F5
     HandleModifierKeys("w", "v")
 }
 *z:: {
-HandleModifierKeys("z", "w")
+    HandleModifierKeys("z", "w")
 }
 ;clibor
 Enter & B::!^+#0
