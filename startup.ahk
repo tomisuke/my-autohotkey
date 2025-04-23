@@ -45,10 +45,4 @@ WinHide("ahk_exe Everything.exe")
 Run "C:\Users\Tomisuke\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Notion Calendar.lnk"
 WinWait("ahk_exe Notion Calendar.exe")
 WinHide("ahk_exe Notion Calendar.exe")
-;DeepL
-Run "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\DeepL.lnk"
-WinWait("ahk_exe DeepL.exe")
-WinHide("ahk_exe DeepL.exe")
-;LINE
-Run "C:\Users\Tomisuke\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\LINE\LINE.lnk"
 ExitApp
