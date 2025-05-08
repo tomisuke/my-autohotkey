@@ -5,6 +5,8 @@
 Run ".\TomisukeLaptop.ahk"
 ;FluentSearch
 Run "C:\Program Files\Fluent Search\FluentSearch.exe"
+;flowLauncher
+Run "C:\Users\Tomisuke\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Flow Launcher\Flow Launcher.lnk"
 ;clibor
 Run "C:\Program Files\clibor\Clibor.exe"
 ;alttabTerminator
