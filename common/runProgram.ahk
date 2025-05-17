@@ -34,7 +34,6 @@ runProgram(x) {
             runChatGPT()
         case 12:
             runExplorer()
-
         default:
             MsgBox("Unknown case: " . x)
             return
