@@ -46,10 +46,10 @@ runApp(x) {
     windows := WinGetList("ahk_exe vivaldi.exe")
     if windows.Length != 0 {
         count := 1  ;forが回った回数
-        num := 0    ;何番目のウインドウか
+        num := 1    ;何番目のウインドウか
         for i in windows {
             if i = WinGetID("a") {
-                if(count >= windows.Length){
+                if(count = windows.Length){
                     num := 1
                 }else{
                     num++
@@ -57,6 +57,7 @@ runApp(x) {
             }
             count++
         }
+        MsgBox "" num
         id := "ahk_id" windows[num] ""
         WinActivate id
     } else {
