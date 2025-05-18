@@ -40,6 +40,18 @@ runProgram(x) {
             return
     }
 }
+/*
+runApp(app) {
+    appName := "ahk_exe " + app
+    if WinExist(appName) {
+        WinActivate("ahk_exe " + app)
+    } else {
+        Run appAddress[app]
+    }
+}
+appAddress := Map()
+appAddress["Notepad.exe"] := "C:\Windows\notepad.exe"
+*/  
 runVivaldi() {
     if WinActive("ahk_exe vivaldi.exe") {
         activeID := WinGetID("A")

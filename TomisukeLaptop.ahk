@@ -6,7 +6,6 @@
 #Include IME.ahk
 #include appOriginal.ahk
 #include common.ahk
-#Include Discord.ahk
 ;-----------------
 Pause:: {
     Run ".\TomisukeToQwerty.ahk"
