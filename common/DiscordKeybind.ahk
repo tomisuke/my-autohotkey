@@ -1,7 +1,10 @@
 #Requires AutoHotkey v2.0
 
+GroupAdd "CtrlEnterToSend", "ahk_exe Discord.exe"
+GroupAdd "CtrlEnterToSend", "ahk_exe ChatGPT.exe"
+
 ; Discordのウィンドウクラスを指定
-#HotIf WinActive("ahk_exe Discord.exe")
+#HotIf WinActive("ahk_group CtrlEnterToSend")
 
 ; 入力中の文字数を保持
 global count := 0
