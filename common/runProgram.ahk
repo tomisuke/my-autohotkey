@@ -36,7 +36,7 @@
                 equal.Push(i)
         }
         below := SortArray(below)
-        over := SortArray(below)
+        over := SortArray(over)
         ;結合
         result := []
         for i in below
