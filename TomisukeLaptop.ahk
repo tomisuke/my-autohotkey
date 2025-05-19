@@ -107,22 +107,6 @@ Space & 4::Volume_Mute
 ;音声入出力切り換え
 Space & ]::!^F4
 Space & [::!^F5
-;コピペショートカット
-*x:: {
-    HandleModifierKeys("x", "z")
-}
-*c:: {
-    HandleModifierKeys("c", "x")
-}
-*v:: {
-    HandleModifierKeys("v", "c")
-}
-*w:: {
-    HandleModifierKeys("w", "v")
-}
-*z:: {
-HandleModifierKeys("z", "w")
-}
 ;clibor
 Enter & B::!^+#0
 Enter & z::!^+#1
