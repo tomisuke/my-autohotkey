@@ -41,15 +41,6 @@ Enter & k:: Send "{Blind}{Right}"
 Enter & g:: Send "{Blind}{Home}"
 Enter & f:: Send "{Blind}{End}"
 
-#HotIf WinActive("ahk_exe FluentSearch.exe")
-Enter & n::Left
-Enter & t::Down
-Enter & s::Up
-Enter & k::Right
-Enter & g::Home
-Enter & f::End
-#HotIf
-
 #HotIf WinActive("ahk_exe ONENOTE.EXE")
 Enter & t:: DllCall("keybd_event", "UInt", 0x28, "UInt", 0, "UInt", 1, "UInt", 0) ; Down
 Enter & s:: DllCall("keybd_event", "UInt", 0x26, "UInt", 0, "UInt", 1, "UInt", 0) ; Up

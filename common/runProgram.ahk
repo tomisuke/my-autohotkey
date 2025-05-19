@@ -1,7 +1,8 @@
+global num := 1    ;何番目のウインドウか
 runProgram(x) {
     switch (x) {
         case 1:
-            runVivaldi()
+            runApp("vivaldi")
             return
         case 2:
             runMemo()
@@ -34,24 +35,35 @@ runProgram(x) {
             runChatGPT()
         case 12:
             runExplorer()
-
         default:
             MsgBox("Unknown case: " . x)
             return
     }
 }
-/*
-runApp(app) {
-    appName := "ahk_exe " + app
-    if WinExist(appName) {
-        WinActivate("ahk_exe " + app)
+app := Map()
+app["vivaldi"] := { name: "ahk_exe vivaldi.exe", address: "C:\Users\Tomisuke\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Vivaldi.lnk" }
+runApp(x) {
+    windows := WinGetList("ahk_exe vivaldi.exe")
+    if windows.Length != 0 {
+        count := 1  ;forが回った回数
+        for i in windows {
+            if i = WinGetID("a") {
+                if(count = windows.Length){
+                    num := 1
+                }else{
+                    num++
+                }
+            }
+            count++
+        }
+        MsgBox "" num
+        id := "ahk_id" windows[num] ""
+        WinActivate id
     } else {
-        Run appAddress[app]
+        Run app[x].address
     }
 }
-appAddress := Map()
-appAddress["Notepad.exe"] := "C:\Windows\notepad.exe"
-*/  
+
 runVivaldi() {
     if WinActive("ahk_exe vivaldi.exe") {
         activeID := WinGetID("A")
