@@ -43,19 +43,20 @@ global num := 1
 app := Map()
 app["vivaldi"] := { name: "ahk_exe vivaldi.exe", address: "C:\Users\Tomisuke\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Vivaldi.lnk" }
 runApp(x) {
-global num
+    global num
     windows := WinGetList("ahk_exe vivaldi.exe")
     if windows.Length != 0 {
         count := 0  ;forが回った回数
         for i in windows {
+            count++
             if i = WinGetID("a") {
-                if(count = windows.Length){
+                if (count = windows.Length) {
                     num := 1
-                }else{
+                    MsgBox("リセット")
+                } else {
                     num++
                 }
             }
-            count++
         }
         MsgBox "" num
         id := "ahk_id" windows[num] ""
