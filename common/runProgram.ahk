@@ -39,12 +39,16 @@ runProgram(x) {
             return
     }
 }
+SortArray(x){
+    return x
+}
 global num := 1
 app := Map()
 app["vivaldi"] := { name: "ahk_exe vivaldi.exe", address: "C:\Users\Tomisuke\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Vivaldi.lnk" }
 runApp(x) {
     global num
     windows := WinGetList("ahk_exe vivaldi.exe")
+    windows := SortArray(windows)
     if windows.Length != 0 {
         count := 0  ;forが回った回数
         for i in windows {
@@ -52,9 +56,11 @@ runApp(x) {
             if i = WinGetID("a") {
                 if (count = windows.Length) {
                     num := 1
-                    MsgBox("リセット")
+                    MsgBox("num:=1")
+                    break
                 } else {
                     num++
+                    MsgBox("num++")
                 }
             }
         }
