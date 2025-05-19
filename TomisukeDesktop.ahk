@@ -18,15 +18,15 @@
 !^F20:: runApp("vscode")
 !^F21:: runApp("thunderbird")
 !^F22:: runApp("onenote")
-#e::runApp("explorer")
+#e:: runApp("explorer")
 ;モニター切り換え
-!^+F13::{
+!^+F13:: {
     Send "#{p}"
     Sleep 50
     Send "{Tab}"
     Sleep 50
-    loop(2){
-        Send "{Down}"   
+    loop (2) {
+        Send "{Down}"
         Sleep 50
     }
 }
@@ -34,5 +34,5 @@
 vk1A:: IME_SET(0)
 vk16:: IME_SET(1)
 #HotIf
-Space::Space 
+Space::Space
 enter::enter
