@@ -28,23 +28,27 @@
         over := []
         equal := []
         for i in arr {
-            if (i < standard)
+            if (i < standard) {
                 below.Push(i)
-            else if (i > standard)
+            } else if (i > standard) {
                 over.Push(i)
-            else
+            } else {
                 equal.Push(i)
+            }
         }
         below := SortArray(below)
         over := SortArray(over)
         ;結合
         result := []
-        for i in below
+        for i in below {
             result.Push(i)
-        for i in equal
+        }
+        for i in equal {
             result.Push(i)
-        for i in over
+        }
+        for i in over {
             result.Push(i)
+        }
         return result
     }
     app := Map()
