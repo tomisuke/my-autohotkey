@@ -1,191 +1,110 @@
-global num := 1    ;何番目のウインドウか
-runProgram(x) {
-    switch (x) {
-        case 1:
-            runApp("vivaldi")
-            return
-        case 2:
-            runMemo()
-            return
-        case 3:
-            runLINE()
-            return
-        case 4:
-            runDiscord()
-            return
-        case 5:
-            runNotionCalendar()
-            return
-        case 6:
-            runZoom()
-            return
-        case 7:
-            runTickTIck()
-            return
-        case 8:
-            runVSCode()
-            return
-        case 9:
-            runThunderbird()
-            return
-        case 10:
-            runOnenote()
-            return
-        case 11:
-            runChatGPT()
-        case 12:
-            runExplorer()
-        default:
-            MsgBox("Unknown case: " . x)
-            return
-    }
-}
-app := Map()
-app["vivaldi"] := { name: "ahk_exe vivaldi.exe", address: "C:\Users\Tomisuke\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Vivaldi.lnk" }
 runApp(x) {
-    windows := WinGetList("ahk_exe vivaldi.exe")
+    windows := WinGetList(app[x].name)
+    windows := SortArray(windows)
     if windows.Length != 0 {
-        count := 1  ;forが回った回数
+        count := 0  ;forが回った回数
         for i in windows {
+            count++
             if i = WinGetID("a") {
-                if(count = windows.Length){
-                    num := 1
-                }else{
-                    num++
+                if (count = windows.Length) {
+                    app[x].num := 1
+                    break
+                } else {
+                    app[x].num++
                 }
             }
-            count++
         }
-        MsgBox "" num
-        id := "ahk_id" windows[num] ""
+        id := "ahk_id" windows[app[x].num]
         WinActivate id
     } else {
         Run app[x].address
     }
 }
+SortArray(arr) {
+    ; QuickSort で数値配列をソート（再帰的にソートして新しい配列を返す）
+    if (arr.Length <= 1)
+        return arr
 
-runVivaldi() {
-    if WinActive("ahk_exe vivaldi.exe") {
-        activeID := WinGetID("A")
-        WinMinimize(activeID)
-        IDList := WinGetList("ahk_exe vivaldi.exe")
-        for ID in IDList {
-            if (!WinActive(ID) AND ID != activeID) {
-                WinActivate(ID)
-                break
-            }
-        }
-    } else if WinExist("ahk_exe vivaldi.exe") {
-        WinActivate "ahk_exe vivaldi.exe"
-    } else {
-        Run "C:\Users\Tomisuke\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Vivaldi.lnk"
+    pivot := arr[Floor(arr.Length / 2)]
+    left := []  ; pivot 未満
+    right := []  ; pivot 超過
+    middle := []  ; pivot と等しい
+
+    for _, v in arr {
+        if (v < pivot)
+            left.Push(v)
+        else if (v > pivot)
+            right.Push(v)
+        else
+            middle.Push(v)
     }
+
+    left := SortArray(left)
+    right := SortArray(right)
+
+    ; left + middle + right を結合
+    result := []
+    for _, v in left   ; 左側
+        result.Push(v)
+    for _, v in middle ; 中央
+        result.Push(v)
+    for _, v in right  ; 右側
+        result.Push(v)
+
+    return result
 }
-runMemo() { ;メモ帳
-    if WinActive("ahk_exe Notepad.exe") {
-        WinMinimize("ahk_exe Notepad.exe")
-    } else if WinExist("ahk_exe Notepad.exe") {
-        WinActivate "ahk_exe Notepad.exe"
-    } else {
-        Run "C:\Windows\notepad.exe"
-    }
+app := Map()
+app["vivaldi"] := {
+    name: "ahk_exe vivaldi.exe",
+    address: "C:\Users\Tomisuke\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Vivaldi.lnk",
+    num: 1
 }
-runLINE() {
-    If WinActive("ahk_exe LINE.exe") {
-        WinHide("ahk_exe LINE.exe")
-    } else if WinExist("ahk_exe LINE.exe") {
-        WinActivate "ahk_exe LINE.exe"
-    } else {
-        Run "C:\Users\Tomisuke\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\LINE\LINE.lnk"
-    }
+app["memo"] := {
+    name: "ahk_exe Notepad.exe",
+    address: "C:\Windows\notepad.exe",
+    num: 1
 }
-runDiscord() {
-    If WinActive("ahk_exe Discord.exe") {
-        WinMinimize("ahk_exe Discord.exe")
-    } else if WinExist("ahk_exe Discord.exe") {
-        WinActivate "ahk_exe Discord.exe"
-    } else {
-        Run "C:\Users\Tomisuke\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Discord Inc\Discord.lnk"
-    }
+app["discord"] := {
+    name: "ahk_exe Discord.exe",
+    address: "C:\Users\Tomisuke\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Discord Inc\Discord.lnk",
+    num: 1,
 }
-runNotionCalendar() {
-    ;notionカレンダー
-    If WinActive("ahk_exe Notion Calendar.exe") {
-        WinMinimize("ahk_exe Notion Calendar.exe")
-    } else if WinExist("ahk_exe Notion Calendar.exe") {
-        WinActivate ("ahk_exe Notion Calendar.exe")
-    } else {
-        Run "C:\Users\Tomisuke\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Notion Calendar.lnk"
-    }
+app["notionCalendar"] := {
+    name: "ahk_exe Notion Calendar.exe",
+    address: "C:\Users\Tomisuke\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Notion Calendar.lnk",
+    num: 1,
 }
-runZoom() {
-    If WinActive("ahk_class ConfMultiTabContentWndClass") {
-        WinMinimize("ahk_class ConfMultiTabContentWndClass")
-    } else if WinExist("ahk_class ConfMultiTabContentWndClass") {
-        WinActivate ("ahk_class ConfMultiTabContentWndClass")
-    }
+app["zoom"] := {
+    name: "ahk_class ConfMultiTabContentWndClass",
+    num: 1,
 }
-runTickTIck() {
-    if WinActive("ahk_exe TickTick.exe") {
-        WinMinimize "ahk_exe TickTick.exe"
-    } else if WinExist("ahk_exe TickTick.exe") {
-        WinActivate "ahk_exe TickTick.exe"
-    } else {
-        Run "C:\Program Files (x86)\TickTick\TickTick.exe"
-    }
+app["ticktick"] := {
+    name: "ahk_exe TickTick.exe",
+    address: "C:\Program Files (x86)\TickTick\TickTick.exe",
+    num: 1,
 }
-runVSCode() {
-    if WinActive("ahk_exe Code.exe") {  ;vscode active
-        WinMinimize "ahk_exe Code.exe"
-        if WinExist("ahk_exe idea64.exe") {
-            WinActivate "ahk_exe idea64.exe"
-        }
-    } else if WinActive("ahk_exe idea64.exe") { ;idea active
-        WinMinimize "ahk_exe idea64.exe"
-        if WinExist("ahk_exe Code.exe") {
-            WinActivate "ahk_exe Code.exe"
-        }
-    } else if WinExist("ahk_exe Code.exe") {    ;vscode exist
-        WinActivate("ahk_exe Code.exe")
-    } else if WinExist("ahk_exe idea64.exe") {  ;idea exist
-        WinActivate "ahk_exe idea64.exe"
-    } else {
-        Run "C:\Users\Tomisuke\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Visual Studio Code\Visual Studio Code.lnk"
-    }
+app["vscode"] := {
+    name: "ahk_exe Code.exe",
+    address: "C:\Users\Tomisuke\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Visual Studio Code\Visual Studio Code.lnk",
+    num: 1,
 }
-runThunderbird() {
-    If WinActive("ahk_exe thunderbird.exe") {
-        WinMinimize "ahk_exe thunderbird.exe"
-    } else if WinExist("ahk_exe thunderbird.exe") {
-        WinActivate "ahk_exe thunderbird.exe"
-    } else {
-        Run "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Thunderbird.lnk"
-    }
+app["thunderbird"] := {
+    name: "ahk_exe thunderbird.exe",
+    address: "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Thunderbird.lnk",
+    num: 1,
 }
-runOnenote() {
-    If WinActive("ahk_exe ONENOTE.EXE") {
-        WinMinimize "ahk_exe ONENOTE.EXE"
-    } else If WinExist("ahk_exe ONENOTE.EXE") {
-        WinActivate "ahk_exe ONENOTE.EXE"
-    } else {
-        Run "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\OneNote.lnk"
-    }
+app["onenote"] := {
+    name: "ahk_exe ONENOTE.EXE",
+    address: "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\OneNote.lnk",
+    num: 1,
 }
-runExplorer() {
-    If WinActive("ahk_class CabinetWClass") {
-        WinMinimize "ahk_class CabinetWClass"
-    } else if WinExist("ahk_class CabinetWClass") {
-        WinActivate "ahk_class CabinetWClass"
-    } else {
-        Run "C:\Windows\explorer.exe"
-    }
+app["explorer"] := {
+    name: "ahk_class CabinetWClass",
+    address: "C:\Windows\explorer.exe",
+    num: 1,
 }
-runChatGPT() {
-    if WinActive("ahk_exe ChatGPT.exe") {
-        WinMinimize("ahk_exe ChatGPT.exe")
-    } else if WinExist("ahk_exe ChatGPT.exe") {
-        WinActivate("ahk_exe ChatGPT.exe")
-    } else {
-        Run "C:\Program Files\WindowsApps\OpenAI.ChatGPT-Desktop_1.2025.16.0_x64__2p2nqsd0c76g0\app\ChatGPT.exe"
-    }
+app["chatGPT"] := {
+    name: "ahk_exe ChatGPT.exe",
+    address: "C:\Program Files\WindowsApps\OpenAI.ChatGPT-Desktop_1.2025.125.0_x64__2p2nqsd0c76g0\app\ChatGPT.exe",
+    num: 1,
 }
