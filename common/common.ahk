@@ -25,3 +25,18 @@ HandleModifierKeys(singleKey, modifiedKey) {
     }
     return
 }
+*x:: {
+    HandleModifierKeys("x", "z")
+}
+*c:: {
+    HandleModifierKeys("c", "x")
+}
+*v:: {
+    HandleModifierKeys("v", "c")
+}
+*w:: {
+    HandleModifierKeys("w", "v")
+}
+*z:: {
+HandleModifierKeys("z", "w")
+}
