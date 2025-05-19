@@ -1,3 +1,4 @@
+global num := 1    ;何番目のウインドウか
 runProgram(x) {
     switch (x) {
         case 1:
@@ -41,12 +42,10 @@ runProgram(x) {
 }
 app := Map()
 app["vivaldi"] := { name: "ahk_exe vivaldi.exe", address: "C:\Users\Tomisuke\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Vivaldi.lnk" }
-
 runApp(x) {
     windows := WinGetList("ahk_exe vivaldi.exe")
     if windows.Length != 0 {
         count := 1  ;forが回った回数
-        num := 1    ;何番目のウインドウか
         for i in windows {
             if i = WinGetID("a") {
                 if(count = windows.Length){
