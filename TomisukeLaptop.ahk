@@ -46,8 +46,8 @@ Enter & t:: DllCall("keybd_event", "UInt", 0x28, "UInt", 0, "UInt", 1, "UInt", 0
 Enter & s:: DllCall("keybd_event", "UInt", 0x26, "UInt", 0, "UInt", 1, "UInt", 0) ; Up
 #HotIf
 
-Enter & h:: Send "!+^{F1}"
-Enter & m:: Send "+{sc079}"
+Enter & h:: Send "!+^{F1}"  ;fluentSearch
+Enter & m:: Send "+{sc079}" ;再度変換
 Enter & y:: Send "{Blind}{up}"
 
 ;コンマレイヤー

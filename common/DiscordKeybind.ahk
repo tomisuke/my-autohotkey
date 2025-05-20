@@ -1,3 +1,4 @@
+/*
 #Requires AutoHotkey v2.0
 
 GroupAdd "CtrlEnterToSend", "ahk_exe Discord.exe"
@@ -170,3 +171,4 @@ NumpadEnter::  ; テンキーパッドのEnter
 }
 
 #HotIf
+*/
