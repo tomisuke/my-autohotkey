@@ -108,9 +108,9 @@ Space & 4::Volume_Mute
 Space & ]::!^F4
 Space & [::!^F5
 ;clibor
-Enter & B::!^+#0
-Enter & z::!^+#1
-Enter & sc073::!^+#2
+Enter & B::!^+0
+Enter & z::!^+1
+Enter & sc073::!^+2
 ;その他
 sc029:: Send "{Esc}"
 ^+sc029:: Send "^+{Esc}"
