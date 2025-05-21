@@ -6,6 +6,7 @@
 #Include IME.ahk
 #include appOriginal.ahk
 #include common.ahk
+#Include DiscordKeybind.ahk
 ;-----------------
 ;スペースレイヤー
 ^!F13:: runApp("vivaldi")
