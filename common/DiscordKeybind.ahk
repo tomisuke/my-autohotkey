@@ -1,3 +1,4 @@
+/*
 #Requires AutoHotkey v2.0
 
 ; Discordのウィンドウクラスを指定
@@ -167,3 +168,4 @@ NumpadEnter::  ; テンキーパッドのEnter
 }
 
 #HotIf
+*/
