@@ -2,7 +2,7 @@
 
 ;-----------------
 #Include %A_ScriptDir%/common/
-#Include runProgram.ahk
+#Include runApp.ahk
 #Include IME.ahk
 #include appOriginal.ahk
 #include common.ahk

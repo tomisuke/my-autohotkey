@@ -1,9 +1,6 @@
 /*
 #Requires AutoHotkey v2.0
 
-GroupAdd "CtrlEnterToSend", "ahk_exe Discord.exe"
-GroupAdd "CtrlEnterToSend", "ahk_exe ChatGPT.exe"
-
 ; Discordのウィンドウクラスを指定
 #HotIf WinActive("ahk_group CtrlEnterToSend")
 
