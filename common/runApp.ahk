@@ -5,7 +5,12 @@
         windows := SortArray(windows)
         if windows.Length != 0 {
             for index, i in windows {
-                if i = WinGetID("a") {
+                try {
+                    j := WinGetID("a")
+                } catch {
+                    j := "miss"
+                }
+                if i = j {
                     if (index = windows.Length) {
                         app[x].num := 1
                         break
@@ -53,4 +58,3 @@
         }
         return result
     }
-    
