@@ -19,6 +19,10 @@ Run "explorer.exe shell:AppsFolder\TwinkleTray_8wekyb3d8bbwe!TwinkleTray"
 Run "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\TickTick\TickTick.lnk"
 WinWait("ahk_exe TickTick.exe")
 WinMinimize("ahk_exe TickTIck.exe")
+;Thunderbird
+Run "c:\ProgramData\Microsoft\Windows\Start Menu\Programs\Thunderbird.lnk"
+WinWait("ahk_exe Thunderbird.exe")
+WinMinimize("ahk_exe Thunderbird.exe")
 ;Discord
 Run "C:\Users\Tomisuke\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Discord Inc\Discord.lnk"
 WinWait("ahk_exe Discord.exe")
@@ -38,7 +42,7 @@ Run "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Google Drive.lnk"
 ;powerToys
 Run "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\PowerToys (Preview)\PowerToys (Preview).lnk"
 ;everything
-Run "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Everything.lnk"
+Run "C:\Program Files\Everything\Everything.exe"
 WinWait("ahk_exe Everything.exe")
 WinHide("ahk_exe Everything.exe")
 ;NotionCalendar
