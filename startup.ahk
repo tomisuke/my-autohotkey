@@ -42,7 +42,7 @@ Run "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Google Drive.lnk"
 ;powerToys
 Run "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\PowerToys (Preview)\PowerToys (Preview).lnk"
 ;everything
-Run "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Everything.lnk"
+Run "C:\Program Files\Everything\Everything.exe"
 WinWait("ahk_exe Everything.exe")
 WinHide("ahk_exe Everything.exe")
 ;NotionCalendar

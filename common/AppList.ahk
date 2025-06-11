@@ -55,6 +55,6 @@ app["explorer"] := {
 }
 app["chatGPT"] := {
     name: "ahk_exe ChatGPT.exe",
-    address: "C:\Program Files\WindowsApps\OpenAI.ChatGPT-Desktop_1.2025.125.0_x64__2p2nqsd0c76g0\app\ChatGPT.exe",
+    address: "explorer.exe shell:AppsFolder\OpenAI.ChatGPT-Desktop_2p2nqsd0c76g0!ChatGPT",
     num: 1,
 }
