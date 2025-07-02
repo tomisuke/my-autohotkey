@@ -35,7 +35,7 @@ apps["zoom"] := {
 }
 apps["ticktick"] := {
     name: "ahk_exe TickTick.exe",
-    address: A_ProgramFiles . "\TickTick\TickTick.exe",
+    address: A_ProgramFiles . " (x86)\TickTick\TickTick.exe",
 }
 apps["vscode"] := {
     name: "ahk_exe Code.exe",
