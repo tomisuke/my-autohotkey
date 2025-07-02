@@ -1,7 +1,7 @@
     #Include AppList.ahk
 
     runApp(x) {
-        windows := WinGetList(app[x].name)
+        windows := WinGetList(apps[x].name)
         windows := SortArray(windows)
         if windows.Length != 0 {
             for index, i in windows {
@@ -12,17 +12,17 @@
                 }
                 if i = j {
                     if (index = windows.Length) {
-                        app[x].num := 1
+                        apps[x].num := 1
                         break
                     } else {
-                        app[x].num++
+                        apps[x].num++
                     }
                 }
             }
-            id := "ahk_id " windows[app[x].num]
+            id := "ahk_id " windows[apps[x].num]
             WinActivate id
         } else {
-            Run app[x].address
+            Run apps[x].address
         }
     }
     SortArray(arr) {
