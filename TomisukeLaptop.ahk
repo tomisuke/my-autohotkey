@@ -84,6 +84,12 @@ Space & v:: runApp("vscode")
 Space & w:: runApp("thunderbird")
 Space & Delete:: runApp("onenote")
 #e:: runApp("explorer")
+
+;-レイヤー
+- & n::AppsKey
+- & t::+Tab
+- & s::Tab
+
 ;FN
 Space & j::F1
 Space & h::F2
@@ -130,3 +136,4 @@ Space::Space
 ,::,
 .::.
 enter::Enter
+-::-
