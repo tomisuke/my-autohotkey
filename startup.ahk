@@ -27,8 +27,13 @@ WinMinimize("ahk_exe Thunderbird.exe")
 Run "C:\Users\Tomisuke\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Discord Inc\Discord.lnk"
 WinWait("ahk_exe Discord.exe")
 WinMinimize("ahk_exe Discord.exe")
-WinWait("ahk_exe Discord.exe")
-WinMinimize("ahk_exe Discord.exe")
+Loop 10 {
+    if WinExist("ahk_exe Discord.exe") {
+        WinMinimize("ahk_exe Discord.exe")
+        break
+    }
+    Sleep 500
+}
 ;Slack
 Run "C:\Users\Tomisuke\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Slack Technologies Inc\Slack.lnk"
 WinWait("ahk_exe Slack.exe")
@@ -45,6 +50,8 @@ Run "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\PowerToys (Preview)\Po
 Run "C:\Program Files\Everything\Everything.exe"
 WinWait("ahk_exe Everything.exe")
 WinHide("ahk_exe Everything.exe")
+;onedrive
+Run A_ProgramFiles . "\Microsoft OneDrive\OneDrive.exe"
 ;NotionCalendar
 Run "C:\Users\Tomisuke\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Notion Calendar.lnk"
 WinWait("ahk_exe Notion Calendar.exe")

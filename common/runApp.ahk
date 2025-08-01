@@ -19,7 +19,11 @@
                     }
                 }
             }
-            id := "ahk_id " windows[apps[x].num]
+            try {
+                id := "ahk_id " windows[apps[x].num]
+            } catch {
+                id := "ahk_id " windows[1]
+            }
             WinActivate id
         } else {
             Run apps[x].address
