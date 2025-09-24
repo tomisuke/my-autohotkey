@@ -16,11 +16,11 @@ apps["discord"] := {
     name: "ahk_exe Discord.exe",
     address: GetDiscordExe(),
 }
-GetDiscordExe(){
+GetDiscordExe() {
     base := EnvGet("LOCALAPPDATA") . "\Discord"
     loop files base . "\app-*", "D" {
         exe := A_LoopFileFullPath . "\Discord.exe"
-        if FileExist(exe){
+        if FileExist(exe) {
             return exe
         }
     }
@@ -28,7 +28,7 @@ GetDiscordExe(){
 }
 apps["notionCalendar"] := {
     name: "ahk_exe Notion Calendar.exe",
-    address: EnvGet("LOCALAPPDATA") . "\Programs\cron-web\Notion Calendar.exe" ,
+    address: EnvGet("LOCALAPPDATA") . "\Programs\cron-web\Notion Calendar.exe",
 }
 apps["zoom"] := {
     name: "ahk_class ConfMultiTabContentWndClass",
@@ -56,6 +56,10 @@ apps["explorer"] := {
 apps["chatGPT"] := {
     name: "ahk_exe ChatGPT.exe",
     address: "explorer.exe shell:AppsFolder\OpenAI.ChatGPT-Desktop_2p2nqsd0c76g0!ChatGPT",
+}
+apps["comet"] := {
+    name: "ahk_exe comet.exe",
+    address: "C:\Users\Tomisuke\AppData\Local\Perplexity\Comet\Application\comet.exe",
 }
 
 for i, x in apps {
