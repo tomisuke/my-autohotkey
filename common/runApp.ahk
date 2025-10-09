@@ -3,6 +3,7 @@
     runApp(x) {
         windows := WinGetList(apps[x].name)
         windows := SortArray(windows)
+        excludeWorkonaWindow(windows)
         if windows.Length != 0 {
             for index, i in windows {
                 try {
@@ -61,4 +62,14 @@
             result.Push(i)
         }
         return result
+    }
+    excludeWorkonaWindow(windows) {
+        if WinExist("Hidden Tabs - Workona - Comet") {
+            id := WinGetID("Hidden Tabs - Workona - Comet")
+            for i, v in windows {
+                if v = id {
+                    windows.RemoveAt(i)
+                }
+            }
+        }
     }
