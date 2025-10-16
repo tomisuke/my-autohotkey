@@ -73,7 +73,7 @@ Enter & y:: Send "{Blind}{up}"
 
 ;スペースレイヤー
 ;アプリ起動
-Space & a:: runApp("comet")
+Space & a:: runApp("vivaldi")
 Space & o:: runApp("memo")
 Space & e:: runApp("chatGPT")
 Space & i:: runApp("discord")

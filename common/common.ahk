@@ -40,3 +40,13 @@ HandleModifierKeys(singleKey, modifiedKey) {
 *z:: {
     HandleModifierKeys("z", "w")
 }
+
+#z:: {
+    Send "#a"
+    Sleep 100
+    Send "{Right}"
+    Send "{Tab}"
+    Send "{Enter}"
+    Sleep 1000
+    Send "+{Tab}"
+}
