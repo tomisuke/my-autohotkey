@@ -73,17 +73,16 @@ Enter & y:: Send "{Blind}{up}"
 
 ;スペースレイヤー
 ;アプリ起動
-Space & a:: runApp("vivaldi")
-Space & o:: runApp("memo")
-Space & e:: runApp("chatGPT")
-Space & i:: runApp("discord")
-Space & u:: runApp("notionCalendar")
-Space & x:: runApp("zoom")
-Space & c:: runApp("ticktick")
-Space & v:: runApp("vscode")
-Space & w:: runApp("thunderbird")
-Space & Delete:: runApp("onenote")
-#e:: runApp("explorer")
+Space & o:: runApp(regularApps[1])
+Space & i:: runApp(regularApps[2])
+Space & a:: runApp(regularApps[3])
+Space & e:: runApp(regularApps[4])
+Space & u:: runApp(regularApps[5])
+Space & x:: runApp(regularApps[6])
+Space & c:: runApp(regularApps[7])
+Space & v:: runApp(regularApps[8])
+Space & w:: runApp(regularApps[9])
+Space & Delete:: runApp(regularApps[10])
 
 ;-レイヤー
 - & n::AppsKey
