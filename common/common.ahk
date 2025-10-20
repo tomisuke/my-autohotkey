@@ -53,3 +53,12 @@ regularApps.Push("vscode")
 regularApps.Push("thunderbird")
 regularApps.Push("onenote")
 #e:: runApp("explorer")
+#z:: {
+    Send "#a"
+    Sleep 100
+    Send "{Right}"
+    Send "{Tab}"
+    Send "{Enter}"
+    Sleep 1000
+    Send "+{Tab}"
+}
