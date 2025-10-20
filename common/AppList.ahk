@@ -61,6 +61,10 @@ apps["comet"] := {
     name: "ahk_exe comet.exe",
     address: "C:\Users\Tomisuke\AppData\Local\Perplexity\Comet\Application\comet.exe",
 }
+apps["chrome"] := {
+    name: "ahk_exe chrome.exe",
+    address: "C:\Program Files\Google\Chrome\Application\chrome.exe",
+}
 
 for i, x in apps {
     apps[i].num := 1

@@ -9,7 +9,7 @@
 #Include DiscordKeybind.ahk
 ;-----------------
 ;スペースレイヤー
-^!F13:: runApp("comet")
+^!F13:: runApp("chrome")
 !^F14:: runApp("memo")
 !^F15:: runApp("chatGPT")
 !^F16:: runApp("discord")
