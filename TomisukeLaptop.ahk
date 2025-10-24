@@ -74,10 +74,10 @@ Enter & y:: Send "{Blind}{up}"
 
 ;スペースレイヤー
 ;アプリ起動
-Space & o:: runApp(regularApps[1])
-Space & i:: runApp(regularApps[2])
-Space & a:: runApp(regularApps[3])
-Space & e:: runApp(regularApps[4])
+Space & a:: runApp(regularApps[1])
+Space & o:: runApp(regularApps[2])
+Space & e:: runApp(regularApps[3])
+Space & i:: runApp(regularApps[4])
 Space & u:: runApp(regularApps[5])
 Space & x:: runApp(regularApps[6])
 Space & c:: runApp(regularApps[7])
