@@ -28,7 +28,7 @@ GetDiscordExe() {
 }
 apps["notionCalendar"] := {
     name: "ahk_exe Notion Calendar.exe",
-    address: EnvGet("LOCALAPPDATA") . "\Programs\cron-web\Notion Calendar.exe",
+    address: EnvGet("LOCALAPPDATA") . "\Programs\notion-calendar-web\Notion Calendar.exe",
 }
 apps["zoom"] := {
     name: "ahk_class ConfMultiTabContentWndClass",
