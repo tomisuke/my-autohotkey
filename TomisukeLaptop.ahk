@@ -1,6 +1,7 @@
 #Requires AutoHotkey v2.0
 ;sc07b:無変換   sc079:変換
 ;-----------------
+#Include C:\Users\Tomisuke\Local\Activity\timestump-diary\diary.ahk
 #Include %A_ScriptDir%/common/
 #Include runApp.ahk
 #Include IME.ahk
