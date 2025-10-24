@@ -41,6 +41,18 @@ HandleModifierKeys(singleKey, modifiedKey) {
     HandleModifierKeys("z", "w")
 }
 
+regularApps := []
+regularApps.Push("chrome")
+regularApps.Push("memo")
+regularApps.Push("perplexity")
+regularApps.Push("discord")
+regularApps.Push("notionCalendar")
+regularApps.Push("zoom")
+regularApps.Push("ticktick")
+regularApps.Push("vscode")
+regularApps.Push("thunderbird")
+regularApps.Push("onenote")
+#e:: runApp("explorer")
 #z:: {
     Send "#a"
     Sleep 100

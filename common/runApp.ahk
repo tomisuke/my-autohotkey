@@ -64,8 +64,17 @@
         return result
     }
     excludeWorkonaWindow(windows) {
-        if WinExist("Hidden Tabs - Workona - Vivaldi") {
-            id := WinGetID("Hidden Tabs - Workona - Vivaldi")
+        windowName := "Hidden Tabs - Workona - "
+        switch (regularApps[1]) {
+            case "chrome":
+                windowName .= "Google Chrome"
+            case "comet":
+                windowName .= "comet"
+            case "vivaldi":
+                windowName .= "vivaldi"
+        }
+        if WinExist(windowName) {
+            id := WinGetID(windowName)
             for i, v in windows {
                 if v = id {
                     windows.RemoveAt(i)
