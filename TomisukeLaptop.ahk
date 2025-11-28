@@ -1,12 +1,22 @@
+SetKeyDelay 50, 50
+SetWinDelay 100
+SetControlDelay 20
+
 #Requires AutoHotkey v2.0
 ;sc07b:無変換   sc079:変換
 ;-----------------
 #Include C:\Users\Tomisuke\Local\Activity\timestump-diary\diary.ahk
 #Include %A_ScriptDir%/common/
+#Include DiscordKeybind.ahk
 #Include runApp.ahk
 #Include IME.ahk
 #include appOriginal.ahk
 #include common.ahk
+#Include string.ahk
+#Include crtlEnter.ahk
+#Include Launcher/
+#include bookmark.ahk
+#Include launcher.ahk
 ;-----------------
 Pause:: {
     Run ".\TomisukeToQwerty.ahk"
@@ -137,3 +147,16 @@ Space::Space
 .::.
 enter::Enter
 -::-
+/*
+^F12::{
+    send "!{Tab}"
+    Sleep 200
+    Send "{Enter}"
+    Sleep 200
+    Send "{Enter}"
+    Sleep 200
+    send "!{Tab}"
+    Sleep 500
+    Send "{Enter}"
+}
+*/

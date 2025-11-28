@@ -3,7 +3,7 @@
     runApp(x) {
         windows := WinGetList(apps[x].name)
         windows := SortArray(windows)
-        excludeWorkonaWindow(windows)
+        windows := excludeWorkonaWindow(windows)
         if windows.Length != 0 {
             for index, i in windows {
                 try {
@@ -81,4 +81,5 @@
                 }
             }
         }
+        return windows
     }
