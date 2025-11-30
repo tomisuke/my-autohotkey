@@ -1,11 +1,22 @@
+SetKeyDelay 50, 50
+SetWinDelay 100
+SetControlDelay 20
+
 #Requires AutoHotkey v2.0
 ;sc07b:無変換   sc079:変換
 ;-----------------
+#Include C:\Users\Tomisuke\Local\Activity\timestump-diary\diary.ahk
 #Include %A_ScriptDir%/common/
+#Include DiscordKeybind.ahk
 #Include runApp.ahk
 #Include IME.ahk
 #include appOriginal.ahk
 #include common.ahk
+#Include string.ahk
+#Include crtlEnter.ahk
+#Include Launcher/
+#include bookmark.ahk
+#Include launcher.ahk
 ;-----------------
 Pause:: {
     Run ".\TomisukeToQwerty.ahk"
@@ -73,10 +84,10 @@ Enter & y:: Send "{Blind}{up}"
 
 ;スペースレイヤー
 ;アプリ起動
-Space & o:: runApp(regularApps[1])
-Space & i:: runApp(regularApps[2])
-Space & a:: runApp(regularApps[3])
-Space & e:: runApp(regularApps[4])
+Space & a:: runApp(regularApps[1])
+Space & o:: runApp(regularApps[2])
+Space & e:: runApp(regularApps[3])
+Space & i:: runApp(regularApps[4])
 Space & u:: runApp(regularApps[5])
 Space & x:: runApp(regularApps[6])
 Space & c:: runApp(regularApps[7])
@@ -136,3 +147,16 @@ Space::Space
 .::.
 enter::Enter
 -::-
+/*
+^F12::{
+    send "!{Tab}"
+    Sleep 200
+    Send "{Enter}"
+    Sleep 200
+    Send "{Enter}"
+    Sleep 200
+    send "!{Tab}"
+    Sleep 500
+    Send "{Enter}"
+}
+*/

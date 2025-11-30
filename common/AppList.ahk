@@ -28,7 +28,7 @@ GetDiscordExe() {
 }
 apps["notionCalendar"] := {
     name: "ahk_exe Notion Calendar.exe",
-    address: EnvGet("LOCALAPPDATA") . "\Programs\cron-web\Notion Calendar.exe",
+    address: EnvGet("LOCALAPPDATA") . "\Programs\notion-calendar-web\Notion Calendar.exe",
 }
 apps["zoom"] := {
     name: "ahk_class ConfMultiTabContentWndClass",
@@ -68,6 +68,10 @@ apps["perplexity"] := {
 apps["chrome"] := {
     name: "ahk_exe chrome.exe",
     address: "C:\Program Files\Google\Chrome\Application\chrome.exe",
+}
+apps["mailspring"] := {
+    name: "ahk_exe mailspring.exe",
+    address: "C:\Users\Tomisuke\AppData\Local\Mailspring\mailspring.exe",
 }
 for i, x in apps {
     apps[i].num := 1

@@ -1,0 +1,25 @@
+Enter & o:: {
+    bookmarkName := InputBox("コマンドを入力", "bookmarkCommand",)
+    if (bookmarkName.Result = "OK") {
+        for (i in bookmark) {
+            if (i = bookmarkName.Value) {
+                Run bookmark[i]
+                return
+            }
+        }
+        for (i in path) {
+            if (i = bookmarkName.Value) {
+                Run path[i]
+                return
+            }
+        }
+        for (i in bookmarks){
+            if(i = bookmarkName.Value){
+                for (j in bookmarks[i]){
+                    Run bookmarks[i][j]
+                }
+                return
+            }
+        }
+    }
+}
