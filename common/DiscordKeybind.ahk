@@ -2,10 +2,7 @@
 #Requires AutoHotkey v2.0
 
 ; Discordのウィンドウクラスを指定
-#HotIf WinActive("ahk_group CtrlEnterToSend")
 
-; 入力中の文字数を保持
-global count := 0
 
 ; ほぼ全てのキーが押された際の処理(半角/全角キー などは不要なので除く)
 ~*a::
@@ -63,13 +60,42 @@ global count := 0
 {
     global count
     count++
-    
+
     ; 確認用
     ; ToolTip("countは: " . count)  ; カウントをツールチップで表示
     ; ToolTip("Key: " . A_ThisHotkey . "`nVK: " . Format("0x{:X}", GetKeyVK(A_ThisHotkey)) . "`nSC: " . Format("0x{:X}", GetKeySC(A_ThisHotkey)))
     ; SetTimer () => ToolTip(), -2000  ; 2秒後にツールチップを消す
 
     return
+}
+*/
+; 入力中の文字数を保持
+global count := 0
+#HotIf WinActive("ahk_group CtrlEnterToSend")
+ihCount := InputHook("V", "{Enter}")
+ihCount.Start()
+ihCount.OnChar := countCharacter
+TargetChars := "abcdefghijklmnopqrstuvwxyz1234567890,.;/[]\-^\\`*=+@*"
+CharSet := CreateLookupMap(TargetChars)
+
+CreateLookupMap(str) {
+    lookup := Map()
+    Loop Parse, str {
+        lookup[A_LoopField] := true
+    }
+    return lookup
+}
+
+
+IsCharInSet(char) {
+    return CharSet.Has(char)
+}
+
+countCharacter(ih, char) {
+    global count
+    if (IsCharInSet(char)) {
+        count++
+    }
 }
 
 
@@ -168,4 +194,3 @@ NumpadEnter::  ; テンキーパッドのEnter
 }
 
 #HotIf
-*/
