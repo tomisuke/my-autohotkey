@@ -72,9 +72,11 @@ try {
     Run "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Google Drive.lnk"
 }
 ;powerToys
+/*
 try {
     Run "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\PowerToys (Preview)\PowerToys (Preview).lnk"
 }
+*/
 ;everything
 try {
     Run "C:\Program Files\Everything\Everything.exe"

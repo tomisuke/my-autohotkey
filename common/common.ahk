@@ -42,7 +42,7 @@ HandleModifierKeys(singleKey, modifiedKey) {
 }
 
 regularApps := []
-regularApps.Push("vivaldi")
+regularApps.Push("chrome")
 regularApps.Push("memo")
 regularApps.Push("perplexity")
 regularApps.Push("discord")

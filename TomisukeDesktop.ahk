@@ -1,12 +1,18 @@
 #Requires AutoHotkey v2.0
 
 ;-----------------
+#Include C:\Users\Tomisuke\Local\Activity\timestump-diary\diary.ahk
 #Include %A_ScriptDir%/common/
+#Include DiscordKeybind.ahk
 #Include runApp.ahk
 #Include IME.ahk
 #include appOriginal.ahk
 #include common.ahk
-#Include DiscordKeybind.ahk
+#Include string.ahk
+#Include crtlEnter.ahk
+#Include Launcher/
+#include bookmark.ahk
+#Include launcher.ahk
 ;-----------------
 ;スペースレイヤー
 ^!F13:: runApp(regularApps[1])
