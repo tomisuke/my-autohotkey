@@ -25,22 +25,86 @@ Pause:: {
 qwerty := false
 ;ピリオドレイヤー
 ;記号
-. & r::_
-. & d::sc028
-. & y::[
-. & p::]
-. & n::!
-. & t::?
-. & s::(
-. & k::)
-. & h::&
-. & m::%
-. & g::"
-. & j::'
-. & f::#
-. & Delete::$
-. & b:: Send "{{}"
-. & z:: Send "{}}"
+. & r:: {
+    global charCount
+    Send "_"
+    charCount++
+}
+. & d:: {
+    global charCount
+    Send "{sc028}"
+    charCount++
+}
+. & y:: {
+    global charCount
+    Send "["
+    charCount++
+}
+. & p:: {
+    global charCount
+    Send "]"
+    charCount++
+}
+. & n:: {
+    global charCount
+    Send "!"
+    charCount++
+}
+. & t:: {
+    global charCount
+    Send "?"
+    charCount++
+}
+. & s:: {
+    global charCount
+    Send "("
+    charCount++
+}
+. & k:: {
+    global charCount
+    Send ")"
+    charCount++
+}
+. & h:: {
+    global charCount
+    Send "&"
+    charCount++
+}
+. & m:: {
+    global charCount
+    Send "%"
+    charCount++
+}
+. & g:: {
+    global charCount
+    Send '"'
+    charCount++
+}
+. & j:: {
+    global charCount
+    Send "'"
+    charCount++
+}
+. & f:: {
+    global charCount
+    Send "#"
+    charCount++
+}
+. & Delete:: {
+    global charCount
+    Send "$"
+    charCount++
+}
+. & b:: {
+    global charCount
+    Send "{{}"
+    charCount++
+}
+. & z:: {
+    global charCount
+    Send "{}}"
+    charCount++
+}
 
 ;enterレイヤー
 ;矢印
@@ -61,23 +125,82 @@ Enter & m:: Send "+{sc079}" ;再度変換
 Enter & y:: Send "{Blind}{up}"
 
 ;コンマレイヤー
-, & n::1
-, & t::2
-, & s::3
-, & k::0
-, & h::4
-, & m::5
-, & b::6
-, & z::.
-, & r::7
-, & d::8
-, & y::9
-, & p::*
+, & n:: {
+    global charCount
+    Send 1
+    charCount++
+}
+, & t:: {
+    global charCount
+    Send 2
+    charCount++
+}
+, & s:: {
+    global charCount
+    Send 3
+    charCount++
+}
+, & k:: {
+    global charCount
+    Send 4
+    charCount++
+}
+, & h:: {
+    global charCount
+    Send 0
+    charCount++
+}
+, & m:: {
+    global charCount
+    Send 5
+    charCount++
+}
+, & b:: {
+    global charCount
+    Send 6
+    charCount++
+}
+, & z:: {
+    global charCount
+    Send "."
+    charCount++
+}
+, & r:: {
+    global charCount
+    Send 7
+    charCount++
+}
+, & d:: {
+    global charCount
+    Send 8
+    charCount++
+}
+, & y:: {
+    global charCount
+    Send 9
+    charCount++
+}
+, & p:: {
+    global charCount
+    Send "*"
+    charCount++
+}
 , & g:: Send "{BS}"
-, & j::+
-, & f::-
-, & Delete::*
-, & l::/
+, & j::{
+    global charCount
+    Send "+"
+    charCount++
+}
+, & f::{
+    global charCount
+    Send "-"
+    charCount++
+}
+, & l::{
+    global charCount
+    Send "/"
+    charCount++
+}
 
 !c::^+R
 
