@@ -25,22 +25,70 @@ Pause:: {
 qwerty := false
 ;ピリオドレイヤー
 ;記号
-. & r::_
-. & d::sc028
-. & y::[
-. & p::]
-. & n::!
-. & t::?
-. & s::(
-. & k::)
-. & h::&
-. & m::%
-. & g::"
-. & j::'
-. & f::#
-. & Delete::$
-. & b:: Send "{{}"
-. & z:: Send "{}}"
+. & r:: {
+    Send "_"
+    charCount++
+}
+. & d:: {
+    Send "{sc028}"
+    charCount++
+}
+. & y:: {
+    Send "["
+    charCount++
+}
+. & p:: {
+    Send "]"
+    charCount++
+}
+. & n:: {
+    Send "!"
+    charCount++
+}
+. & t:: {
+    Send "?"
+    charCount++
+}
+. & s:: {
+    Send "("
+    charCount++
+}
+. & k:: {
+    Send ")"
+    charCount++
+}
+. & h:: {
+    Send "&"
+    charCount++
+}
+. & m:: {
+    Send "%"
+    charCount++
+}
+. & g:: {
+    Send '"'
+    charCount++
+}
+. & j:: {
+    Send "'"
+    charCount++
+}
+. & f:: {
+    Send "#"
+    charCount++
+}
+. & Delete:: {
+    Send "$"
+    charCount++
+}
+. & b:: {
+    Send "{"
+    charCount++
+}
+. & z:: {
+    Send "}"
+    charCount++
+}
 
 ;enterレイヤー
 ;矢印
@@ -61,23 +109,67 @@ Enter & m:: Send "+{sc079}" ;再度変換
 Enter & y:: Send "{Blind}{up}"
 
 ;コンマレイヤー
-, & n::1
-, & t::2
-, & s::3
-, & k::0
-, & h::4
-, & m::5
-, & b::6
-, & z::.
-, & r::7
-, & d::8
-, & y::9
-, & p::*
+, & n:: {
+    Send 1
+    charCount++
+}
+, & t:: {
+    Send 2
+    charCount++
+}
+, & s:: {
+    Send 3
+    charCount++
+}
+, & k:: {
+    Send 0
+    charCount++
+}
+, & h:: {
+    Send 4
+    charCount++
+}
+, & m:: {
+    Send 5
+    charCount++
+}
+, & b:: {
+    Send 6
+    charCount++
+}
+, & z:: {
+    Send "."
+    charCount++
+}
+, & r:: {
+    Send 7
+    charCount++
+}
+, & d:: {
+    Send 8
+    charCount++
+}
+, & y:: {
+    Send 9
+    charCount++
+}
+, & p:: {
+    Send "*"
+    charCount++
+}
 , & g:: Send "{BS}"
-, & j::+
-, & f::-
-, & Delete::*
-, & l::/
+, & j::{
+    Send "+"
+    charCount++
+}
+, & f::{
+    Send "-"
+    charCount++
+}
+, & l::{
+    Send "/"
+    charCount++
+}
 
 !c::^+R
 
