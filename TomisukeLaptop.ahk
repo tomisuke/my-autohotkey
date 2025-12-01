@@ -23,71 +23,86 @@ Pause:: {
     ExitApp
 }
 qwerty := false
-global charCount
 ;ピリオドレイヤー
 ;記号
 . & r:: {
+    global charCount
     Send "_"
     charCount++
 }
 . & d:: {
+    global charCount
     Send "{sc028}"
     charCount++
 }
 . & y:: {
+    global charCount
     Send "["
     charCount++
 }
 . & p:: {
+    global charCount
     Send "]"
     charCount++
 }
 . & n:: {
+    global charCount
     Send "!"
     charCount++
 }
 . & t:: {
+    global charCount
     Send "?"
     charCount++
 }
 . & s:: {
+    global charCount
     Send "("
     charCount++
 }
 . & k:: {
+    global charCount
     Send ")"
     charCount++
 }
 . & h:: {
+    global charCount
     Send "&"
     charCount++
 }
 . & m:: {
+    global charCount
     Send "%"
     charCount++
 }
 . & g:: {
+    global charCount
     Send '"'
     charCount++
 }
 . & j:: {
+    global charCount
     Send "'"
     charCount++
 }
 . & f:: {
+    global charCount
     Send "#"
     charCount++
 }
 . & Delete:: {
+    global charCount
     Send "$"
     charCount++
 }
 . & b:: {
-    Send "{"
+    global charCount
+    Send "{{}"
     charCount++
 }
 . & z:: {
-    Send "}"
+    global charCount
+    Send "{}}"
     charCount++
 }
 
@@ -111,63 +126,78 @@ Enter & y:: Send "{Blind}{up}"
 
 ;コンマレイヤー
 , & n:: {
+    global charCount
     Send 1
     charCount++
 }
 , & t:: {
+    global charCount
     Send 2
     charCount++
 }
 , & s:: {
+    global charCount
     Send 3
     charCount++
 }
 , & k:: {
-    Send 0
-    charCount++
-}
-, & h:: {
+    global charCount
     Send 4
     charCount++
 }
+, & h:: {
+    global charCount
+    Send 0
+    charCount++
+}
 , & m:: {
+    global charCount
     Send 5
     charCount++
 }
 , & b:: {
+    global charCount
     Send 6
     charCount++
 }
 , & z:: {
+    global charCount
     Send "."
     charCount++
 }
 , & r:: {
+    global charCount
     Send 7
     charCount++
 }
 , & d:: {
+    global charCount
     Send 8
     charCount++
 }
 , & y:: {
+    global charCount
     Send 9
     charCount++
 }
 , & p:: {
+    global charCount
     Send "*"
     charCount++
 }
 , & g:: Send "{BS}"
 , & j::{
+    global charCount
     Send "+"
     charCount++
 }
 , & f::{
+    global charCount
     Send "-"
     charCount++
 }
 , & l::{
+    global charCount
     Send "/"
     charCount++
 }
