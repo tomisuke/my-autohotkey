@@ -263,6 +263,8 @@ F14:: IME_SET(0)
 #HotIf
 F14:: Send "{vk1A}" ;EnterToIMEOff
 
+F1::MsgBox IME_GetConverting()
+
 ;補助
 Space::Space
 ,::,

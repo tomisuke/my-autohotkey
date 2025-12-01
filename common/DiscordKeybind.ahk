@@ -56,8 +56,6 @@ countCharacter(ih, char) {
     SendInput "^c"
     return
 }
-; Ctrl + v が押された場合
-; Ctrl + vしてからすぐEnterを押したら送信されてしまうのを防ぐ
 ^v::
 {
     global charCount
@@ -69,25 +67,22 @@ countCharacter(ih, char) {
     SendInput "^v"
     return
 }
-; Backspaceが押された場合
-; 入力中の文字をすべて消してEnterを押すと送信されてしまうのを防ぐ
 ~BackSpace::
 {
     global charCount
     if (charCount > 0) {
         charCount--
     }
-    return
+    return  
 }
-; Enter が押された場合
 Enter::
-NumpadEnter::  ; テンキーパッドのEnter
+NumpadEnter::
 {
     global charCount
     imeMode := IME_GET()
 
     if (imeMode) {
-        if (charCount == 0) {
+        if (IME_GetConverting() == 0) {
             SendInput "+{Enter}"
         } else {
             SendInput "{Enter}"
@@ -97,10 +92,8 @@ NumpadEnter::  ; テンキーパッドのEnter
         SendInput "+{Enter}"
         charCount := 0
     }
-
     return
 }
-; Ctrl + Enter が押された場合
 ^Enter::
 {
     global charCount
@@ -108,5 +101,4 @@ NumpadEnter::  ; テンキーパッドのEnter
     SendInput "{Enter}"
     return
 }
-
 #HotIf
