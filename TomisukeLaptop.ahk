@@ -23,6 +23,7 @@ Pause:: {
     ExitApp
 }
 qwerty := false
+global charCount
 ;ピリオドレイヤー
 ;記号
 . & r:: {
