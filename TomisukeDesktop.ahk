@@ -9,7 +9,6 @@
 #include appOriginal.ahk
 #include common.ahk
 #Include string.ahk
-#Include crtlEnter.ahk
 #Include Launcher/
 #include bookmark.ahk
 #Include launcher.ahk
