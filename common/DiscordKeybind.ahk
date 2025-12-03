@@ -5,7 +5,7 @@ global charCount := 0
 ihCount := InputHook("V", "{Enter}")
 ihCount.Start()
 ihCount.OnChar := countCharacter
-TargetChars := "abcdefghijklmnopqrstuvwxyz1234567890,.;/[]\-^\\`*=+@*"
+TargetChars := "aoeiu1234567890,.;/[]\-^\\`*=+@*"
 CharSet := CreateLookupMap(TargetChars)
 CreateLookupMap(str) {
     lookup := Map()
@@ -48,6 +48,7 @@ countCharacter(ih, char) {
 
     return
 }
+/*
 ; Ctrl + c が押された場合
 ; ひらがなモードかつ入力中でない時にctrl + c押してEnterを押すと送信されてしまうのを防ぐ
 ; この中の処理が優先されるのでctrl + cの「c」の本来の1回分のcountプラス処理は行われなくなる
@@ -69,6 +70,7 @@ countCharacter(ih, char) {
     SendInput "^v"
     return
 }
+*/
 ; Backspaceが押された場合
 ; 入力中の文字をすべて消してEnterを押すと送信されてしまうのを防ぐ
 ~BackSpace::
