@@ -50,7 +50,7 @@ regularApps.Push("notionCalendar")
 regularApps.Push("zoom")
 regularApps.Push("ticktick")
 regularApps.Push("vscode")
-regularApps.Push("mailspring")
+regularApps.Push("thunderbird")
 regularApps.Push("onenote")
 #e:: runApp("explorer")
 #z:: {
