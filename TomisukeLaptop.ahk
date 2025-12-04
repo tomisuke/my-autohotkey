@@ -7,7 +7,7 @@ SetControlDelay 20
 ;-----------------
 #Include C:\Users\Tomisuke\Local\Activity\timestump-diary\diary.ahk
 #Include %A_ScriptDir%/common/
-#Include DiscordKeybind.ahk
+#Include ctrlEntertoSend.ahk
 #Include runApp.ahk
 #Include IME.ahk
 #include appOriginal.ahk
@@ -25,86 +25,22 @@ Pause:: {
 qwerty := false
 ;ピリオドレイヤー
 ;記号
-. & r:: {
-    global charCount
-    Send "_"
-    charCount++
-}
-. & d:: {
-    global charCount
-    Send "{sc028}"
-    charCount++
-}
-. & y:: {
-    global charCount
-    Send "["
-    charCount++
-}
-. & p:: {
-    global charCount
-    Send "]"
-    charCount++
-}
-. & n:: {
-    global charCount
-    Send "!"
-    charCount++
-}
-. & t:: {
-    global charCount
-    Send "?"
-    charCount++
-}
-. & s:: {
-    global charCount
-    Send "("
-    charCount++
-}
-. & k:: {
-    global charCount
-    Send ")"
-    charCount++
-}
-. & h:: {
-    global charCount
-    Send "&"
-    charCount++
-}
-. & m:: {
-    global charCount
-    Send "%"
-    charCount++
-}
-. & g:: {
-    global charCount
-    Send '"'
-    charCount++
-}
-. & j:: {
-    global charCount
-    Send "'"
-    charCount++
-}
-. & f:: {
-    global charCount
-    Send "#"
-    charCount++
-}
-. & Delete:: {
-    global charCount
-    Send "$"
-    charCount++
-}
-. & b:: {
-    global charCount
-    Send "{{}"
-    charCount++
-}
-. & z:: {
-    global charCount
-    Send "{}}"
-    charCount++
-}
+. & r::Send "_"
+. & d::Send "{sc028}"
+. & y::Send "["
+. & p::Send "]"
+. & n::Send "!"
+. & t::Send "?"
+. & s::Send "("
+. & k::Send ")"
+. & h::Send "&"
+. & m::Send "%"
+. & g::Send '"'
+. & j::Send "'"
+. & f::Send "#"
+. & Delete::Send "$"
+. & b::Send "{{}"
+. & z::Send "{}}"
 
 ;enterレイヤー
 ;矢印
@@ -125,82 +61,22 @@ Enter & m:: Send "+{sc079}" ;再度変換
 Enter & y:: Send "{Blind}{up}"
 
 ;コンマレイヤー
-, & n:: {
-    global charCount
-    Send 1
-    charCount++
-}
-, & t:: {
-    global charCount
-    Send 2
-    charCount++
-}
-, & s:: {
-    global charCount
-    Send 3
-    charCount++
-}
-, & k:: {
-    global charCount
-    Send 4
-    charCount++
-}
-, & h:: {
-    global charCount
-    Send 0
-    charCount++
-}
-, & m:: {
-    global charCount
-    Send 5
-    charCount++
-}
-, & b:: {
-    global charCount
-    Send 6
-    charCount++
-}
-, & z:: {
-    global charCount
-    Send "."
-    charCount++
-}
-, & r:: {
-    global charCount
-    Send 7
-    charCount++
-}
-, & d:: {
-    global charCount
-    Send 8
-    charCount++
-}
-, & y:: {
-    global charCount
-    Send 9
-    charCount++
-}
-, & p:: {
-    global charCount
-    Send "*"
-    charCount++
-}
+, & n::Send 1
+, & t::Send 2
+, & s::Send 3
+, & k::Send 0
+, & h::Send 4
+, & m::Send 5
+, & b::Send 6
+, & z::Send "."
+, & r::Send 7
+, & d::Send 8
+, & y::Send 9
+, & p::Send "*"
 , & g:: Send "{BS}"
-, & j::{
-    global charCount
-    Send "+"
-    charCount++
-}
-, & f::{
-    global charCount
-    Send "-"
-    charCount++
-}
-, & l::{
-    global charCount
-    Send "/"
-    charCount++
-}
+, & j::Send "+"
+, & f::Send "-"
+, & l::Send "/"
 
 !c::^+R
 
@@ -271,16 +147,3 @@ Space::Space
 .::.
 enter::Enter
 -::-
-/*
-^F12::{
-    send "!{Tab}"
-    Sleep 200
-    Send "{Enter}"
-    Sleep 200
-    Send "{Enter}"
-    Sleep 200
-    send "!{Tab}"
-    Sleep 500
-    Send "{Enter}"
-}
-*/

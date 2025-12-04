@@ -38,20 +38,6 @@ IME_GET(WinTitle := "A") {
         , "Int", 0x0005  ;wParam  : IMC_GETOPENSTATUS
         , "Int", 0)      ;lParam  : 0
 }
-
-;;; software / AutoHotkey スレッド part8
-;;; http://p2.chbox.jp/read.php?url=http%3A//pc12.2ch.net/test/read.cgi/software/1243005818/787
-
-;;; IMEの変換状態を見る
-;;; http://sites.google.com/site/agkh6mze/scripts#TOC-IME-
-
-;;; software / AutoHotkey スレッド part9
-;;; http://p2.chbox.jp/read.php?url=http%3A//pc12.2ch.net/test/read.cgi/software/1253888736/400
-
-
-;---------------------------------------------------------------------------
-;  IMEの種類を選ぶかもしれない関数
-
 ;==========================================================================
 ;  IME 文字入力の状態を返す
 ;  (パクリ元 : http://sites.google.com/site/agkh6mze/scripts#TOC-IME- )
@@ -71,7 +57,6 @@ IME_GET(WinTitle := "A") {
 ;      のチェックを外す
 ;==========================================================================
 IME_GetConverting(WinTitle := "A", ConvCls := "", CandCls := "") {
-
     ;IME毎の 入力窓/候補窓Class一覧 ("|" 区切りで適当に足してけばOK)
     ConvCls .= (ConvCls ? "|" : "")                 ;--- 入力窓 ---
         . "ATOK\d+CompStr"                     ; ATOK系
@@ -147,4 +132,12 @@ IME_GetConverting(WinTitle := "A", ConvCls := "", CandCls := "") {
     }
     SetTitleMatchMode tmm
     return ret
+}
+
+isIMEConverting() {
+    if (IME_GetConverting() = 0 AND !IMEFlag) {
+        return false
+    } else {
+        return true
+    }
 }
