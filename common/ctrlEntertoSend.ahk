@@ -16,7 +16,6 @@ NumpadEnter::
 {
     global IMEFlag
     imeMode := IME_GET()
-
     if (imeMode) {
         if (isIMEConverting()) {
             SendInput "{Enter}"

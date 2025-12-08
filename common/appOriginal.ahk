@@ -8,6 +8,7 @@ Enter & a::^+E
 Enter & a::Send "!6"
 #HotIf
 
+;Workona
 #HotIf WinActive("ahk_exe chrome.exe" OR "ahk_exe vivaldi.exe") 
 Enter & v::Send "!+{2}"
 Enter & w::Send "!+{3}"

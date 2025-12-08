@@ -3,7 +3,7 @@
 ;-----------------
 #Include C:\Users\Tomisuke\Local\Activity\timestump-diary\diary.ahk
 #Include %A_ScriptDir%/common/
-#Include DiscordKeybind.ahk
+#Include ctrlEntertoSend.ahk
 #Include runApp.ahk
 #Include IME.ahk
 #include appOriginal.ahk

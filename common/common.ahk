@@ -18,7 +18,7 @@ HandleModifierKeys(singleKey, modifiedKey) {
         modifiers .= "#"
 
     ; 修飾キーと指定されたキーを送信
-    if (modifiers = "" OR modifiers = "+") {
+    if (modifiers = "" OR modifiers = "+" OR modifiers = "!") {
         Send(modifiers singleKey)
     } else {
         Send(modifiers modifiedKey)
@@ -53,12 +53,3 @@ regularApps.Push("vscode")
 regularApps.Push("thunderbird")
 regularApps.Push("onenote")
 #e:: runApp("explorer")
-#z:: {
-    Send "#a"
-    Sleep 100
-    Send "{Right}"
-    Send "{Tab}"
-    Send "{Enter}"
-    Sleep 1000
-    Send "+{Tab}"
-}

@@ -22,7 +22,6 @@ Pause:: {
     Msgbox "ゲストモード`nGuestMode", "LayoutChanger", "T0.5"
     ExitApp
 }
-qwerty := false
 ;ピリオドレイヤー
 ;記号
 . & r::Send "_"
@@ -77,8 +76,6 @@ Enter & y:: Send "{Blind}{up}"
 , & j::Send "+"
 , & f::Send "-"
 , & l::Send "/"
-
-!c::^+R
 
 ;スペースレイヤー
 ;アプリ起動
@@ -138,8 +135,6 @@ F13:: Send "{vk16}" ;かな/ローマ字キーtoIMEOn
 F14:: IME_SET(0)
 #HotIf
 F14:: Send "{vk1A}" ;EnterToIMEOff
-
-F1::MsgBox IME_GetConverting()
 
 ;補助
 Space::Space
