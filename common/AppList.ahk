@@ -4,6 +4,7 @@ GroupAdd "CtrlEnterToSend", "ahk_exe Perplexity.exe"
 
 GroupAdd "IMEAbnormal", "ahk_exe YukkuriMovieMaker.exe"
 GroupAdd "IMEAbnormal", "Flow.Launcher"
+GroupAdd "IMEAbnormal", "ahk_exe javaw.exe"
 apps := Map()
 apps["vivaldi"] := {
     name: "ahk_exe vivaldi.exe",

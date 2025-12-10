@@ -127,11 +127,11 @@ sc029:: Send "{Esc}"
 ^+sc029:: Send "^+{Esc}"
 Enter & j::!^+F13 ;flowLauncher
 ;ime制御
-#HotIf WinExist("Flow.Launcher") OR WinActive("ahk_exe YukkuriMovieMaker.exe")
+#HotIf WinExist("Flow.Launcher") OR WinActive("ahk_group IMEAbnormal")
 F13:: IME_SET(1)
 #HotIf
 F13:: Send "{vk16}" ;かな/ローマ字キーtoIMEOn
-#HotIf WinExist("Flow.Launcher") OR WinActive("ahk_exe YukkuriMovieMaker.exe")
+#HotIf WinExist("Flow.Launcher") OR WinActive("ahk_group IMEAbnormal")
 F14:: IME_SET(0)
 #HotIf
 F14:: Send "{vk1A}" ;EnterToIMEOff
@@ -142,3 +142,13 @@ Space::Space
 .::.
 enter::Enter
 -::-
+
+SetTimer updateToolTip, 10
+
+updateToolTip(){
+    if(isIMEConverting())
+        ToolTip("変換中")
+    else{
+        ToolTip("")
+    }
+}

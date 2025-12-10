@@ -13,6 +13,7 @@ bookmark["skyscanner"] := "https://www.skyscanner.jp/"
 bookmark["sbibank"] := "https://www.netbk.co.jp/contents/pages/wpl010002/i010002CT/DI01000200?CallerScreen=1"
 bookmark["sonybank"] := "https://sonybank.jp/pages/da/daya010a/"
 bookmark["sec"] := "https://site.sbisec.co.jp/account/assets"
+bookmark["notebooklm"] := "https://notebooklm.google.com/"
 path := Map()
 path["download"] := "C:\Users\Tomisuke\Downloads"
 path["home"] := "C:\sync\Home"
