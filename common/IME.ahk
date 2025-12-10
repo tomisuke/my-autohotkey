@@ -90,22 +90,43 @@ IME_GetConverting(WinTitle := "A", ConvCls := "", CandCls := "") {
     }
     tmm := A_TitleMatchMode
     SetTitleMatchMode "RegEx"
-    ret := WinExist("ahk_class " . CandCls . " ahk_pid " pid) ? 2
-        : WinExist("ahk_class " . CandGCls) ? 2
-        : WinExist("ahk_class " . ConvCls . " ahk_pid " pid) ? 1
+
+    ; ウィンドウの存在確認と hwnd 保持（競合回避）
+    candHwnd := WinExist("ahk_class " . CandCls . " ahk_pid " pid)
+    candGHwnd := WinExist("ahk_class " . CandGCls)
+    convHwnd := WinExist("ahk_class " . ConvCls . " ahk_pid " pid)
+
+    ret := candHwnd ? 2
+        : candGHwnd ? 2
+        : convHwnd ? 1
         : 0
     ;; 推測変換(atok)や予想入力(msime)中は候補窓が出ていないものとして取り扱う
     if (2 == ret) {
-        if (WinExist("ahk_class " . CandCls . " ahk_pid " pid))
+        X := 0
+        Y := 0
+        Width := 0
+        Height := 0
+
+        if (candHwnd)
         {
             ;; atok だと仮定して再度ウィンドウを検出する
-            WinGetPos(&X, &Y, &Width, &Height, "ahk_class " . CandCls . " ahk_pid " pid)
-        } else
-            if (WinExist("ahk_class " . CandGCls))
-            {
-                ;; Google IME だと仮定して再度ウィンドウを検出する
-                WinGetPos(&X, &Y, &Width, &Height, "ahk_class " . CandGCls)
+            try {
+                WinGetPos(&X, &Y, &Width, &Height, "ahk_id " . candHwnd)
+            } catch {
+                ; ウィンドウが消えた場合は ret=2 のまま抜ける
+                SetTitleMatchMode tmm
+                return ret
             }
+        } else if (candGHwnd)
+        {
+            ;; Google IME だと仮定して再度ウィンドウを検出する
+            try {
+                WinGetPos(&X, &Y, &Width, &Height, "ahk_id " . candGHwnd)
+            } catch {
+                SetTitleMatchMode tmm
+                return ret
+            }
+        }
         X1 := X
         Y1 := Y
         X2 := X + Width
