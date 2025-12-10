@@ -1,8 +1,10 @@
 GroupAdd "CtrlEnterToSend", "ahk_exe Discord.exe"
 GroupAdd "CtrlEnterToSend", "ahk_exe ChatGPT.exe"
+GroupAdd "CtrlEnterToSend", "ahk_exe Perplexity.exe"
 
 GroupAdd "IMEAbnormal", "ahk_exe YukkuriMovieMaker.exe"
 GroupAdd "IMEAbnormal", "Flow.Launcher"
+GroupAdd "IMEAbnormal", "ahk_exe javaw.exe"
 apps := Map()
 apps["vivaldi"] := {
     name: "ahk_exe vivaldi.exe",
@@ -16,11 +18,11 @@ apps["discord"] := {
     name: "ahk_exe Discord.exe",
     address: GetDiscordExe(),
 }
-GetDiscordExe(){
+GetDiscordExe() {
     base := EnvGet("LOCALAPPDATA") . "\Discord"
     loop files base . "\app-*", "D" {
         exe := A_LoopFileFullPath . "\Discord.exe"
-        if FileExist(exe){
+        if FileExist(exe) {
             return exe
         }
     }
@@ -28,7 +30,7 @@ GetDiscordExe(){
 }
 apps["notionCalendar"] := {
     name: "ahk_exe Notion Calendar.exe",
-    address: EnvGet("LOCALAPPDATA") . "\Programs\cron-web\Notion Calendar.exe" ,
+    address: EnvGet("LOCALAPPDATA") . "\Programs\notion-calendar-web\Notion Calendar.exe",
 }
 apps["zoom"] := {
     name: "ahk_class ConfMultiTabContentWndClass",
@@ -57,7 +59,22 @@ apps["chatGPT"] := {
     name: "ahk_exe ChatGPT.exe",
     address: "explorer.exe shell:AppsFolder\OpenAI.ChatGPT-Desktop_2p2nqsd0c76g0!ChatGPT",
 }
-
+apps["comet"] := {
+    name: "ahk_exe comet.exe",
+    address: "C:\Users\Tomisuke\AppData\Local\Perplexity\Comet\Application\comet.exe",
+}
+apps["perplexity"] := {
+    name: "ahk_exe perplexity.exe",
+    address: "C:\Users\Tomisuke\AppData\Local\Programs\Perplexity\Perplexity.exe",
+}
+apps["chrome"] := {
+    name: "ahk_exe chrome.exe",
+    address: "C:\Program Files\Google\Chrome\Application\chrome.exe",
+}
+apps["mailspring"] := {
+    name: "ahk_exe mailspring.exe",
+    address: "C:\Users\Tomisuke\AppData\Local\Mailspring\mailspring.exe",
+}
 for i, x in apps {
     apps[i].num := 1
 }

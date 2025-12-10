@@ -3,6 +3,7 @@
     runApp(x) {
         windows := WinGetList(apps[x].name)
         windows := SortArray(windows)
+        windows := excludeWorkonaWindow(windows)
         if windows.Length != 0 {
             for index, i in windows {
                 try {
@@ -61,4 +62,24 @@
             result.Push(i)
         }
         return result
+    }
+    excludeWorkonaWindow(windows) {
+        windowName := "Hidden Tabs - Workona - "
+        switch (regularApps[1]) {
+            case "chrome":
+                windowName .= "Google Chrome"
+            case "comet":
+                windowName .= "comet"
+            case "vivaldi":
+                windowName .= "vivaldi"
+        }
+        if WinExist(windowName) {
+            id := WinGetID(windowName)
+            for i, v in windows {
+                if v = id {
+                    windows.RemoveAt(i)
+                }
+            }
+        }
+        return windows
     }

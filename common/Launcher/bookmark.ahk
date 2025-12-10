@@ -1,0 +1,24 @@
+bookmark := Map()
+bookmark["nikkei"] := "https://www.nikkei.com/"
+bookmark["hope"] := "https://hope.fun.ac.jp/"
+bookmark["myahk"] := "https://github.com/Tomisuke/my-autohotkey"
+bookmark["ana"] := "https://www.ana.co.jp/"
+bookmark["jal"] := "https://www.jal.co.jp/"
+bookmark["airdo"] := "https://www.airdo.jp/"
+bookmark["insta"] := "https://www.instagram.com/"
+bookmark["youtube"] := "https://www.youtube.com/feed/subscription"
+bookmark["map"] := "https://www.google.com/maps"
+bookmark["syllabus"] := "https://students.fun.ac.jp/Lesson/SyllabusList?module=2"
+bookmark["skyscanner"] := "https://www.skyscanner.jp/"
+bookmark["sbibank"] := "https://www.netbk.co.jp/contents/pages/wpl010002/i010002CT/DI01000200?CallerScreen=1"
+bookmark["sonybank"] := "https://sonybank.jp/pages/da/daya010a/"
+bookmark["sec"] := "https://site.sbisec.co.jp/account/assets"
+bookmark["notebooklm"] := "https://notebooklm.google.com/"
+path := Map()
+path["download"] := "C:\Users\Tomisuke\Downloads"
+path["home"] := "C:\sync\Home"
+path["local"] := "C:\Users\Tomisuke\Local"
+path["class"] := "C:\sync\Home\Class\2025SecondSemester"
+path["c"] := "C:\"
+bookmarks := Map()
+bookmarks["flight"] := [bookmark["ana"], bookmark["jal"], bookmark["airdo"]] 

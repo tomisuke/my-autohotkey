@@ -18,7 +18,7 @@ HandleModifierKeys(singleKey, modifiedKey) {
         modifiers .= "#"
 
     ; 修飾キーと指定されたキーを送信
-    if (modifiers = "" OR modifiers = "+") {
+    if (modifiers = "" OR modifiers = "+" OR modifiers = "!") {
         Send(modifiers singleKey)
     } else {
         Send(modifiers modifiedKey)
@@ -40,3 +40,16 @@ HandleModifierKeys(singleKey, modifiedKey) {
 *z:: {
     HandleModifierKeys("z", "w")
 }
+
+regularApps := []
+regularApps.Push("chrome")
+regularApps.Push("memo")
+regularApps.Push("perplexity")
+regularApps.Push("discord")
+regularApps.Push("notionCalendar")
+regularApps.Push("zoom")
+regularApps.Push("ticktick")
+regularApps.Push("vscode")
+regularApps.Push("thunderbird")
+regularApps.Push("onenote")
+#e:: runApp("explorer")

@@ -1,36 +1,45 @@
+SetKeyDelay 50, 50
+SetWinDelay 100
+SetControlDelay 20
+
 #Requires AutoHotkey v2.0
 ;sc07b:無変換   sc079:変換
 ;-----------------
+#Include C:\Users\Tomisuke\Local\Activity\timestump-diary\diary.ahk
 #Include %A_ScriptDir%/common/
+#Include ctrlEntertoSend.ahk
 #Include runApp.ahk
 #Include IME.ahk
 #include appOriginal.ahk
 #include common.ahk
+#Include string.ahk
+#Include Launcher/
+#include bookmark.ahk
+#Include launcher.ahk
 ;-----------------
 Pause:: {
     Run ".\TomisukeToQwerty.ahk"
     Msgbox "ゲストモード`nGuestMode", "LayoutChanger", "T0.5"
     ExitApp
 }
-qwerty := false
 ;ピリオドレイヤー
 ;記号
-. & r::_
-. & d::sc028
-. & y::[
-. & p::]
-. & n::!
-. & t::?
-. & s::(
-. & k::)
-. & h::&
-. & m::%
-. & g::"
-. & j::'
-. & f::#
-. & Delete::$
-. & b:: Send "{{}"
-. & z:: Send "{}}"
+. & r::Send "_"
+. & d::Send "{sc028}"
+. & y::Send "["
+. & p::Send "]"
+. & n::Send "!"
+. & t::Send "?"
+. & s::Send "("
+. & k::Send ")"
+. & h::Send "&"
+. & m::Send "%"
+. & g::Send '"'
+. & j::Send "'"
+. & f::Send "#"
+. & Delete::Send "$"
+. & b::Send "{{}"
+. & z::Send "{}}"
 
 ;enterレイヤー
 ;矢印
@@ -51,39 +60,35 @@ Enter & m:: Send "+{sc079}" ;再度変換
 Enter & y:: Send "{Blind}{up}"
 
 ;コンマレイヤー
-, & n::1
-, & t::2
-, & s::3
-, & k::0
-, & h::4
-, & m::5
-, & b::6
-, & z::.
-, & r::7
-, & d::8
-, & y::9
-, & p::*
+, & n::Send 1
+, & t::Send 2
+, & s::Send 3
+, & k::Send 0
+, & h::Send 4
+, & m::Send 5
+, & b::Send 6
+, & z::Send "."
+, & r::Send 7
+, & d::Send 8
+, & y::Send 9
+, & p::Send "*"
 , & g:: Send "{BS}"
-, & j::+
-, & f::-
-, & Delete::*
-, & l::/
-
-!c::^+R
+, & j::Send "+"
+, & f::Send "-"
+, & l::Send "/"
 
 ;スペースレイヤー
 ;アプリ起動
-Space & a:: runApp("vivaldi")
-Space & o:: runApp("memo")
-Space & e:: runApp("chatGPT")
-Space & i:: runApp("discord")
-Space & u:: runApp("notionCalendar")
-Space & x:: runApp("zoom")
-Space & c:: runApp("ticktick")
-Space & v:: runApp("vscode")
-Space & w:: runApp("thunderbird")
-Space & Delete:: runApp("onenote")
-#e:: runApp("explorer")
+Space & a:: runApp(regularApps[1])
+Space & o:: runApp(regularApps[2])
+Space & e:: runApp(regularApps[3])
+Space & i:: runApp(regularApps[4])
+Space & u:: runApp(regularApps[5])
+Space & x:: runApp(regularApps[6])
+Space & c:: runApp(regularApps[7])
+Space & v:: runApp(regularApps[8])
+Space & w:: runApp(regularApps[9])
+Space & Delete:: runApp(regularApps[10])
 
 ;-レイヤー
 - & n::AppsKey
@@ -122,11 +127,11 @@ sc029:: Send "{Esc}"
 ^+sc029:: Send "^+{Esc}"
 Enter & j::!^+F13 ;flowLauncher
 ;ime制御
-#HotIf WinExist("Flow.Launcher") OR WinActive("ahk_exe YukkuriMovieMaker.exe")
+#HotIf WinExist("Flow.Launcher") OR WinActive("ahk_group IMEAbnormal")
 F13:: IME_SET(1)
 #HotIf
 F13:: Send "{vk16}" ;かな/ローマ字キーtoIMEOn
-#HotIf WinExist("Flow.Launcher") OR WinActive("ahk_exe YukkuriMovieMaker.exe")
+#HotIf WinExist("Flow.Launcher") OR WinActive("ahk_group IMEAbnormal")
 F14:: IME_SET(0)
 #HotIf
 F14:: Send "{vk1A}" ;EnterToIMEOff
@@ -137,3 +142,13 @@ Space::Space
 .::.
 enter::Enter
 -::-
+
+SetTimer updateToolTip, 10
+
+updateToolTip(){
+    if(isIMEConverting())
+        ToolTip("変換中")
+    else{
+        ToolTip("")
+    }
+}
