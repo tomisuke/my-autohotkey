@@ -1,9 +1,11 @@
-SetKeyDelay 50, 50
-SetWinDelay 100
-SetControlDelay 20
-
 #Requires AutoHotkey v2.0
 ;sc07b:無変換   sc079:変換
+
+;入力抜け対策
+SetKeyDelay 10, 10
+SetWinDelay 100 ;default 100
+SetControlDelay 20 ;default 20
+SendMode "Event" ;default Input
 ;-----------------
 #Include C:\Users\Tomisuke\Local\Activity\timestump-diary\diary.ahk
 #Include %A_ScriptDir%/common/
