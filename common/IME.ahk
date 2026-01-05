@@ -86,7 +86,9 @@ IME_GetConverting(WinTitle := "A", ConvCls := "", CandCls := "") {
     ret := 0
     pid := 0
     if (hwnd) {
-        pid := WinGetPID("ahk_id " . hwnd)	;WinGet, pid, PID,% "ahk_id " hwnd
+        try {
+            pid := WinGetPID("ahk_id " . hwnd)	;WinGet, pid, PID,% "ahk_id " hwnd
+        }
     }
     tmm := A_TitleMatchMode
     SetTitleMatchMode "RegEx"
