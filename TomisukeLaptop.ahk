@@ -26,22 +26,22 @@ Pause:: {
 }
 ;ピリオドレイヤー
 ;記号
-. & r::Send "_"
-. & d::Send "{sc028}"
-. & y::Send "["
-. & p::Send "]"
-. & n::Send "!"
-. & t::Send "?"
-. & s::Send "("
-. & k::Send ")"
-. & h::Send "&"
-. & m::Send "%"
-. & g::Send '"'
-. & j::Send "'"
-. & f::Send "#"
-. & Delete::Send "$"
-. & b::Send "{{}"
-. & z::Send "{}}"
+. & r:: Send "_"
+. & d:: Send "{sc028}"
+. & y:: Send "["
+. & p:: Send "]"
+. & n:: Send "!"
+. & t:: Send "?"
+. & s:: Send "("
+. & k:: Send ")"
+. & h:: Send "&"
+. & m:: Send "%"
+. & g:: Send '"'
+. & j:: Send "'"
+. & f:: Send "#"
+. & Delete:: Send "$"
+. & b:: Send "{{}"
+. & z:: Send "{}}"
 
 ;enterレイヤー
 ;矢印
@@ -62,22 +62,22 @@ Enter & m:: Send "+{sc079}" ;再度変換
 Enter & y:: Send "{Blind}{up}"
 
 ;コンマレイヤー
-, & n::Send 1
-, & t::Send 2
-, & s::Send 3
-, & k::Send 0
-, & h::Send 4
-, & m::Send 5
-, & b::Send 6
-, & z::Send "."
-, & r::Send 7
-, & d::Send 8
-, & y::Send 9
-, & p::Send "*"
+, & n:: Send 1
+, & t:: Send 2
+, & s:: Send 3
+, & k:: Send 0
+, & h:: Send 4
+, & m:: Send 5
+, & b:: Send 6
+, & z:: Send "."
+, & r:: Send 7
+, & d:: Send 8
+, & y:: Send 9
+, & p:: Send "*"
 , & g:: Send "{BS}"
-, & j::Send "+"
-, & f::Send "-"
-, & l::Send "/"
+, & j:: Send "+"
+, & f:: Send "-"
+, & l:: Send "/"
 
 ;スペースレイヤー
 ;アプリ起動
@@ -144,13 +144,3 @@ Space::Space
 .::.
 enter::Enter
 -::-
-
-SetTimer updateToolTip, 10
-
-updateToolTip(){
-    if(isIMEConverting())
-        ToolTip("変換中")
-    else{
-        ToolTip("")
-    }
-}
