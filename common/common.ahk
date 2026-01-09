@@ -53,3 +53,13 @@ regularApps.Push("vscode")
 regularApps.Push("thunderbird")
 regularApps.Push("onenote")
 #e:: runApp("explorer")
+
+SetTimer updateToolTip, 10
+
+updateToolTip(){
+    if(isIMEConverting())
+        ToolTip("変換中")
+    else{
+        ToolTip("")
+    }
+}

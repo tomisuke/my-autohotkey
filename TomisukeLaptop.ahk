@@ -144,13 +144,3 @@ Space::Space
 .::.
 enter::Enter
 -::-
-
-SetTimer updateToolTip, 10
-
-updateToolTip(){
-    if(isIMEConverting())
-        ToolTip("変換中")
-    else{
-        ToolTip("")
-    }
-}
