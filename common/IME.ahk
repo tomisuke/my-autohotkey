@@ -164,3 +164,11 @@ isIMEConverting() {
         return true
     }
 }
+
+imeFlagToTrue(key) {
+    global IMEFlag
+    if (IME_GetConverting() != 0) {
+        IMEFlag := true
+    }
+    SendInput "{" key "}"
+}
