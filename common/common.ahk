@@ -56,10 +56,10 @@ regularApps.Push("onenote")
 
 SetTimer updateToolTip, 10
 
-updateToolTip(){
-    if(isIMEConverting())
+updateToolTip() {
+    if (isIMEConverting())
         ToolTip("変換中")
-    else{
+    else {
         ToolTip("")
     }
 }
