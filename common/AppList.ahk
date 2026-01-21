@@ -3,6 +3,7 @@ GroupAdd "CtrlEnterToSend", "ahk_exe ChatGPT.exe"
 GroupAdd "CtrlEnterToSend", "ahk_exe Perplexity.exe"
 GroupAdd "CtrlEnterToSend", "ahk_exe claude.exe"
 
+
 GroupAdd "IMEAbnormal", "ahk_exe YukkuriMovieMaker.exe"
 GroupAdd "IMEAbnormal", "Flow.Launcher"
 GroupAdd "IMEAbnormal", "ahk_exe javaw.exe"

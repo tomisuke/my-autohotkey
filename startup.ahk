@@ -91,4 +91,7 @@ try {
     WinWait("ahk_exe Notion Calendar.exe", , timeOut)
     WinHide("ahk_exe Notion Calendar.exe")
 }
+try {
+    Run "C:\Users\Tomisuke\AppData\Local\Programs\twinkle-tray\Twinkle Tray.exe"
+}   
 ExitApp
