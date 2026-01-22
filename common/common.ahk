@@ -41,25 +41,18 @@ HandleModifierKeys(singleKey, modifiedKey) {
     HandleModifierKeys("z", "w")
 }
 
-regularApps := []
-regularApps.Push("chrome")
-regularApps.Push("memo")
-regularApps.Push("perplexity")
-regularApps.Push("discord")
-regularApps.Push("notionCalendar")
-regularApps.Push("zoom")
-regularApps.Push("ticktick")
-regularApps.Push("vscode")
-regularApps.Push("thunderbird")
-regularApps.Push("onenote")
-#e:: runApp("explorer")
-
-SetTimer updateToolTip, 10
-
-updateToolTip() {
-    if (isIMEConverting())
-        ToolTip("変換中")
-    else {
-        ToolTip("")
-    }
+getRegularApps() {
+    regularApps := []
+    regularApps.Push("chrome")
+    regularApps.Push("memo")
+    regularApps.Push("perplexity")
+    regularApps.Push("discord")
+    regularApps.Push("notionCalendar")
+    regularApps.Push("zoom")
+    regularApps.Push("ticktick")
+    regularApps.Push("vscode")
+    regularApps.Push("thunderbird")
+    regularApps.Push("onenote")
+    return regularApps
 }
+#e:: mylauncher.runApp("explorer")

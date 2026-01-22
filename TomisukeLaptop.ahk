@@ -19,6 +19,7 @@ SendMode "Event" ;default Input
 #include bookmark.ahk
 #Include launcher.ahk
 ;-----------------
+myLauncher := appManager()
 Pause:: {
     Run ".\TomisukeToQwerty.ahk"
     Msgbox "ゲストモード`nGuestMode", "LayoutChanger", "T0.5"
@@ -81,17 +82,16 @@ Enter & y:: Send "{Blind}{up}"
 
 ;スペースレイヤー
 ;アプリ起動
-Space & a:: runApp(regularApps[1])
-Space & o:: runApp(regularApps[2])
-Space & e:: runApp(regularApps[3])
-Space & i:: runApp(regularApps[4])
-Space & u:: runApp(regularApps[5])
-Space & x:: runApp(regularApps[6])
-Space & c:: runApp(regularApps[7])
-Space & v:: runApp(regularApps[8])
-Space & w:: runApp(regularApps[9])
-Space & Delete:: runApp(regularApps[10])
-
+Space & a:: mylauncher.runRegularApp(1)
+Space & o:: mylauncher.runRegularApp(2)
+Space & e:: mylauncher.runRegularApp(3)
+Space & i:: mylauncher.runRegularApp(4)
+Space & u:: mylauncher.runRegularApp(5)
+Space & x:: mylauncher.runRegularApp(6)
+Space & c:: mylauncher.runRegularApp(7)
+Space & v:: mylauncher.runRegularApp(8)
+Space & w:: mylauncher.runRegularApp(9)
+Space & Delete:: mylauncher.runRegularApp(10)
 ;-レイヤー
 - & n::AppsKey
 - & t::+Tab
