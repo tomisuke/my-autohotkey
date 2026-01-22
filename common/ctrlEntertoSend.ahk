@@ -3,17 +3,17 @@
 global IMEFlag := false
 #HotIf WinActive("ahk_group CtrlEnterToSend")
 global IMEFlag
-Space:: imeFlagToTrue("Space")
-F2:: imeFlagToTrue("F2")
-F3:: imeFlagToTrue("F3")
-F4:: imeFlagToTrue("F4")
-F5:: imeFlagToTrue("F5")
-F6:: imeFlagToTrue("F6")
-F7:: imeFlagToTrue("F7")
-F8:: imeFlagToTrue("F8")
-F9:: imeFlagToTrue("F9")
-F10:: imeFlagToTrue("F10")
-F11:: imeFlagToTrue("F11")
+Space:: imeFlagToTrue()
+~F2:: imeFlagToTrue()
+~F3:: imeFlagToTrue()
+~F4:: imeFlagToTrue()
+~F5:: imeFlagToTrue()
+~F6:: imeFlagToTrue()
+~F7:: imeFlagToTrue()
+~F8:: imeFlagToTrue()
+~F9:: imeFlagToTrue()
+~F10:: imeFlagToTrue()
+~F11:: imeFlagToTrue()
 ~Esc::
 ~LButton::
 ~RButton::
