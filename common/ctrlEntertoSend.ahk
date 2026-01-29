@@ -3,7 +3,7 @@
 global IMEFlag := false
 #HotIf WinActive("ahk_group CtrlEnterToSend")
 global IMEFlag
-Space:: imeFlagToTrue()
+~Space:: imeFlagToTrue()
 ~F2:: imeFlagToTrue()
 ~F3:: imeFlagToTrue()
 ~F4:: imeFlagToTrue()

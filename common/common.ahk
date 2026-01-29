@@ -1,3 +1,6 @@
+global activeLaptop := (A_ComputerName = "TomisukeLaptop")
+global activeDesktop := (A_ComputerName = "TOMISUKEDESKTOP")
+
 #HotIf WinActive("ahk_exe Discord.exe")
 !F4:: WinClose("ahk_exe Discord.exe")
 #HotIf
@@ -25,21 +28,13 @@ HandleModifierKeys(singleKey, modifiedKey) {
     }
     return
 }
-*x:: {
-    HandleModifierKeys("x", "z")
-}
-*c:: {
-    HandleModifierKeys("c", "x")
-}
-*v:: {
-    HandleModifierKeys("v", "c")
-}
-*w:: {
-    HandleModifierKeys("w", "v")
-}
-*z:: {
-    HandleModifierKeys("z", "w")
-}
+#HotIf GetKeyState("Ctrl", "P") or GetKeyState("LWin", "P") or GetKeyState("RWin", "P")
+*x::z
+*c::x
+*v::c
+*w::v
+*z::w
+#HotIf
 
 getRegularApps() {
     regularApps := []

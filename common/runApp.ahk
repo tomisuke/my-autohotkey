@@ -2,6 +2,7 @@
     class appManager {
         apps := Map()
         regularApps := []
+        anotherApps := 0
 
         __New() {
             this.apps := getAppList()
@@ -10,7 +11,7 @@
         runApp(x) {
             windows := WinGetList(this.apps[x].name)
             windows := this.SortArray(windows)
-            windows := this.excludeWorkonaWindow(windows)
+            windows := this.excludeWindow(windows)
             if windows.Length != 0 {
                 for index, i in windows {
                     try {
@@ -35,6 +36,43 @@
                 WinActivate id
             } else {
                 Run this.apps[x].address
+            }
+        }
+        activeAnotherApp() {
+            windows := WinGetList()
+            windows := this.SortArray(windows)
+            for (regularApp in this.regularApps) {
+                ids := WinGetList(this.apps[regularApp].name)
+                for (i, id in ids) {
+                    for (j, v in windows) {
+                        if (v = id)
+                            windows.RemoveAt(j)
+                    }
+                }
+            }
+            windows := this.excludeWindow(windows, "partial")
+            if windows.Length != 0 {
+                for index, i in windows {
+                    try {
+                        j := WinGetID("a")
+                    } catch {
+                        j := "miss"
+                    }
+                    if i = j {
+                        if (index = windows.Length) {
+                            this.anotherApps := 1
+                            break
+                        } else {
+                            this.anotherApps++
+                        }
+                    }
+                }
+                try {
+                    id := "ahk_id " windows[this.anotherApps]
+                } catch {
+                    id := "ahk_id " windows[1]
+                }
+                WinActivate id
             }
         }
         runRegularApp(index) {
@@ -75,24 +113,40 @@
             return result
         }
 
-        excludeWorkonaWindow(windows) {
-            windowName := "Hidden Tabs - Workona - "
-            switch (this.regularApps[1]) {
-                case "chrome":
-                    windowName .= "Google Chrome"
-                case "comet":
-                    windowName .= "comet"
-                case "vivaldi":
-                    windowName .= "vivaldi"
+        excludeWindow(windows, mode := "all") {
+            SetTitleMatchMode "RegEx"
+            ids := []
+            ids.Push("Hidden Tabs - Workona - .*")
+            ;ノイズ除去
+            ids.Push("DDMExtension")
+            ids.Push("Program Manager")
+            ids.Push("Twinkle Tray Panel")
+            if (mode = "all") {
+                ids.Push("MoneyForwardForSBI - マネーフォワード for 住信SBIネット銀行")
+                ids.Push("YouTube Music*")
             }
-            if WinExist(windowName) {
-                id := WinGetID(windowName)
-                for i, v in windows {
-                    if v = id {
-                        windows.RemoveAt(i)
+            for (id in ids) {
+                if WinExist(id) {
+                    id := WinGetID(id)
+                    for i, v in windows {
+                        if v = id {
+                            windows.RemoveAt(i)
+                        }
                     }
                 }
             }
+            i := windows.Length
+            while (i > 0) {
+                try {
+                    if (WinGetTitle(windows[i]) = "") {
+                        windows.RemoveAt(i)
+                    }
+                } catch {
+                    windows.RemoveAt(i)
+                }
+                i--
+            }
+            SetTitleMatchMode 2 ;部分一致(デフォルト値)
             return windows
         }
     }

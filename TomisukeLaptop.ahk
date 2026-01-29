@@ -62,6 +62,8 @@ Enter & h:: Send "!+^{F1}"  ;fluentSearch
 Enter & m:: Send "+{sc079}" ;再度変換
 Enter & y:: Send "{Blind}{up}"
 
+Enter & o::launcher()
+
 ;コンマレイヤー
 , & n:: Send 1
 , & t:: Send 2
@@ -87,7 +89,7 @@ Space & o:: mylauncher.runRegularApp(2)
 Space & e:: mylauncher.runRegularApp(3)
 Space & i:: mylauncher.runRegularApp(4)
 Space & u:: mylauncher.runRegularApp(5)
-Space & x:: mylauncher.runRegularApp(6)
+Space & x:: mylauncher.anotherApps()
 Space & c:: mylauncher.runRegularApp(7)
 Space & v:: mylauncher.runRegularApp(8)
 Space & w:: mylauncher.runRegularApp(9)
