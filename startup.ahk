@@ -1,7 +1,15 @@
 #Requires AutoHotkey v2.0
 timeOut := 20
 ;tomisukeLaptop
-Run ".\TomisukeLaptop.ahk"
+if (A_ComputerName = "tomisukeLaptop") {
+    global activeLaptop := true
+    global activeDesktop := false
+    Run ".\TomisukeLaptop.ahk"
+} else {
+    global activeLaptop := false
+    global activeDesktop := true
+    Run ".\TomisukeDesktop.ahk"
+}
 ;FluentSearch
 try {
     Run "C:\Program Files\Fluent Search\FluentSearch.exe"
@@ -45,7 +53,7 @@ try {
     WinMinimize("ahk_exe Discord.exe")
 }
 try {
-    Loop 10 {
+    loop 10 {
         if WinExist("ahk_exe Discord.exe") {
             WinMinimize("ahk_exe Discord.exe")
             break
@@ -93,5 +101,5 @@ try {
 }
 try {
     Run "C:\Users\Tomisuke\AppData\Local\Programs\twinkle-tray\Twinkle Tray.exe"
-}   
+}
 ExitApp

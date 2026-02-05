@@ -16,6 +16,7 @@ bookmark["sec"] := "https://site.sbisec.co.jp/account/assets"
 bookmark["nblm"] := "https://notebooklm.google.com/"
 bookmark["amazon"] := "https://www.amazon.co.jp/"
 bookmark["tateyoko"] := "https://discourse.f-syukatu-community.com/"
+bookmark["metalife"] := "https://app.metalife.co.jp/spaces/kaiNBs7HsYubz1JI55Z8?loading=true"
 path := Map()
 path["download"] := "C:\Users\Tomisuke\Downloads"
 path["home"] := "C:\sync\Home"

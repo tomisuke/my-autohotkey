@@ -16,11 +16,11 @@ Enter & w:: Send "!+{3}"
 #HotIf
 
 #HotIf WinActive("ahk_exe TickTick.exe") AND activeDesktop
-!+^F14:: ^1
-!+^F15:: ^2
-!+^F16:: ^3
-!+^F17:: ^4
-!+^F18:: ^5
+!+^F19:: ^1
+!+^F20:: ^2
+!+^F21:: ^3
+!+^F22:: ^4
+!+^F23:: ^5
 #HotIf
 
 #HotIf WinActive("Gemini - Google Gemini") AND activeDesktop

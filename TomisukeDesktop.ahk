@@ -22,6 +22,7 @@ SendMode "Event" ;default Input
 mylauncher := appManager()
 OutputDebug("TomisukeDesktop.ahk loaded")
 
+^+!F15::launcher()
 ;スペースレイヤー
 ^!F13:: mylauncher.runRegularApp(1)
 !^F14:: mylauncher.runRegularApp(2)
