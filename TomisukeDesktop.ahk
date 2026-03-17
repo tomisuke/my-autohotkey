@@ -1,3 +1,4 @@
+#SingleInstance Force
 #Requires AutoHotkey v2.0
 
 ;入力抜け対策
@@ -8,27 +9,33 @@ SendMode "Event" ;default Input
 ;-----------------
 #Include C:\Users\Tomisuke\Local\Activity\timestump-diary\diary.ahk
 #Include %A_ScriptDir%/common/
+#include common.ahk
+#include appOriginal.ahk
 #Include ctrlEntertoSend.ahk
 #Include runApp.ahk
 #Include IME.ahk
-#include appOriginal.ahk
-#include common.ahk
 #Include string.ahk
 #Include Launcher/
 #include bookmark.ahk
 #Include launcher.ahk
 ;-----------------
+mylauncher := appManager()
+OutputDebug("TomisukeDesktop.ahk loaded")
+
+^+!F15::launcher()
 ;スペースレイヤー
-^!F13:: runApp(regularApps[1])
-!^F14:: runApp(regularApps[2])
-!^F15:: runApp(regularApps[3])
-!^F16:: runApp(regularApps[4])
-!^F17:: runApp(regularApps[5])
-!^F18:: runApp(regularApps[6])
-!^F19:: runApp(regularApps[7])
-!^F20:: runApp(regularApps[8])
-!^F21:: runApp(regularApps[9])
-!^F22:: runApp(regularApps[10])
+^!F13:: mylauncher.runRegularApp(1)
+!^F14:: mylauncher.runRegularApp(2)
+!^F15:: mylauncher.runRegularApp(3)
+!^F16:: mylauncher.runRegularApp(4)
+!^F17:: mylauncher.runRegularApp(5)
+!^F18:: mylauncher.activeAnotherApp()
+!^F19:: mylauncher.runRegularApp(7)
+!^F20:: mylauncher.runRegularApp(8)
+!^F21:: mylauncher.runRegularApp(9)
+!^F22:: mylauncher.runRegularApp(10)
+
+!+3:: launcher()
 ;モニター切り換え
 !^+F13:: {
     Send "#{p}"

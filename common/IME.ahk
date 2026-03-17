@@ -165,10 +165,9 @@ isIMEConverting() {
     }
 }
 
-imeFlagToTrue(key) {
+imeFlagToTrue() {
     global IMEFlag
     if (IME_GetConverting() != 0) {
         IMEFlag := true
     }
-    SendInput "{" key "}"
 }
