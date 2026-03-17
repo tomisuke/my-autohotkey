@@ -40,7 +40,7 @@ IME_GET(WinTitle := "A") {
 }
 ;==========================================================================
 ;  IME 文字入力の状態を返す
-;  (パクリ元 : http://sites.google.com/site/agkh6mze/scripts#TOC-IME- )
+;  (パクリ元 : http://sites.google.com/site/agkh6mze/scripts#TOC-IME- ) 
 ;    標準対応IME : ATOK系 / MS-IME2002 2007 / WXG / SKKIME
 ;    その他のIMEは 入力窓/変換窓を追加指定することで対応可能
 ;
