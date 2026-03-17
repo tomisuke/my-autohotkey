@@ -1,4 +1,4 @@
-Enter & o:: {
+launcher() {
     bookmarkName := InputBox("コマンドを入力", "bookmarkCommand",)
     if (bookmarkName.Result = "OK") {
         for (i in bookmark) {
@@ -13,9 +13,9 @@ Enter & o:: {
                 return
             }
         }
-        for (i in bookmarks){
-            if(i = bookmarkName.Value){
-                for (j in bookmarks[i]){
+        for (i in bookmarks) {
+            if (i = bookmarkName.Value) {
+                for (j in bookmarks[i]) {
                     Run bookmarks[i][j]
                 }
                 return
