@@ -40,7 +40,7 @@ getRegularApps() {
     regularApps := []
     regularApps.Push("chrome")
     regularApps.Push("memo")
-    regularApps.Push("perplexity")
+    regularApps.Push("claude")
     regularApps.Push("discord")
     regularApps.Push("notionCalendar")
     regularApps.Push("zoom")

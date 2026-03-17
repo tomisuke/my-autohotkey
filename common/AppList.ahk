@@ -78,6 +78,10 @@ getAppList() {
         name: "ahk_exe mailspring.exe",
         address: "C:\Users\Tomisuke\AppData\Local\Mailspring\mailspring.exe",
     }
+    apps["claude"] := {
+        name: "ahk_exe claude.exe",
+        address: "C:\Users\Tomisuke\AppData\Local\AnthropicClaude\claude.exe",
+    }
     for i, x in apps {
         apps[i].num := 1
     }
