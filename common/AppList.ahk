@@ -80,7 +80,7 @@ getAppList() {
     }
     apps["claude"] := {
         name: "ahk_exe claude.exe",
-        address: "C:\Users\Tomisuke\AppData\Local\AnthropicClaude\claude.exe",
+        address: "C:\Program Files\WindowsApps\Claude_1.1.7053.0_x64__pzs8sxrjxfjjc\app\claude.exe",
     }
     for i, x in apps {
         apps[i].num := 1
