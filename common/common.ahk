@@ -43,12 +43,12 @@ getRegularApps() {
     regularApps.Push("claude")
     regularApps.Push("discord")
     regularApps.Push("notionCalendar")
-    regularApps.Push("zoom")
     regularApps.Push("ticktick")
     regularApps.Push("vscode")
     regularApps.Push("thunderbird")
     regularApps.Push("onenote")
     regularApps.Push("explorer")
+    regularApps.Push("notion")
     return regularApps
 }
 #e:: mylauncher.runApp("explorer")

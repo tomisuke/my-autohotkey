@@ -82,6 +82,10 @@ getAppList() {
         name: "ahk_exe claude.exe",
         address: "C:\Program Files\WindowsApps\Claude_1.569.0.0_x64__pzs8sxrjxfjjc\app\claude.exe",
     }
+    apps["notion"] := {
+        name: "ahk_exe Notion.exe",
+        address: "C:\Users\Tomisuke\AppData\Local\Programs\Notion\Notion.exe"
+    }
     for i, x in apps {
         apps[i].num := 1
     }

@@ -94,6 +94,7 @@ Space & c:: mylauncher.runRegularApp(7)
 Space & v:: mylauncher.runRegularApp(8)
 Space & w:: mylauncher.runRegularApp(9)
 Space & Delete:: mylauncher.runRegularApp(10)
+Space & BackSpace:: mylauncher.runRegularApp(11)
 ;-レイヤー
 - & n::AppsKey
 - & t::+Tab

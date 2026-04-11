@@ -34,6 +34,7 @@ OutputDebug("TomisukeDesktop.ahk loaded")
 !^F20:: mylauncher.runRegularApp(8)
 !^F21:: mylauncher.runRegularApp(9)
 !^F22:: mylauncher.runRegularApp(10)
+!^F23:: mylauncher.runRegularApp(11)
 
 !+3:: launcher()
 ;モニター切り換え
