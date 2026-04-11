@@ -48,6 +48,7 @@ getRegularApps() {
     regularApps.Push("vscode")
     regularApps.Push("thunderbird")
     regularApps.Push("onenote")
+    regularApps.Push("explorer")
     return regularApps
 }
 #e:: mylauncher.runApp("explorer")
