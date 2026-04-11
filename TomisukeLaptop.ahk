@@ -90,11 +90,11 @@ Space & e:: mylauncher.runRegularApp(3)
 Space & i:: mylauncher.runRegularApp(4)
 Space & u:: mylauncher.runRegularApp(5)
 Space & x:: mylauncher.activeAnotherApp()
-Space & c:: mylauncher.runRegularApp(7)
-Space & v:: mylauncher.runRegularApp(8)
-Space & w:: mylauncher.runRegularApp(9)
-Space & Delete:: mylauncher.runRegularApp(10)
-Space & BackSpace:: mylauncher.runRegularApp(11)
+Space & c:: mylauncher.runRegularApp(6)
+Space & v:: mylauncher.runRegularApp(7)
+Space & w:: mylauncher.runRegularApp(8)
+Space & Delete:: mylauncher.runRegularApp(9)
+Space & BackSpace:: mylauncher.runRegularApp(10)
 ;-レイヤー
 - & n::AppsKey
 - & t::+Tab

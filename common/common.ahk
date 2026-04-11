@@ -38,7 +38,7 @@ HandleModifierKeys(singleKey, modifiedKey) {
 
 getRegularApps() {
     regularApps := []
-    regularApps.Push("chrome")
+    regularApps.Push("vivaldi")
     regularApps.Push("memo")
     regularApps.Push("claude")
     regularApps.Push("discord")
@@ -47,8 +47,8 @@ getRegularApps() {
     regularApps.Push("vscode")
     regularApps.Push("thunderbird")
     regularApps.Push("onenote")
+    regularApps.Push("obsidian")
     regularApps.Push("explorer")
-    regularApps.Push("notion")
     return regularApps
 }
 #e:: mylauncher.runApp("explorer")

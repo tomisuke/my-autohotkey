@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(powershell.exe -NoProfile -Command 'Get-AppxPackage | Where-Object { $_.Name -like \"*EarTrumpet*\" -or $_.Name -like \"*Twinkle*\" } | Select-Object Name, PackageFamilyName')"
+    ]
+  }
+}

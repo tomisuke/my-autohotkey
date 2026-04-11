@@ -86,6 +86,10 @@ getAppList() {
         name: "ahk_exe Notion.exe",
         address: "C:\Users\Tomisuke\AppData\Local\Programs\Notion\Notion.exe"
     }
+    apps["obsidian"] := {
+        name: "ahk_exe Obsidian.exe",
+        address: "C:\Users\Tomisuke\AppData\Local\Programs\Obsidian\Obsidian.exe"
+    }
     for i, x in apps {
         apps[i].num := 1
     }

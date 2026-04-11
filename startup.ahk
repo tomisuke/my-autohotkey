@@ -28,11 +28,11 @@ try {
 }
 ;earTrumpet
 try {
-    Run "explorer.exe shell:AppsFolder\404timeOut9File-New-Project.EarTrumpet_1sdd7yawvg6ne!EarTrumpet"
+    Run "explorer.exe shell:AppsFolder\40459File-New-Project.EarTrumpet_1sdd7yawvg6ne!EarTrumpet"
 }
-; twinkleTray
+;twinkleTray
 try {
-    Run "explorer.exe shell:AppsFolder\TwinkleTray_8wekyb3d8bbwe!TwinkleTray"
+    Run "C:\Windows.old\Users\Tomisuke\AppData\Local\Programs\twinkle-tray\Twinkle Tray.exe"
 }
 ;TickTick
 try {
@@ -98,8 +98,5 @@ try {
     Run "C:\Users\Tomisuke\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Notion Calendar.lnk"
     WinWait("ahk_exe Notion Calendar.exe", , timeOut)
     WinHide("ahk_exe Notion Calendar.exe")
-}
-try {
-    Run "C:\Users\Tomisuke\AppData\Local\Programs\twinkle-tray\Twinkle Tray.exe"
 }
 ExitApp
