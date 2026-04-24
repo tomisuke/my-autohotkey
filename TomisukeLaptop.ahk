@@ -29,8 +29,12 @@ Pause:: {
 ;記号
 . & r:: Send "_"
 . & d:: Send "{sc028}"
-. & y:: Send "["
-. & p:: Send "]"
+. & y:: {
+    SendText "["
+}
+. & p:: {
+    SendText "]"
+}
 . & n:: Send "!"
 . & t:: Send "?"
 . & s:: Send "("
@@ -62,7 +66,7 @@ Enter & h:: Send "!+^{F1}"  ;fluentSearch
 Enter & m:: Send "+{sc079}" ;再度変換
 Enter & y:: Send "{Blind}{up}"
 
-Enter & o::launcher()
+Enter & o:: launcher()
 
 ;コンマレイヤー
 , & n:: Send 1
@@ -121,8 +125,38 @@ Space & .::Volume_Down
 Space & -::Volume_Up
 Space & 4::Volume_Mute
 ;音声入出力切り換え
-Space & ]::!^F4
-Space & [::!^F5
+Space & ]:: { ;内蔵マイク
+    btName := "OpenRun"  ; デバイス名
+    Send("!^+#{F1}")
+}
+Space & [:: { ;OpenRun
+    btName := "OpenRun"  ; デバイス名
+
+    ; COM経由でWMIに問い合わせ（PS起動不要）
+    wmi := ComObject("WbemScripting.SWbemLocator").ConnectServer()
+    devices := wmi.ExecQuery("SELECT * FROM Win32_PnPEntity WHERE Name LIKE '%" . btName . "%'")
+
+    connected := false
+    for device in devices {
+        if (device.Status = "OK")
+            connected := true
+    }
+    if (!connected) {
+        TrayTip("OpenRun接続中...", btName, 1)
+        exitCode := RunWait(
+            "powershell -WindowStyle Hidden -ExecutionPolicy Bypass -File `"C:\sync\program\OpenRunConnect.ps1`"", ,
+            "Hide")
+        if (exitCode != 0) {
+            TrayTip("接続失敗", btName, 2)
+            return
+        }
+        TrayTip("接続完了", btName, 1)
+
+    }
+
+    Send("!^+#{F2}")
+}
+
 ;clibor
 Enter & B::!^+0
 Enter & z::!^+1

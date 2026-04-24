@@ -18,6 +18,10 @@ try {
 try {
     Run "C:\Users\Tomisuke\AppData\Local\FlowLauncher\Flow.Launcher.exe"
 }
+;soundSwitch
+try {
+    Run "C:\Program Files\SoundSwitch\SoundSwitch.exe"
+}
 ;clibor
 try {
     Run "C:\Program Files\clibor\Clibor.exe"
