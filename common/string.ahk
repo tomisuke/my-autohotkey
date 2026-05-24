@@ -31,8 +31,12 @@
 :*:ename@:: {
     stringTemplate("Taichi Ishikawa")
 }
-:*:today@:: {
+typeDate() {
     Now := FormatTime(A_Now, "yyMMdd")
+    stringTemplate(Now)
+}
+typeTime() {
+    Now := FormatTime(A_Now, "HH:mm")
     stringTemplate(Now)
 }
 stringTemplate(x) {

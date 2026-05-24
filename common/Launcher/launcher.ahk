@@ -21,5 +21,12 @@ launcher() {
                 return
             }
         }
+        if(bookmarkName.Value = "opdf"){
+            if(WinActive("ahk_exe POWERPNT.EXE") OR WinActive("ahk_exe WINWORD.EXE") OR WinActive("ahk_exe EXCEL.EXE")){
+                Send "{Alt}{f}"
+                Send "e"
+                Send "a"
+            } 
+        }
     }
 }

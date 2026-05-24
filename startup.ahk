@@ -103,4 +103,9 @@ try {
     WinWait("ahk_exe Notion Calendar.exe", , timeOut)
     WinHide("ahk_exe Notion Calendar.exe")
 }
+try{
+    Run "C:\Program Files\Google\NearbyShare\nearby_share.exe"
+    WinWait("ahk_exe nearby_share.exe", , timeOut)
+    WinHide("ahk_exe nearby_share.exe")
+}
 ExitApp

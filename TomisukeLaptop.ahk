@@ -56,7 +56,6 @@ Enter & s:: Send "{Blind}{Up}"
 Enter & k:: Send "{Blind}{Right}"
 Enter & g:: Send "{Blind}{Home}"
 Enter & f:: Send "{Blind}{End}"
-
 #HotIf WinActive("ahk_exe ONENOTE.EXE")
 Enter & t:: DllCall("keybd_event", "UInt", 0x28, "UInt", 0, "UInt", 1, "UInt", 0) ; Down
 Enter & s:: DllCall("keybd_event", "UInt", 0x26, "UInt", 0, "UInt", 1, "UInt", 0) ; Up
@@ -67,6 +66,9 @@ Enter & m:: Send "+{sc079}" ;再度変換
 Enter & y:: Send "{Blind}{up}"
 
 Enter & o:: launcher()
+
+Enter & v:: typeTime()
+Enter & w:: typeDate()
 
 ;コンマレイヤー
 , & n:: Send 1
