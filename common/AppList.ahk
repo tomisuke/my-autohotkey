@@ -80,7 +80,21 @@ getAppList() {
     }
     apps["claude"] := {
         name: "ahk_exe claude.exe",
-        address: "C:\Program Files\WindowsApps\Claude_1.569.0.0_x64__pzs8sxrjxfjjc\app\claude.exe",
+        address: GetClaudeExe(),
+    }
+    GetClaudeExe() {
+        cmd := "powershell -NoProfile -Command `"(Get-AppxPackage -Name '*Claude*').InstallLocation`""
+        result := ""
+        shell := ComObject("WScript.Shell")
+        ;cmdでAppxPackageからclaudeのインストール場所を取得し、そこからexeのパスを取得
+        exec := shell.Exec(cmd)
+        result := Trim(exec.StdOut.ReadAll(), " `t`r`n")
+        if result != "" {
+            exe := result . "\app\claude.exe"
+            if FileExist(exe)
+                return exe
+        }
+        return 0
     }
     apps["notion"] := {
         name: "ahk_exe Notion.exe",

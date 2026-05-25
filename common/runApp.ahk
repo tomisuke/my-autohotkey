@@ -33,7 +33,7 @@
                 } catch {
                     id := "ahk_id " windows[1]
                 }
-                WinActivate id
+                WinActivate id 
             } else {
                 Run this.apps[x].address
             }

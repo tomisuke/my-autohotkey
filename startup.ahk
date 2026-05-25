@@ -18,6 +18,10 @@ try {
 try {
     Run "C:\Users\Tomisuke\AppData\Local\FlowLauncher\Flow.Launcher.exe"
 }
+;soundSwitch
+try {
+    Run "C:\Program Files\SoundSwitch\SoundSwitch.exe"
+}
 ;clibor
 try {
     Run "C:\Program Files\clibor\Clibor.exe"
@@ -98,5 +102,10 @@ try {
     Run "C:\Users\Tomisuke\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Notion Calendar.lnk"
     WinWait("ahk_exe Notion Calendar.exe", , timeOut)
     WinHide("ahk_exe Notion Calendar.exe")
+}
+try{
+    Run "C:\Program Files\Google\NearbyShare\nearby_share.exe"
+    WinWait("ahk_exe nearby_share.exe", , timeOut)
+    WinHide("ahk_exe nearby_share.exe")
 }
 ExitApp
