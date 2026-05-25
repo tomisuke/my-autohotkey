@@ -31,8 +31,9 @@
 :*:ename@:: {
     stringTemplate("Taichi Ishikawa")
 }
-
-
+:*:time@:: {
+    stringTemplate(FormatTime(A_Now, "HH:mm"))
+}
 stringTemplate(x) {
     oldClip := ClipboardAll
     A_Clipboard := x
