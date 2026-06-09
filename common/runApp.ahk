@@ -13,27 +13,7 @@
             windows := this.SortArray(windows)
             windows := this.excludeWindow(windows)
             if windows.Length != 0 {
-                for index, i in windows {
-                    try {
-                        j := WinGetID("a")
-                    } catch {
-                        j := "miss"
-                    }
-                    if i = j {
-                        if (index = windows.Length) {
-                            this.apps[x].num := 1
-                            break
-                        } else {
-                            this.apps[x].num++
-                        }
-                    }
-                }
-                try {
-                    id := "ahk_id " windows[this.apps[x].num]
-                } catch {
-                    id := "ahk_id " windows[1]
-                }
-                WinActivate id 
+                this.apps[x].num := this.cycleAndActivate(windows, this.apps[x].num)
             } else {
                 Run this.apps[x].address
             }
@@ -52,28 +32,32 @@
             }
             windows := this.excludeWindow(windows, "partial")
             if windows.Length != 0 {
-                for index, i in windows {
-                    try {
-                        j := WinGetID("a")
-                    } catch {
-                        j := "miss"
-                    }
-                    if i = j {
-                        if (index = windows.Length) {
-                            this.anotherApps := 1
-                            break
-                        } else {
-                            this.anotherApps++
-                        }
-                    }
-                }
-                try {
-                    id := "ahk_id " windows[this.anotherApps]
-                } catch {
-                    id := "ahk_id " windows[1]
-                }
-                WinActivate id
+                this.anotherApps := this.cycleAndActivate(windows, this.anotherApps)
             }
+        }
+        cycleAndActivate(windows, num) {
+            try {
+                j := WinGetID("a")
+            } catch {
+                j := "miss"
+            }
+            for index, i in windows {
+                if (i = j) {
+                    if (index = windows.length) {
+                        num := 1
+                    } else {
+                        num := index + 1
+                    }
+                    break
+                }
+            }
+            try {
+                WinActivate "ahk_id " windows[num]
+            }
+            catch {
+                WinActivate "ahk_id " windows[1]
+            }
+            return num
         }
         runRegularApp(index) {
             this.runApp(this.regularApps[index])
@@ -128,10 +112,12 @@
             for (id in ids) {
                 if WinExist(id) {
                     id := WinGetID(id)
-                    for i, v in windows {
-                        if v = id {
+                    i := windows.Length
+                    while (i > 0) {
+                        if windows[i] = id {
                             windows.RemoveAt(i)
                         }
+                        i--
                     }
                 }
             }

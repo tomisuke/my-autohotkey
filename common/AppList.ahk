@@ -64,11 +64,11 @@ getAppList() {
     }
     apps["comet"] := {
         name: "ahk_exe comet.exe",
-        address: "C:\Users\Tomisuke\AppData\Local\Perplexity\Comet\Application\comet.exe",
+        address: EnvGet("LOCALAPPDATA") . "\Perplexity\Comet\Application\comet.exe",
     }
     apps["perplexity"] := {
         name: "ahk_exe perplexity.exe",
-        address: "C:\Users\Tomisuke\AppData\Local\Programs\Perplexity\Perplexity.exe",
+        address: EnvGet("LOCALAPPDATA") . "\Programs\Perplexity\Perplexity.exe",
     }
     apps["chrome"] := {
         name: "ahk_exe chrome.exe",
@@ -76,7 +76,7 @@ getAppList() {
     }
     apps["mailspring"] := {
         name: "ahk_exe mailspring.exe",
-        address: "C:\Users\Tomisuke\AppData\Local\Mailspring\mailspring.exe",
+        address: EnvGet("LOCALAPPDATA") . "\Mailspring\mailspring.exe",
     }
     apps["claude"] := {
         name: "ahk_exe claude.exe",
@@ -98,11 +98,11 @@ getAppList() {
     }
     apps["notion"] := {
         name: "ahk_exe Notion.exe",
-        address: "C:\Users\Tomisuke\AppData\Local\Programs\Notion\Notion.exe"
+        address: EnvGet("LOCALAPPDATA") . "\Programs\Notion\Notion.exe"
     }
     apps["obsidian"] := {
         name: "ahk_exe Obsidian.exe",
-        address: "C:\Users\Tomisuke\AppData\Local\Programs\Obsidian\Obsidian.exe"
+        address: EnvGet("LOCALAPPDATA") . "\Programs\Obsidian\Obsidian.exe"
     }
     for i, x in apps {
         apps[i].num := 1
