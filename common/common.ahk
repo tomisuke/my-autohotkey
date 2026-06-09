@@ -40,7 +40,7 @@ getRegularApps() {
     regularApps := []
     regularApps.Push("vivaldi")
     regularApps.Push("memo")
-    regularApps.Push("chatGPT")
+    regularApps.Push("claude")
     regularApps.Push("discord")
     regularApps.Push("notionCalendar")
     regularApps.Push("ticktick")

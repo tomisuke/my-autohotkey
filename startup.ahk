@@ -4,11 +4,11 @@ timeOut := 20
 if (A_ComputerName = "tomisukeLaptop") {
     global activeLaptop := true
     global activeDesktop := false
-    Run ".\TomisukeLaptop.ahk"
+    Run '*RunAs ".\TomisukeLaptop.ahk"'
 } else {
     global activeLaptop := false
     global activeDesktop := true
-    Run ".\TomisukeDesktop.ahk"
+    Run '*RunAs ".\TomisukeDesktop.ahk"'
 }
 ;FluentSearch
 try {
