@@ -10,9 +10,9 @@ if (A_ComputerName = "tomisukeLaptop") {
     global activeDesktop := true
     Run '*RunAs ".\TomisukeDesktop.ahk"'
 }
-;FluentSearch
+;MouseByKeyboard
 try {
-    Run "C:\Program Files\Fluent Search\FluentSearch.exe"
+    Run "C:\Users\Tomisuke\Local\Activity\mouseByKeyboard\KeyNavigator.exe"
 }
 ;flowLauncher
 try {
@@ -25,10 +25,6 @@ try {
 ;clibor
 try {
     Run "C:\Program Files\clibor\Clibor.exe"
-}
-;alttabTerminator
-try {
-    Run "C:\Program Files\Alt-Tab Terminator\AltTabTer.exe"
 }
 ;earTrumpet
 try {
@@ -103,9 +99,16 @@ try {
     WinWait("ahk_exe Notion Calendar.exe", , timeOut)
     WinHide("ahk_exe Notion Calendar.exe")
 }
-try{
+try {
     Run "C:\Program Files\Google\NearbyShare\nearby_share.exe"
     WinWait("ahk_exe nearby_share.exe", , timeOut)
     WinHide("ahk_exe nearby_share.exe")
+}
+;manicTime
+try {
+    Run "C:\Program Files\ManicTime\ManicTime.exe"
+}
+try {
+    Run "C:\Program Files\WhatPulse\WhatPulse.exe"
 }
 ExitApp

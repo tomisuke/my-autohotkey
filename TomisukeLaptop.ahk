@@ -60,6 +60,8 @@ Enter & f:: Send "{Blind}{End}"
 Enter & t:: DllCall("keybd_event", "UInt", 0x28, "UInt", 0, "UInt", 1, "UInt", 0) ; Down
 Enter & s:: DllCall("keybd_event", "UInt", 0x26, "UInt", 0, "UInt", 1, "UInt", 0) ; Up
 #HotIf
+Enter & r:: Send "{Blind}{AppsKey}"
+Enter & d:: Send "{Blind}{Tab}"
 
 Enter & h:: Send "!+^{F1}"  ;fluentSearch
 Enter & m:: Send "+{sc079}" ;再度変換
@@ -71,22 +73,17 @@ Enter & v:: typeTime()
 Enter & w:: typeDate()
 
 ;コンマレイヤー
-, & n:: Send 1
-, & t:: Send 2
-, & s:: Send 3
-, & k:: Send 0
-, & h:: Send 4
-, & m:: Send 5
-, & b:: Send 6
-, & z:: Send "."
+, & n:: Send 4
+, & AppsKey:: Send 0
+, & t:: Send 5
+, & s:: Send 6
+, & h:: Send 1
+, & m:: Send 2
+, & b:: Send 3
+, & z:: Send "+"
 , & r:: Send 7
 , & d:: Send 8
 , & y:: Send 9
-, & p:: Send "*"
-, & g:: Send "{BS}"
-, & j:: Send "+"
-, & f:: Send "-"
-, & l:: Send "/"
 
 ;スペースレイヤー
 ;アプリ起動
@@ -183,3 +180,18 @@ Space::Space
 .::.
 enter::Enter
 -::-
+
+StartDebugFollow() {
+    SetTimer(UpdateDebug, 50)
+}
+StopDebugFollow() {
+    SetTimer(UpdateDebug, "Off"), ToolTip()
+}
+
+UpdateDebug() {
+    MouseGetPos &x, &y
+    ; マウスの右下に表示（オフセット16px）
+    ToolTip IMEFlag " | " isIMEConverting(), x + 16, y + 16
+}
+
+StartDebugFollow()

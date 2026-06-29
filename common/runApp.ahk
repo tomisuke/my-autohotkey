@@ -105,9 +105,11 @@
             ids.Push("DDMExtension")
             ids.Push("Program Manager")
             ids.Push("Twinkle Tray Panel")
+            ;PWAアプリ
             if (mode = "all") {
                 ids.Push("MoneyForwardForSBI - マネーフォワード for 住信SBIネット銀行")
                 ids.Push("YouTube Music*")
+                ids.Push("Gemini - Google Gemini")
             }
             for (id in ids) {
                 if WinExist(id) {

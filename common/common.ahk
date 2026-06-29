@@ -32,7 +32,12 @@ HandleModifierKeys(singleKey, modifiedKey) {
 *x::z
 *c::x
 *v::c
-*w::v
+*w:: {
+    Send "{Blind}{v}"
+    if GetKeyState("Ctrl", "P") {
+        imeFlagToTrue()
+    }
+}
 *z::w
 #HotIf
 

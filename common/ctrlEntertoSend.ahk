@@ -3,17 +3,20 @@
 global IMEFlag := false
 #HotIf WinActive("ahk_group CtrlEnterToSend")
 global IMEFlag
-~Space:: imeFlagToTrue()
-~F2:: imeFlagToTrue()
-~F3:: imeFlagToTrue()
-~F4:: imeFlagToTrue()
-~F5:: imeFlagToTrue()
-~F6:: imeFlagToTrue()
-~F7:: imeFlagToTrue()
-~F8:: imeFlagToTrue()
-~F9:: imeFlagToTrue()
-~F10:: imeFlagToTrue()
-~F11:: imeFlagToTrue()
+~Space::
+~F2::
+~F3::
+~F4::
+~F5::
+~F6::
+~F7::
+~F8::
+~F9::
+~F10::
+~F11:: {
+    imeFlagToTrue()
+}
+
 ~Esc::
 ~LButton::
 ~RButton::
@@ -26,7 +29,6 @@ global IMEFlag
     global IMEFlag
     IMEFlag := false
 }
-
 
 Enter::
 NumpadEnter::
@@ -71,6 +73,10 @@ StartIMEFlagHook() {
     global IMEFlag
     ih := InputHook("V I1 L0")
     ih.KeyOpt("{All}", "N")
-    ih.OnKeyDown := (ih, vk, sc) => (IMEFlag := true)
+    ih.OnKeyDown := OnIMEFlagInput
     ih.Start()
+}
+
+OnIMEFlagInput(ih, vk, sc) {
+    imeFlagToTrue()
 }
