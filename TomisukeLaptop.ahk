@@ -7,9 +7,8 @@ SetWinDelay 100 ;default 100
 SetControlDelay 20 ;default 20
 SendMode "Event" ;default Input
 ;-----------------
-#Include C:\Users\Tomisuke\Local\Activity\timestump-diary\diary.ahk
+#Include app/ctrlEntertoSend.ahk
 #Include %A_ScriptDir%/common/
-#Include ctrlEntertoSend.ahk
 #Include runApp.ahk
 #Include IME.ahk
 #include appOriginal.ahk
@@ -193,5 +192,4 @@ UpdateDebug() {
     ; マウスの右下に表示（オフセット16px）
     ToolTip IMEFlag " | " isIMEConverting(), x + 16, y + 16
 }
-
 StartDebugFollow()

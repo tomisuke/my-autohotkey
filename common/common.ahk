@@ -35,7 +35,8 @@ HandleModifierKeys(singleKey, modifiedKey) {
 *w:: {
     Send "{Blind}{v}"
     if GetKeyState("Ctrl", "P") {
-        imeFlagToTrue()
+        global IMEFlag
+        IMEFlag := true
     }
 }
 *z::w
