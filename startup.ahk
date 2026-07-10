@@ -42,9 +42,9 @@ try {
 }
 ;Thunderbird
 try {
-    Run "c:\ProgramData\Microsoft\Windows\Start Menu\Programs\Thunderbird.lnk"
-    WinWait("ahk_exe Thunderbird.exe", , timeOut)
-    WinMinimize("ahk_exe Thunderbird.exe")
+    Run "C:\Program Files (x86)\eM Client\MailClient.exe"
+    WinWait("ahk_exe MailClient.exe", , timeOut)
+    WinMinimize("ahk_exe MailClient.exe")
 }
 ;Discord
 try {

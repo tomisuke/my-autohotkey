@@ -1,0 +1,6 @@
+﻿ahk_exe Discord.exe
+ahk_exe ChatGPT.exe
+ahk_exe Perplexity.exe
+ahk_exe claude.exe
+ahk_exe LINE.exe
+ahk_exe Code.exe

@@ -50,7 +50,7 @@ getRegularApps() {
     regularApps.Push("notionCalendar")
     regularApps.Push("ticktick")
     regularApps.Push("vscode")
-    regularApps.Push("thunderbird")
+    regularApps.Push("emclient")
     regularApps.Push("onenote")
     regularApps.Push("obsidian")
     regularApps.Push("explorer")

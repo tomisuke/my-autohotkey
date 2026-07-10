@@ -30,6 +30,6 @@ Enter & w:: {
 !+^F23::^5
 #HotIf
 
-#HotIf WinActive("Gemini - Google Gemini") AND activeDesktop
-!+^F17::^+o
+#HotIf WinActive("Gemini - Google Gemini")
+^n::^+o
 #HotIf

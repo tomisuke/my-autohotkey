@@ -72,6 +72,7 @@ Enter & o:: launcher()
 Enter & v:: typeTime()
 Enter & w:: typeDate()
 
+Space & Insert:: Send "{sc079}"
 ;コンマレイヤー
 , & n:: Send 4
 , & AppsKey:: Send 0
@@ -181,6 +182,7 @@ Space::Space
 enter::Enter
 -::-
 
+/*
 StartDebugFollow() {
     SetTimer(UpdateDebug, 50)
 }

@@ -105,6 +105,10 @@ getAppList() {
         name: "ahk_exe Obsidian.exe",
         address: EnvGet("LOCALAPPDATA") . "\Programs\Obsidian\Obsidian.exe"
     }
+    apps["emclient"] := {
+        name: "ahk_exe MailClient.exe",
+        address: "C:\Program Files (x86)\eM Client\MailClient.exe"
+    }
     for i, x in apps {
         apps[i].num := 1
     }
