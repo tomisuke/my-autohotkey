@@ -59,15 +59,15 @@ StartIMEFlagHook() {
 }
 
 OnIMEFlagInput(ih, vk, sc) {
-    ; if (IME_GetConverting() != 0) {
-    ;     global IMEFlag
-    ;     IMEFlag := true
-    ; }
-    ;ToolTip "vk=" Format("0x{:X}", vk) " ime=" IME_GET()
-    global IMEFlag
-    if (IME_GET() && vk >= 0x41 && vk <= 0x5A) {
+    if (IME_GetConverting() != 0) {
+        global IMEFlag
         IMEFlag := true
     }
+    ;ToolTip "vk=" Format("0x{:X}", vk) " ime=" IME_GET()
+    ; global IMEFlag
+    ; if (IME_GET() && vk >= 0x41 && vk <= 0x5A) {
+    ;     IMEFlag := true
+    ; }
 }
 
 isIMEConverting() {
