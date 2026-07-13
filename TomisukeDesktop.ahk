@@ -7,13 +7,11 @@ SetWinDelay 100 ;default 100
 SetControlDelay 20 ;default 20
 SendMode "Event" ;default Input
 ;-----------------
+#Include app/ctrlEntertoSend.ahk
 #Include C:\Users\Tomisuke\Local\Activity\timestump-diary\diary.ahk
 #Include %A_ScriptDir%/common/
 #include common.ahk
-
-
 #include appOriginal.ahk
-#Include ctrlEntertoSend.ahk
 #Include runApp.ahk
 #Include IME.ahk
 #Include string.ahk
@@ -24,7 +22,7 @@ SendMode "Event" ;default Input
 mylauncher := appManager()
 OutputDebug("TomisukeDesktop.ahk loaded")
 
-^+!F15::launcher()
+^+!F15:: launcher()
 ;スペースレイヤー
 ^!F13:: mylauncher.runRegularApp(1)
 !^F15:: mylauncher.runRegularApp(3)
