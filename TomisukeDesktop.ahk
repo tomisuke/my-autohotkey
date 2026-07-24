@@ -25,6 +25,7 @@ OutputDebug("TomisukeDesktop.ahk loaded")
 ^+!F15:: launcher()
 ;スペースレイヤー
 ^!F13:: mylauncher.runRegularApp(1)
+^!F14:: mylauncher.runRegularApp(2)
 !^F15:: mylauncher.runRegularApp(3)
 !^F16:: mylauncher.runRegularApp(4)
 !^F17:: mylauncher.runRegularApp(5)
