@@ -11,8 +11,7 @@ Enter & a:: Send "!6"
 
 ;Workona
 #HotIf (WinActive("ahk_exe chrome.exe") or WinActive("ahk_exe vivaldi.exe")) AND activeLaptop
-Enter & v:: Send "!+{2}"
-Enter & w:: {
+Enter & c:: {
     Send "!+{3}"
     IME_SET(1)
     Send "{a}"

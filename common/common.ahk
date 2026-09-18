@@ -37,14 +37,14 @@ HandleModifierKeys(singleKey, modifiedKey) {
     if GetKeyState("Ctrl", "P") {
         global IMEFlag
         IMEFlag := true
-    }
+    } 
 }
 *z::w
 #HotIf
 
 getRegularApps() {
     regularApps := []
-    regularApps.Push("vivaldi")
+    regularApps.Push("chrome")
     regularApps.Push("memo")
     regularApps.Push("claude")
     regularApps.Push("discord")

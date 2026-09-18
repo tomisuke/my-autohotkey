@@ -1,14 +1,18 @@
 #Requires AutoHotkey v2.0
-
+GroupAdd "CtrlEnterToSend", "ahk_exe Discord.exe"
+GroupAdd "CtrlEnterToSend", "ahk_exe ChatGPT.exe"
+GroupAdd "CtrlEnterToSend", "ahk_exe Perplexity.exe"
+GroupAdd "CtrlEnterToSend", "ahk_exe claude.exe"
+GroupAdd "CtrlEnterToSend", "ahk_exe LINE.exe"
+GroupAdd "CtrlEnterToSend", "ahk_exe ticktick.exe"
 global IMEFlag := false
-
-#HotIf WinActive("ahk_group CtrlEnterToSend")
+#HotIf WinActive("ahk_group CtrlEnterToSend") AND isTextBoxFocused()
 Enter::
 NumpadEnter::
 {
     global IMEFlag
     imeMode := IME_GET()
-    if (imeMode & isIMEConverting()) {
+    if (imeMode AND isIMEConverting()) {
         SendInput "{Enter}"
         IMEFlag := false
     } else {
@@ -59,19 +63,116 @@ StartIMEFlagHook() {
 }
 
 OnIMEFlagInput(ih, vk, sc) {
+    global IMEFlag
+    if (IMEFlag || !WinActive("ahk_group CtrlEnterToSend")) {
+        return
+    }
+    if (!IsTextBoxFocused() || !IME_GET()) {
+        return
+    }
     if (IME_GetConverting() != 0) {
-        global IMEFlag
+        IMEFlag := true
+        return
+    }
+    if (isTextGeneratingKey(vk)) {
         IMEFlag := true
     }
-    ;ToolTip "vk=" Format("0x{:X}", vk) " ime=" IME_GET()
-    ; global IMEFlag
-    ; if (IME_GET() && vk >= 0x41 && vk <= 0x5A) {
-    ;     IMEFlag := true
-    ; }
 }
 
 isIMEConverting() {
     return (IME_GetConverting() != 0 OR IMEFlag)
+}
+isTextBoxFocused() {
+    try {
+        el := UIA.GetFocusedElement()
+        ctrlType := el.CurrentControlType
+        return (ctrlType = 50004) || (ctrlType = 50030)
+    } catch {
+        return false
+    }
+}
+getFocusedElementText() {
+    try {
+        el := UIA.GetFocusedElement()
+    } catch {
+        return ""
+    }
+
+    text := ""
+    try {
+        vp := el.GetPattern("ValuePattern")
+        text := vp.CurrentValue
+    } catch {
+        try {
+            tp := el.GetPattern("TextPattern")
+            text := tp.DocumentRange.GetText(-1)
+        } catch {
+            return ""
+        }
+    }
+
+    return StrReplace(text, Chr(0xFEFF), "")
+}
+isTextGeneratingKey(vk) {
+    static NonTextKeys := Map(
+        ;マウスボタン
+        0x01, true, 0x02, true, 0x04, true, 0x05, true, 0x06, true,
+        ;制御・特殊キー
+        0x08, true, ; BackSpace(別処理でカバー済みだが除外)
+        0x09, true, ; Tab
+        0x0C, true, ; Clear
+        0x0D, true, ; Enter(別処理でカバー済みだが除外)
+        0x13, true, ; Pause
+        0x14, true, ; CapsLock
+        0x1B, true, ; Escape
+        ;IME制御
+        0x15, true, ; Kana/IME_ON
+        0x17, true, ; Junja
+        0x18, true, ; Final
+        0x19, true, ; Kanji/Hanja
+        0x1A, true, ; IME_OFF
+        0x1C, true, ; Convert-変換
+        0x1D, true, ; NonConvert-無変換
+        0x1E, true, ; Accept
+        0x1F, true, ; ModeChange
+        ;ナビゲーション
+        0x21, true, 0x22, true, 0x23, true, 0x24, true, ; PageUp/Down/End/Home
+        0x25, true, 0x26, true, 0x27, true, 0x28, true, ; 矢印
+        0x29, true, ; Select
+        0x2A, true, ; Print
+        0x2B, true, ; Execute
+        0x2C, true, ; PrintScreen
+        0x2D, true, 0x2E, true, ; Insert, Delete
+        0x2F, true, ; Help
+        ;Windows、Apps
+        0x5B, true, 0x5C, true, 0x5D, true, ; LWin, RWin, Apps
+        0x5F, true, ; Sleep
+        ;Fn
+        0x70, true, 0x71, true, 0x72, true, 0x73, true, 0x74, true, 0x75, true,
+        0x76, true, 0x77, true, 0x78, true, 0x79, true, 0x7A, true, 0x7B, true,
+        0x7C, true, 0x7D, true, 0x7E, true, 0x7F, true, 0x80, true, 0x81, true,
+        0x82, true, 0x83, true, 0x84, true, 0x85, true, 0x86, true, 0x87, true,
+        ;ロック系
+        0x90, true, 0x91, true, ; NumLock, ScrollLock
+        ;修飾キー
+        0x10, true, 0xA0, true, 0xA1, true, ; Shift系
+        0x11, true, 0xA2, true, 0xA3, true, ; Ctrl系
+        0x12, true, 0xA4, true, 0xA5, true, ; Alt系
+        ;ブラウザ系
+        0xA6, true, 0xA7, true, 0xA8, true, 0xA9, true,
+        0xAA, true, 0xAB, true, 0xAC, true,
+        ;メディア・音量系
+        0xAD, true, 0xAE, true, 0xAF, true,
+        0xB0, true, 0xB1, true, 0xB2, true, 0xB3, true,
+        0xB4, true, 0xB5, true, 0xB6, true, 0xB7, true,
+        ;IME関連(拡張)
+        0xE5, true, ; VK_PROCESSKEY (IME処理中のキー、環境依存)
+        ;その他システム系
+        0xF6, true, 0xF7, true, 0xF8, true, 0xF9, true,
+        0xFA, true, 0xFB, true, 0xFC, true, 0xFD, true, 0xFE, true
+    )
+
+    return !NonTextKeys.Has(vk)
 }
 
 ;==========================================================================

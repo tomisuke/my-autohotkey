@@ -1,4 +1,5 @@
 #Requires AutoHotkey v2.0
+#Include <UIA>
 ;sc07b:無変換   sc079:変換
 
 ;入力抜け対策
@@ -7,7 +8,8 @@ SetWinDelay 100 ;default 100
 SetControlDelay 20 ;default 20
 SendMode "Event" ;default Input
 ;-----------------
-#Include app/ctrlEntertoSend.ahk
+;#Include app/ctrlEntertoSend.ahk
+#Include C:\Users\Tomisuke\Local\Activity\ctrlEnterToSend\ctrlEntertoSendGUI.ahk
 #Include %A_ScriptDir%/common/
 #Include runApp.ahk
 #Include IME.ahk
@@ -181,17 +183,21 @@ Space::Space
 enter::Enter
 -::-
 
-/*
 StartDebugFollow() {
     SetTimer(UpdateDebug, 50)
 }
 StopDebugFollow() {
     SetTimer(UpdateDebug, "Off"), ToolTip()
 }
-
 UpdateDebug() {
-    MouseGetPos &x, &y
-    ; マウスの右下に表示（オフセット16px）
-    ToolTip IMEFlag " | " isIMEConverting(), x + 16, y + 16
+    try {
+        el := UIA.GetFocusedElement()
+        MouseGetPos &x, &y
+        ; マウスの右下に表示（オフセット16px）  
+        ToolTip IMEFlag " | " isIMEConverting() " | " el.CurrentControlType " " el.AriaRole " | " el.IsTextEditPatternAvailable " | "
+        , x + 16, y + 16
+    } catch {
+        ; フォーカス要素が取得直後に無効化された場合（stale element）はこのティックをスキップ
+    }
 }
 StartDebugFollow()
