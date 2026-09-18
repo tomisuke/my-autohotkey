@@ -111,4 +111,36 @@ try {
 try {
     Run "C:\Program Files\WhatPulse\WhatPulse.exe"
 }
+;parsec
+try {
+    if !ProcessExist("parsecd.exe") {
+        parsecExe := GetParsecExe()
+        if parsecExe
+            Run '"' parsecExe '" app_silent=1'
+    }
+}
 ExitApp
+
+;Parsecの実行ファイルを探す(per-machine/per-userどちらのインストールにも対応)
+GetParsecExe() {
+    ;アンインストール情報から引く
+    keys := [
+        "HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Parsec",
+        "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Parsec",
+        "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Parsec"
+    ]
+    for key in keys {
+        loc := RegRead(key, "InstallLocation", "")
+        if loc && FileExist(exe := RTrim(loc, "\") . "\parsecd.exe")
+            return exe
+        icon := RegRead(key, "DisplayIcon", "")
+        if icon && FileExist(exe := Trim(StrSplit(icon, ",")[1], ' "'))
+            return exe
+    }
+    ;標準的なインストール先を順に試す
+    for dir in [EnvGet("ProgramW6432"), A_ProgramFiles, EnvGet("ProgramFiles(x86)"), EnvGet("LOCALAPPDATA")] {
+        if dir && FileExist(exe := dir . "\Parsec\parsecd.exe")
+            return exe
+    }
+    return ""
+}

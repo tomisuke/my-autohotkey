@@ -1,5 +1,6 @@
 #SingleInstance Force
 #Requires AutoHotkey v2.0
+#Include <UIA>
 
 ;入力抜け対策
 SetKeyDelay 10, 10

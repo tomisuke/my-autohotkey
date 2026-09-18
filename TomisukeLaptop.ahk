@@ -8,8 +8,16 @@ SetWinDelay 100 ;default 100
 SetControlDelay 20 ;default 20
 SendMode "Event" ;default Input
 ;-----------------
-;#Include app/ctrlEntertoSend.ahk
-#Include C:\Users\Tomisuke\Local\Activity\ctrlEnterToSend\ctrlEntertoSendGUI.ahk
+;管理者権限で起動されていない場合は昇格して再起動す
+if !A_IsAdmin && !(A_Args.Length && A_Args[-1] = "/elevated") {
+    try {
+        Run '*RunAs "' A_AhkPath '" "' A_ScriptFullPath '" /elevated', A_ScriptDir
+        ExitApp
+    }
+    TrayTip "管理者権限なしで起動中。管理者権限アプリ内ではホットキーが動作しません", "TomisukeLaptop.ahk", 2
+}
+;-----------------
+#Include app/ctrlEntertoSend.ahk
 #Include %A_ScriptDir%/common/
 #Include runApp.ahk
 #Include IME.ahk
@@ -20,7 +28,7 @@ SendMode "Event" ;default Input
 #include bookmark.ahk
 #Include launcher.ahk
 ;-----------------
-;parsecd.exeがアクティブウィンドウになったらスクリプトを終了
+;parsecd.exeがアクティブウィンドウになったらremoteDesktop.ahkに切り替える
 DllCall("SetWinEventHook", "UInt", 0x0003, "UInt", 0x0003, "Ptr", 0
     , "Ptr", CallbackCreate(OnForegroundChanged, "F"), "UInt", 0, "UInt", 0, "UInt", 0x0000)
 
@@ -30,8 +38,15 @@ OnForegroundChanged(hWinEventHook, event, hwnd, idObject, idChild, dwEventThread
     try exe := WinGetProcessName("ahk_id " hwnd)
     catch
         return
+    ;フック内では判定のみ行い、実際の切り替えは通常スレッドに委ねる
     if exe = "parsecd.exe"
-        ExitApp
+        SetTimer SwitchToRemoteDesktop, -1
+}
+
+SwitchToRemoteDesktop() {
+    try FileAppend A_Hour ":" A_Min ":" A_Sec " Parsecを検出 → remoteDesktop.ahkに切り替え`n", A_ScriptDir "\remoteDesktop.log"
+    Run '"' A_AhkPath '" "' A_ScriptDir '\remoteDesktop.ahk"', A_ScriptDir
+    ExitApp
 }
 ;-----------------
 myLauncher := appManager()
@@ -214,4 +229,4 @@ UpdateDebug() {
         ; フォーカス要素が取得直後に無効化された場合（stale element）はこのティックをスキップ
     }
 }
-StartDebugFollow()
+; StartDebugFollow()
