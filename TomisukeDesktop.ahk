@@ -42,7 +42,7 @@ OutputDebug("TomisukeDesktop.ahk loaded")
 !^+F8:: typeTime()
 !^+F9:: typeDate()
 
-;リモート接続時の1画面切り替えを手動でトグル(動作確認用)
+;リモート判定(1画面化とスクリプト入れ替え)を手動でトグルする(動作確認用)
 !^+F10:: RM_Toggle()
 
 ;モニター切り換え

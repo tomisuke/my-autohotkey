@@ -24,13 +24,22 @@ if !A_IsAdmin && !(A_Args.Length && A_Args[-1] = "/elevated") {
 #include appOriginal.ahk
 #include common.ahk
 #Include string.ahk
+#Include monitorLayout.ahk
+#Include remoteMonitor.ahk
 #Include Launcher/
 #include bookmark.ahk
 #Include launcher.ahk
 ;-----------------
 ;parsecd.exeがアクティブウィンドウになったらremoteDesktop.ahkに切り替える
-DllCall("SetWinEventHook", "UInt", 0x0003, "UInt", 0x0003, "Ptr", 0
-    , "Ptr", CallbackCreate(OnForegroundChanged, "F"), "UInt", 0, "UInt", 0, "UInt", 0x0000)
+;ホスト側でもこのスクリプトを使うため、クライアント(ラップトップ)のときだけ有効にする
+if activeLaptop
+    DllCall("SetWinEventHook", "UInt", 0x0003, "UInt", 0x0003, "Ptr", 0
+        , "Ptr", CallbackCreate(OnForegroundChanged, "F"), "UInt", 0, "UInt", 0, "UInt", 0x0000)
+
+;ホストでリモート判定を手動トグルする(動作確認用)
+#HotIf activeDesktop
+!^+F10:: RM_Toggle()
+#HotIf
 
 OnForegroundChanged(hWinEventHook, event, hwnd, idObject, idChild, dwEventThread, dwmsEventTime) {
     if idObject != 0

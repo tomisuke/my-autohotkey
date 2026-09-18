@@ -1,13 +1,25 @@
-;ホスト側でParsecのリモート接続を検知し、接続中だけモニターを1画面に落とす
-;主トリガーはParsecのホストログ、従として入力の注入フラグを使う
+;ホスト側でParsecのリモート接続を検知し、接続中だけ
+;  ・モニターを1画面に落とす
+;  ・TomisukeDesktop.ahk を終了して TomisukeLaptop.ahk に切り替える
+;切断したら元に戻す。主トリガーはParsecのホストログ、従として入力の注入フラグを使う。
+;
+;自分が「ローカル役」か「リモート役」かは起動しているスクリプト名から判断する。
+;  TomisukeDesktop.ahk で動いている = ローカル役 → 接続を待つ
+;  TomisukeLaptop.ahk  で動いている = リモート役 → 切断を待つ
 
 ;===== 設定 =====
-global RM_ENABLE := true
-global RM_KEEP_DEVICE := ""             ;残すモニター。空ならプライマリ("\\.\DISPLAY1" のように指定する)
+global RM_ENABLE := activeDesktop           ;ホスト(デスクトップ)でのみ動作させる
+global RM_LOCAL_SCRIPT := "TomisukeDesktop.ahk"
+global RM_REMOTE_SCRIPT := "TomisukeLaptop.ahk"
+global RM_SWITCH_MONITOR := true            ;リモート中にモニターを1画面へ落とすか
+global RM_SWITCH_SCRIPT := true             ;リモート中にスクリプトを入れ替えるか
+global RM_KEEP_DEVICE := ""                 ;残すモニター。空ならプライマリ
+global RM_USE_INPUT_FALLBACK := true        ;ログで判定できないとき注入フラグで補うか
 global RM_POLL_MS := 500
-global RM_GRACE_MS := 3000              ;状態を切り替えた直後は逆方向の判定を無視する
-global RM_LOCAL_RETURN_MS := 1500       ;物理入力をこの時間内に観測したらローカル復帰とみなす
-global RM_NO_PHYSICAL_MS := 3000        ;注入入力をリモートと判断するために必要な「物理入力がない」時間
+global RM_GRACE_MS := 5000                  ;起動直後は判定しない(切り替え直後の往復を防ぐ)
+global RM_LOCAL_RETURN_MS := 1500           ;物理入力をこの時間内に観測したらローカル復帰とみなす
+global RM_NO_PHYSICAL_MS := 3000            ;注入入力をリモートと判断するのに必要な「物理入力がない」時間
+global RM_PHYSICAL_HITS := 3                ;ローカル復帰に必要な物理入力の回数
 
 ;Parsecホストログのパターン。初回の実接続後に remoteMonitor.log を見て詰める
 global RM_CONNECT_PATTERNS := [
@@ -26,13 +38,13 @@ global RM_IGNORE_PATTERNS := [
 
 ;===== 内部状態 =====
 global RM_logFile := A_ScriptDir "\remoteMonitor.log"
-global RM_reloadFlag := A_ScriptDir "\remoteMonitor.reload"
 global RM_parsecLog := EnvGet("APPDATA") "\Parsec\log.txt"
-global RM_state := "local"
-global RM_localSince := A_TickCount
-global RM_remoteSince := 0
+global RM_state := (A_ScriptName = RM_REMOTE_SCRIPT) ? "remote" : "local"
+global RM_since := A_TickCount
 global RM_lastInjected := 0
 global RM_lastPhysical := 0
+global RM_physicalCount := 0
+global RM_handingOver := false
 global RM_logPos := 0
 global RM_hookKb := 0
 global RM_hookMs := 0
@@ -44,61 +56,109 @@ RM_Init()
 RM_Init() {
     if !RM_ENABLE
         return
-    RM_RecoverState()
+    RM_SyncMonitors()
     RM_InstallHooks()
     RM_SeekLogEnd()
     SetTimer RM_Poll, RM_POLL_MS
     OnExit RM_OnExit
-    RM_Log("監視開始 state=" RM_state " モニター数=" ML_GetDisplays().Length)
+    RM_Log("監視開始 役割=" RM_state " script=" A_ScriptName " モニター数=" ML_GetDisplays().Length)
+}
+
+;スクリプトの役割とモニター構成を一致させる
+RM_SyncMonitors() {
+    if !RM_SWITCH_MONITOR
+        return
+    if (RM_state = "remote") {
+        ;受け渡しで来た場合は既に1画面。素の状態で起動されたときだけ落とす
+        if !ML_HasState()
+            ML_SoloDisplay(RM_KEEP_DEVICE)
+        return
+    }
+    ;ローカル役なのに構成が残っている = 前回が正常に終わっていない
+    if ML_HasState() && ML_RestoreDisplays()
+        RM_Log("残っていたモニター構成を復元")
 }
 
 ;===== 状態遷移 =====
 RM_Poll() {
     hit := RM_ScanParsecLog()
-    now := A_TickCount
-    reason := ""
     if (RM_state = "local") {
         if (hit = "connect")
-            reason := "Parsecログで接続を検出"
-        else if (RM_lastInjected > RM_localSince + RM_GRACE_MS
-            && now - RM_lastInjected < 1000
-            && now - RM_lastPhysical > RM_NO_PHYSICAL_MS)
-            reason := "注入入力を検出(ホストの物理入力なし)"
-        if (reason != "")
-            RM_GoRemote(reason)
+            RM_GoRemote("Parsecログで接続を検出")
+        else if RM_InjectedOnly()
+            RM_GoRemote("注入入力を検出(ホストの物理入力なし)")
         return
     }
     if (hit = "disconnect")
-        reason := "Parsecログで切断を検出"
-    else if (RM_lastPhysical > RM_remoteSince + RM_GRACE_MS && now - RM_lastPhysical < RM_LOCAL_RETURN_MS)
-        reason := "ホストの物理入力を検出"
-    if (reason != "")
-        RM_GoLocal(reason)
+        RM_GoLocal("Parsecログで切断を検出")
+    else if RM_PhysicalReturn()
+        RM_GoLocal("ホストの物理入力を検出")
+}
+
+;リモート操作されている: 注入入力が来ていて、ホストの物理入力は途絶えている
+RM_InjectedOnly() {
+    if !RM_USE_INPUT_FALLBACK
+        return false
+    now := A_TickCount
+    return RM_lastInjected > RM_since + RM_GRACE_MS
+        && now - RM_lastInjected < 1000
+        && now - RM_lastPhysical > RM_NO_PHYSICAL_MS
+}
+
+;ローカルに戻った: ホストの物理入力が続けて来ている
+;単発の取りこぼしで往復しないよう、回数のしきい値を設ける
+RM_PhysicalReturn() {
+    if !RM_USE_INPUT_FALLBACK
+        return false
+    return RM_physicalCount >= RM_PHYSICAL_HITS
+        && A_TickCount - RM_lastPhysical < RM_LOCAL_RETURN_MS
 }
 
 RM_GoRemote(reason) {
-    global RM_state, RM_remoteSince
+    global RM_state
+    RM_Log("リモート接続を検出 (" reason ")")
+    if RM_SWITCH_MONITOR
+        RM_Log("  モニター切り離し=" (ML_SoloDisplay(RM_KEEP_DEVICE) ? "成功" : "対象なし"))
     RM_state := "remote"
-    RM_remoteSince := A_TickCount
-    ok := ML_SoloDisplay(RM_KEEP_DEVICE)
-    RM_Log("リモート → 1画面 (" reason ") 切り離し=" (ok ? "成功" : "対象なし"))
+    RM_HandOver(RM_REMOTE_SCRIPT)
 }
 
 RM_GoLocal(reason) {
-    global RM_state, RM_localSince
+    global RM_state
+    RM_Log("ローカル復帰を検出 (" reason ")")
+    if RM_SWITCH_MONITOR
+        RM_Log("  モニター復元=" (ML_RestoreDisplays() ? "成功" : "対象なし"))
     RM_state := "local"
-    RM_localSince := A_TickCount
-    ok := ML_RestoreDisplays()
-    RM_Log("ローカル → マルチモニター復元 (" reason ") 復元=" (ok ? "成功" : "対象なし"))
+    RM_HandOver(RM_LOCAL_SCRIPT)
+}
+
+;もう一方のスクリプトへ受け渡して自分は終了する
+RM_HandOver(script) {
+    global RM_handingOver, RM_since, RM_physicalCount
+    if !RM_SWITCH_SCRIPT || (A_ScriptName = script) {
+        ;スクリプトを入れ替えない設定のときは、この場で役割だけ切り替える
+        RM_since := A_TickCount
+        RM_physicalCount := 0
+        return
+    }
+    RM_handingOver := true
+    SetTimer RM_Poll, 0
+    RM_RemoveHooks()
+    RM_Log("  " script " へ切り替え")
+    try Run '"' A_AhkPath '" "' A_ScriptDir '\' script '"', A_ScriptDir
+    ExitApp
 }
 
 ;手動トグル(動作確認用)
 RM_Toggle() {
+    if !RM_ENABLE {
+        TrayTip("このPCでは無効です", "remoteMonitor", 2)
+        return
+    }
     if (RM_state = "remote")
         RM_GoLocal("手動トグル")
     else
         RM_GoRemote("手動トグル")
-    TrayTip((RM_state = "remote") ? "1画面に切り替えました" : "マルチモニターに戻しました", "remoteMonitor", 2)
 }
 
 ;===== Parsecログ監視 =====
@@ -196,50 +256,29 @@ RM_MsProc(nCode, wParam, lParam) {
 
 ;フック内では変数を更新するだけにして、実処理は RM_Poll に委ねる
 RM_Mark(injected, extra) {
-    global RM_lastInjected, RM_lastPhysical
+    global RM_lastInjected, RM_lastPhysical, RM_physicalCount
     ;AHK自身の Send / MouseMove は KEY_IGNORE 系の dwExtraInfo が付くので除外する
     if (extra >= 0xFFC3D44D && extra <= 0xFFC3D44F)
         return
-    if injected
+    if injected {
         RM_lastInjected := A_TickCount
-    else
-        RM_lastPhysical := A_TickCount
-}
-
-;===== 起動時 / 終了時 =====
-RM_RecoverState() {
-    global RM_state, RM_remoteSince
-    if !ML_HasState() {
-        ;取り残されたリロードフラグを掃除しておく
-        try FileDelete RM_reloadFlag
         return
     }
-    if FileExist(RM_reloadFlag) {
-        try FileDelete RM_reloadFlag
-        RM_state := "remote"
-        RM_remoteSince := A_TickCount
-        RM_Log("リロードを検出 → 1画面モードをそのまま引き継ぎ")
-        return
-    }
-    ;stateが残ったまま起動した = 前回は正常終了していない
-    if ML_RestoreDisplays()
-        RM_Log("前回の異常終了を検出 → モニター構成を復元")
+    RM_lastPhysical := A_TickCount
+    if (RM_lastPhysical - RM_since > RM_GRACE_MS)
+        RM_physicalCount++
 }
 
+;===== 終了時 =====
 RM_OnExit(reason, code) {
     RM_RemoveHooks()
-    if (RM_state != "remote")
+    ;受け渡しとリロードでは構成を触らない。次のインスタンスが役割を引き継ぐ
+    if (RM_handingOver || reason = "Reload")
         return 0
-    ;Alt+Ctrl+R のリロードでモニターがちらつかないよう、復元せずに次のインスタンスへ引き継ぐ
-    if (reason = "Reload") {
-        if ML_HasState() {
-            try FileAppend "1", RM_reloadFlag
-            RM_Log("リロードのため1画面モードを引き継ぐ (復元しない)")
-        }
-        return 0
+    if (RM_state = "remote" && RM_SWITCH_MONITOR) {
+        ML_RestoreDisplays()
+        RM_Log("終了(" reason ") → モニター構成を復元")
     }
-    ML_RestoreDisplays()
-    RM_Log("終了(" reason ") → モニター構成を復元")
     return 0
 }
 
