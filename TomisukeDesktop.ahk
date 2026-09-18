@@ -16,6 +16,8 @@ SendMode "Event" ;default Input
 #Include runApp.ahk
 #Include IME.ahk
 #Include string.ahk
+#Include monitorLayout.ahk
+#Include remoteMonitor.ahk
 #Include Launcher/
 #include bookmark.ahk
 #Include launcher.ahk
@@ -39,6 +41,9 @@ OutputDebug("TomisukeDesktop.ahk loaded")
 
 !^+F8:: typeTime()
 !^+F9:: typeDate()
+
+;リモート接続時の1画面切り替えを手動でトグル(動作確認用)
+!^+F10:: RM_Toggle()
 
 ;モニター切り換え
 !^+F13:: {
