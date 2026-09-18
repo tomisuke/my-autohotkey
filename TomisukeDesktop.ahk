@@ -25,6 +25,7 @@ OutputDebug("TomisukeDesktop.ahk loaded")
 ^+!F15:: launcher()
 ;スペースレイヤー
 ^!F13:: mylauncher.runRegularApp(1)
+^!F14:: mylauncher.runRegularApp(2)
 !^F15:: mylauncher.runRegularApp(3)
 !^F16:: mylauncher.runRegularApp(4)
 !^F17:: mylauncher.runRegularApp(5)
@@ -35,7 +36,9 @@ OutputDebug("TomisukeDesktop.ahk loaded")
 !^F22:: mylauncher.runRegularApp(9)
 !^F23:: mylauncher.runRegularApp(10)
 
-!+3:: launcher()
+!^+F8:: typeTime()
+!^+F9:: typeDate()
+
 ;モニター切り換え
 !^+F13:: {
     Send "#{p}"
