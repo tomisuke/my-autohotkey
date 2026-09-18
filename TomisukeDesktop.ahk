@@ -36,7 +36,9 @@ OutputDebug("TomisukeDesktop.ahk loaded")
 !^F22:: mylauncher.runRegularApp(9)
 !^F23:: mylauncher.runRegularApp(10)
 
-!+3:: launcher()
+!^+F8:: typeTime()
+!^+F9:: typeDate()
+
 ;モニター切り換え
 !^+F13:: {
     Send "#{p}"

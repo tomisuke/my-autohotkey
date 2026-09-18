@@ -18,7 +18,15 @@ Enter & w:: {
     Send "{a}"
     Send "{Backspace}"
     Send "{Backspace}"
-
+}
+#HotIf
+#HotIf (WinActive("ahk_exe chrome.exe") or WinActive("ahk_exe vivaldi.exe")) AND activeDesktop
+!+^F7:: {
+    Send "!+{3}"
+    IME_SET(1)
+    Send "{a}"
+    Send "{Backspace}"
+    Send "{Backspace}"
 }
 #HotIf
 

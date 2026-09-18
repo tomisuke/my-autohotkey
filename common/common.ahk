@@ -44,7 +44,7 @@ HandleModifierKeys(singleKey, modifiedKey) {
 
 getRegularApps() {
     regularApps := []
-    regularApps.Push("vivaldi")
+    regularApps.Push("chrome")
     regularApps.Push("memo")
     regularApps.Push("claude")
     regularApps.Push("discord")
