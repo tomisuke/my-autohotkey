@@ -18,6 +18,20 @@ SendMode "Event" ;default Input
 #include bookmark.ahk
 #Include launcher.ahk
 ;-----------------
+;parsecd.exeがアクティブウィンドウになったらスクリプトを終了
+DllCall("SetWinEventHook", "UInt", 0x0003, "UInt", 0x0003, "Ptr", 0
+    , "Ptr", CallbackCreate(OnForegroundChanged, "F"), "UInt", 0, "UInt", 0, "UInt", 0x0000)
+
+OnForegroundChanged(hWinEventHook, event, hwnd, idObject, idChild, dwEventThread, dwmsEventTime) {
+    if idObject != 0
+        return
+    try exe := WinGetProcessName("ahk_id " hwnd)
+    catch
+        return
+    if exe = "parsecd.exe"
+        ExitApp
+}
+;-----------------
 myLauncher := appManager()
 Pause:: {
     Run ".\TomisukeToQwerty.ahk"
