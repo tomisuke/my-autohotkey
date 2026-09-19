@@ -44,6 +44,8 @@ OutputDebug("TomisukeDesktop.ahk loaded")
 
 ;リモート判定(1画面化とスクリプト入れ替え)を手動でトグルする(動作確認用)
 !^+F10:: RM_Toggle()
+;モニターだけを切り替える(切り分け用)
+!^+F11:: RM_ToggleMonitor()
 
 ;モニター切り換え
 !^+F13:: {

@@ -117,8 +117,10 @@ RM_PhysicalReturn() {
 RM_GoRemote(reason) {
     global RM_state
     RM_Log("リモート接続を検出 (" reason ")")
-    if RM_SWITCH_MONITOR
-        RM_Log("  モニター切り離し=" (ML_SoloDisplay(RM_KEEP_DEVICE) ? "成功" : "対象なし"))
+    if RM_SWITCH_MONITOR {
+        method := ML_SoloDisplay(RM_KEEP_DEVICE)
+        RM_Log("  1画面化=" (method != "" ? "成功(" method ")" : "失敗または対象なし"))
+    }
     RM_state := "remote"
     RM_HandOver(RM_REMOTE_SCRIPT)
 }
@@ -149,7 +151,7 @@ RM_HandOver(script) {
     ExitApp
 }
 
-;手動トグル(動作確認用)
+;手動トグル(動作確認用)。モニターとスクリプトの両方を切り替える
 RM_Toggle() {
     if !RM_ENABLE {
         TrayTip("このPCでは無効です", "remoteMonitor", 2)
@@ -159,6 +161,25 @@ RM_Toggle() {
         RM_GoLocal("手動トグル")
     else
         RM_GoRemote("手動トグル")
+}
+
+;モニターだけを切り替えて結果を通知する(切り分け用)
+;スクリプトを終了しないので、通知も remoteMonitor.log もその場で確認できる
+RM_ToggleMonitor() {
+    if !RM_ENABLE {
+        TrayTip("このPCでは無効です", "remoteMonitor", 2)
+        return
+    }
+    if ML_HasState() {
+        ok := ML_RestoreDisplays()
+        TrayTip(ok ? "元の構成に復元しました" : "復元できませんでした", "モニターのみ切替", 2)
+        return
+    }
+    method := ML_SoloDisplay(RM_KEEP_DEVICE)
+    if (method != "")
+        TrayTip("1画面にしました (" method ")", "モニターのみ切替", 2)
+    else
+        TrayTip("1画面化に失敗。remoteMonitor.log を確認してください", "モニターのみ切替", 2)
 }
 
 ;===== Parsecログ監視 =====

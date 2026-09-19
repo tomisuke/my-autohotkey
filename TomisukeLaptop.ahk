@@ -39,6 +39,8 @@ if activeLaptop
 ;ホストでリモート判定を手動トグルする(動作確認用)
 #HotIf activeDesktop
 !^+F10:: RM_Toggle()
+;モニターだけを切り替える(切り分け用)
+!^+F11:: RM_ToggleMonitor()
 #HotIf
 
 OnForegroundChanged(hWinEventHook, event, hwnd, idObject, idChild, dwEventThread, dwmsEventTime) {
