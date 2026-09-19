@@ -2,3 +2,5 @@ ATOKPH.BIN
 remoteDesktop.log
 remoteMonitor.log
 remoteMonitor.state
+common/wakeOnLan.config.ahk
+wakeOnLan.log

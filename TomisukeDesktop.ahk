@@ -46,6 +46,8 @@ OutputDebug("TomisukeDesktop.ahk loaded")
 !^+F10:: RM_Toggle()
 ;モニターだけを切り替える(切り分け用)
 !^+F11:: RM_ToggleMonitor()
+;現在のモニター構成を表示する
+!^+F12:: RM_ShowDisplays()
 
 ;モニター切り換え
 !^+F13:: {

@@ -1,7 +1,7 @@
 ;モニター構成の取得・1画面化・復元
-;1画面化は2段構えで、うまくいった方式を state ファイルに記録して復元時に使い分ける
-;  detach : ChangeDisplaySettingsEx で残す1台以外をデスクトップから切り離す(解像度をそのまま保てる本命)
-;  clone  : SetDisplayConfig / DisplaySwitch で複製にする(切り離しが効かない環境向けの代替)
+;1画面化は方式を順に試し、うまくいった方式を state ファイルに記録して復元時に使い分ける
+;  detach : ChangeDisplaySettingsEx で残す1台以外をデスクトップから切り離す(狙った1台だけを残せる本命)
+;  clone  : SetDisplayConfig / DisplaySwitch で複製にする(切り離しがどうしても効かない環境向けの最終手段)
 ;どちらも結果を必ず検証し、失敗したらログに理由を残す
 
 ;DISPLAY_DEVICEW
@@ -11,11 +11,6 @@ global ML_DEVICE_ACTIVE := 0x1      ;DISPLAY_DEVICE_ATTACHED_TO_DESKTOP
 global ML_DEVICE_PRIMARY := 0x4     ;DISPLAY_DEVICE_PRIMARY_DEVICE
 ;DEVMODEW (dmSize = 220)
 global ML_DM_SIZE := 220
-global ML_DM_POSITION := 0x20
-global ML_DM_BITSPERPEL := 0x40000
-global ML_DM_PELSWIDTH := 0x80000
-global ML_DM_PELSHEIGHT := 0x100000
-global ML_DM_DISPLAYFREQUENCY := 0x400000
 global ML_DM_ALL := 0x20 | 0x40000 | 0x80000 | 0x100000 | 0x400000
 ;ChangeDisplaySettingsEx のフラグ
 global ML_CDS_UPDATEREGISTRY := 0x01
@@ -71,16 +66,7 @@ ML_SoloDisplay(keepName := "") {
         ML_Log("接続中のディスプレイが1台以下のため何もしない")
         return ""
     }
-    if (keepName = "") {
-        for d in displays {
-            if d.primary {
-                keepName := d.name
-                break
-            }
-        }
-    }
-    if (keepName = "")
-        keepName := displays[1].name
+    keepName := ML_ResolveKeepName(displays, keepName)
     ;CDS_UPDATEREGISTRY で保存値が 0 に上書きされるため、変更前に現在値を控える
     ML_SaveState(displays, "")
     ML_Log("1画面化を開始 残す=" keepName " モニター数=" MonitorGetCount())
@@ -90,12 +76,13 @@ ML_SoloDisplay(keepName := "") {
         ML_Log("1画面化に成功 (detach)")
         return "detach"
     }
-    ;切り離しが効かない環境向けの代替。途中まで変わっている可能性があるので一度戻す
+    ;切り離しがどうしても効かない環境向けの最終手段
+    ;狙った1台だけを残すことはできないが、マルチモニターのままよりはましという位置づけ
     ML_Log("detach が効かなかったので複製にフォールバックする")
     ML_ApplyDevmodes(displays)
     if ML_TryClone() {
         ML_SaveState(displays, "clone")
-        ML_Log("1画面化に成功 (clone)")
+        ML_Log("1画面化に成功 (clone) ※狙った1台だけを残せていない")
         return "clone"
     }
     ML_Log("1画面化に失敗。構成を元に戻す")
@@ -104,41 +91,63 @@ ML_SoloDisplay(keepName := "") {
     return ""
 }
 
+;残すモニターを決める。指定が実在しなければプライマリに落とす
+;(存在しない名前をそのまま使うと全台切り離して画面が無くなるため、ここは必ず通す)
+ML_ResolveKeepName(displays, keepName) {
+    for d in displays
+        if (d.name = keepName)
+            return d.name
+    if (keepName != "")
+        ML_Log("指定された " keepName " が見つからないのでプライマリを残す")
+    for d in displays
+        if d.primary
+            return d.name
+    return displays[1].name
+}
+
 ;残す1台以外をデスクトップから切り離す
 ML_TryDetach(displays, keepName) {
-    ;残すモニターがプライマリでなければ、先に (0,0) のプライマリへ動かしておく
-    ;(プライマリを切り離すと構成が壊れるため)
+    ;残すモニターがプライマリでなければ、先に単独で (0,0) のプライマリにしておく
+    ;プライマリは切り離せないので、ここは切り離しとは別に確実に反映させる
     for d in displays {
         if (d.name != keepName || d.primary)
             continue
-        dm := Buffer(ML_DM_SIZE, 0)
-        NumPut("UShort", ML_DM_SIZE, dm, 68)
-        NumPut("UInt", ML_DM_POSITION, dm, 72)
+        dm := ML_Devmode(0, 0, d.w, d.h, d.freq, d.bpp)
         ret := DllCall("ChangeDisplaySettingsExW", "Str", keepName, "Ptr", dm, "Ptr", 0
-            , "UInt", ML_CDS_UPDATEREGISTRY | ML_CDS_SET_PRIMARY | ML_CDS_NORESET, "Ptr", 0, "Int")
-        ML_Log("  プライマリ化 " keepName " → " ML_DispChangeName(ret))
+            , "UInt", ML_CDS_UPDATEREGISTRY | ML_CDS_SET_PRIMARY, "Ptr", 0, "Int")
+        ML_Log("  " keepName " をプライマリにする → " ML_DispChangeName(ret))
+        Sleep 600
     }
+    ;1回目: まとめて積んで一括反映
+    if ML_DetachOthers(displays, keepName, true)
+        return true
+    ;2回目: 一括反映を受け付けないドライバ向けに、1台ずつ即時反映する
+    ML_Log("  一括反映が効かないので1台ずつ試す")
+    return ML_DetachOthers(displays, keepName, false)
+}
+
+ML_DetachOthers(displays, keepName, batched) {
+    flags := ML_CDS_UPDATEREGISTRY | (batched ? ML_CDS_NORESET : 0)
     detached := 0
     for d in displays {
         if (d.name = keepName)
             continue
         ;位置・解像度・色深度・周波数をすべて 0 にすると切り離しになる
-        dm := Buffer(ML_DM_SIZE, 0)
-        NumPut("UShort", ML_DM_SIZE, dm, 68)
-        NumPut("UInt", ML_DM_ALL, dm, 72)
-        ret := DllCall("ChangeDisplaySettingsExW", "Str", d.name, "Ptr", dm, "Ptr", 0
-            , "UInt", ML_CDS_UPDATEREGISTRY | ML_CDS_NORESET, "Ptr", 0, "Int")
-        ML_Log("  切り離し " d.name " → " ML_DispChangeName(ret))
+        ret := DllCall("ChangeDisplaySettingsExW", "Str", d.name, "Ptr", ML_Devmode(0, 0, 0, 0, 0, 0)
+            , "Ptr", 0, "UInt", flags, "Ptr", 0, "Int")
+        ML_Log("  切り離し " d.name " (" (batched ? "一括" : "即時") ") → " ML_DispChangeName(ret))
         if (ret = 0)
             detached++
+        if !batched
+            Sleep 400
     }
     if !detached {
         ML_Log("  切り離せたモニターがない")
         return false
     }
-    ret := ML_Commit()
-    ML_Log("  反映 → " ML_DispChangeName(ret))
-    Sleep 500
+    if batched
+        ML_Log("  反映 → " ML_DispChangeName(ML_Commit()))
+    Sleep 700
     ;戻り値が成功でも実際に反映されないことがあるので、必ず数えて確かめる
     count := MonitorGetCount()
     ML_Log("  反映後のモニター数=" count)
@@ -200,23 +209,29 @@ ML_ApplyDevmodes(saved) {
         if !d.primary
             ordered.Push(d)
     for d in ordered {
-        dm := Buffer(ML_DM_SIZE, 0)
-        NumPut("UShort", ML_DM_SIZE, dm, 68)
-        NumPut("UInt", ML_DM_ALL, dm, 72)
-        NumPut("Int", d.x, dm, 76)
-        NumPut("Int", d.y, dm, 80)
-        NumPut("UInt", d.bpp, dm, 168)
-        NumPut("UInt", d.w, dm, 172)
-        NumPut("UInt", d.h, dm, 176)
-        NumPut("UInt", d.freq, dm, 184)
         flags := ML_CDS_UPDATEREGISTRY | ML_CDS_NORESET
         if d.primary
             flags |= ML_CDS_SET_PRIMARY
-        ret := DllCall("ChangeDisplaySettingsExW", "Str", d.name, "Ptr", dm, "Ptr", 0, "UInt", flags, "Ptr", 0, "Int")
+        ret := DllCall("ChangeDisplaySettingsExW", "Str", d.name, "Ptr", ML_Devmode(d.x, d.y, d.w, d.h, d.freq, d.bpp)
+            , "Ptr", 0, "UInt", flags, "Ptr", 0, "Int")
         ML_Log("  復元 " d.name " " d.w "x" d.h " (" d.x "," d.y ") → " ML_DispChangeName(ret))
     }
     ML_Log("  反映 → " ML_DispChangeName(ML_Commit()))
     return true
+}
+
+;すべて 0 を渡すと「切り離し」を表す DEVMODE になる
+ML_Devmode(x, y, w, h, freq, bpp) {
+    dm := Buffer(ML_DM_SIZE, 0)
+    NumPut("UShort", ML_DM_SIZE, dm, 68)
+    NumPut("UInt", ML_DM_ALL, dm, 72)
+    NumPut("Int", x, dm, 76)
+    NumPut("Int", y, dm, 80)
+    NumPut("UInt", bpp, dm, 168)
+    NumPut("UInt", w, dm, 172)
+    NumPut("UInt", h, dm, 176)
+    NumPut("UInt", freq, dm, 184)
+    return dm
 }
 
 ;CDS_NORESET で積んだ変更をまとめて反映する

@@ -111,36 +111,58 @@ try {
 try {
     Run "C:\Program Files\WhatPulse\WhatPulse.exe"
 }
-;parsec
+;シン・テレワークシステム(ホストはサーバー、ラップトップはクライアント)
 try {
-    if !ProcessExist("parsecd.exe") {
-        parsecExe := GetParsecExe()
-        if parsecExe
-            Run '"' parsecExe '" app_silent=1'
-    }
+    StartThinTelework()
 }
 ExitApp
 
-;Parsecの実行ファイルを探す(per-machine/per-userどちらのインストールにも対応)
-GetParsecExe() {
-    ;アンインストール情報から引く
-    keys := [
-        "HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Parsec",
-        "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Parsec",
-        "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Parsec"
-    ]
-    for key in keys {
-        loc := RegRead(key, "InstallLocation", "")
-        if loc && FileExist(exe := RTrim(loc, "\") . "\parsecd.exe")
-            return exe
-        icon := RegRead(key, "DisplayIcon", "")
-        if icon && FileExist(exe := Trim(StrSplit(icon, ",")[1], ' "'))
-            return exe
+StartThinTelework() {
+    exe := GetThinTeleworkExe(activeDesktop ? "server" : "client")
+    if !exe
+        return
+    SplitPath exe, &procName
+    if ProcessExist(procName)
+        return
+    Run '"' exe '"'
+}
+
+;シン・テレワークシステムの実行ファイルを探す
+;kind: "server"(ホスト側) / "client"(クライアント側)
+;インストーラはユーザーモード(%APPDATA%配下)とマシン共通(Program Files配下)の両方があるので順に探す
+GetThinTeleworkExe(kind) {
+    label := (kind = "server") ? "Server" : "Client"
+    dirs := []
+    ;アンインストール情報から引く。InstallLocation は空なので DisplayIcon のフォルダを使う
+    ;(例: "C:\Program Files\Thin Telework System Client\ThinSetup.exe",13)
+    for root in ["HKCU", "HKLM"] {
+        icon := RegRead(root "\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\softether_thin" kind, "DisplayIcon", "")
+        if !icon
+            continue
+        SplitPath Trim(StrSplit(icon, ",")[1], ' "'), , &iconDir
+        if iconDir
+            dirs.Push(iconDir)
     }
     ;標準的なインストール先を順に試す
-    for dir in [EnvGet("ProgramW6432"), A_ProgramFiles, EnvGet("ProgramFiles(x86)"), EnvGet("LOCALAPPDATA")] {
-        if dir && FileExist(exe := dir . "\Parsec\parsecd.exe")
-            return exe
+    for base in [EnvGet("APPDATA"), EnvGet("ProgramW6432"), A_ProgramFiles, EnvGet("ProgramFiles(x86)")] {
+        if base
+            dirs.Push(base "\Thin Telework System " label)
+    }
+    ;実行ファイル名はモードやバージョンで変わりうるので候補を順に探す
+    ;サーバーのユーザーモードは ThinConfig.exe が常駐本体
+    names := (kind = "server")
+        ? ["ThinConfig.exe", "ThinServer.exe", "ThinTeleworkServer.exe"]
+        : ["ThinClient.exe", "ThinTeleworkClient.exe"]
+    return FindFirstExe(dirs, names)
+}
+
+;dirs を順に見て、names のいずれかが最初に見つかったフルパスを返す
+FindFirstExe(dirs, names) {
+    for dir in dirs {
+        for name in names {
+            if FileExist(exe := RTrim(dir, "\") "\" name)
+                return exe
+        }
     }
     return ""
 }

@@ -24,38 +24,46 @@ if !A_IsAdmin && !(A_Args.Length && A_Args[-1] = "/elevated") {
 #include appOriginal.ahk
 #include common.ahk
 #Include string.ahk
+#Include remoteClient.ahk
 #Include monitorLayout.ahk
 #Include remoteMonitor.ahk
+#Include wakeOnLan.ahk
+#Include *i wakeOnLan.config.ahk
 #Include Launcher/
 #include bookmark.ahk
 #Include launcher.ahk
 ;-----------------
-;parsecd.exeがアクティブウィンドウになったらremoteDesktop.ahkに切り替える
+;シン・テレワークシステムのセッションウィンドウがアクティブになったらremoteDesktop.ahkに切り替える
 ;ホスト側でもこのスクリプトを使うため、クライアント(ラップトップ)のときだけ有効にする
 if activeLaptop
     DllCall("SetWinEventHook", "UInt", 0x0003, "UInt", 0x0003, "Ptr", 0
         , "Ptr", CallbackCreate(OnForegroundChanged, "F"), "UInt", 0, "UInt", 0, "UInt", 0x0000)
+
+;外出先からデスクトップをWake on LANで起動する
+;ホストがリモート役のときこのスクリプトはデスクトップ上でも動くため、ラップトップ限定にする
+#HotIf activeLaptop
+Enter & p:: WOL_Wake()      ;p = power
+#HotIf
 
 ;ホストでリモート判定を手動トグルする(動作確認用)
 #HotIf activeDesktop
 !^+F10:: RM_Toggle()
 ;モニターだけを切り替える(切り分け用)
 !^+F11:: RM_ToggleMonitor()
+;現在のモニター構成を表示する
+!^+F12:: RM_ShowDisplays()
 #HotIf
 
 OnForegroundChanged(hWinEventHook, event, hwnd, idObject, idChild, dwEventThread, dwmsEventTime) {
     if idObject != 0
         return
-    try exe := WinGetProcessName("ahk_id " hwnd)
-    catch
-        return
     ;フック内では判定のみ行い、実際の切り替えは通常スレッドに委ねる
-    if exe = "parsecd.exe"
+    if RC_IsRemoteWindow(hwnd)
         SetTimer SwitchToRemoteDesktop, -1
 }
 
 SwitchToRemoteDesktop() {
-    try FileAppend A_Hour ":" A_Min ":" A_Sec " Parsecを検出 → remoteDesktop.ahkに切り替え`n", A_ScriptDir "\remoteDesktop.log"
+    try FileAppend A_Hour ":" A_Min ":" A_Sec " リモートセッションを検出 [" RC_DescribeActive() "] → remoteDesktop.ahkに切り替え`n", A_ScriptDir "\remoteDesktop.log"
     Run '"' A_AhkPath '" "' A_ScriptDir '\remoteDesktop.ahk"', A_ScriptDir
     ExitApp
 }
